@@ -1,0 +1,54 @@
+@import "../../constant/constant.scss";
+
+.dropdown{
+    display: inline-block;
+    .item-nav{
+        color: #202124;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.57;
+        letter-spacing: normal;
+        text-decoration: none;
+    }
+    .bttn-arrow-down{
+        font-size: 10px;
+        background-color: transparent;
+        border: none;
+        margin-left: -10px;
+    }
+
+    .bttn-arrow-down:focus{
+        outline-width: 0;
+    }
+}
+
+.dropdown-content {
+    margin-top: 20px;
+    padding: 10px;
+    position: absolute;
+    border: solid 0.5px #eaeaea;
+    background-color: #fbfbfb;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+    width: 620px;
+    height: 55px;
+    flex-direction: column;
+    .element-dropdown{
+        height: 100px;
+        position: relative;
+        padding-right: 37.5px;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.57;
+        letter-spacing: normal;
+        text-align: center;
+        text-decoration: none;
+        color: #202124;
+    }
+}

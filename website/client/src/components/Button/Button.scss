@@ -1,0 +1,23 @@
+@import "../../constant/constant.scss";
+
+.bttn-login{
+    border-radius: 100px;
+    border: solid 1px $pale-orange;
+    color:$pale-orange;
+    width: 120px;
+    height: 35px;
+}
+
+.bttn-register{
+    width: 59px;
+  height: 22px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  border: none;
+  color: #4d4d4d;
+}

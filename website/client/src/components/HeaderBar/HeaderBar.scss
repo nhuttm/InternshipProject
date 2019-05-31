@@ -1,0 +1,9 @@
+@import "../../constant/constant.scss";
+
+.header-bar{
+    height: 100px;
+}
+
+.line{
+    @include line;
+}
