@@ -1,0 +1,42 @@
+@import "../../constant/constant.scss";
+
+.login-label{
+    margin: auto;
+    width: 105px;
+    height: 42px;
+    font-size: 32px;
+    font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: center;
+  color: #202124;
+}
+
+.default{
+    width: 168px;
+  height: 22px;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: #4d4d4d;
+}
+
+.name-product{
+    @extend .default;
+    display: block;
+    margin: auto;
+    font-weight: bold;
+}
+
+.price-product{
+    @extend .default;
+    display: block;
+    margin: auto;
+    padding-top: 20px;
+}

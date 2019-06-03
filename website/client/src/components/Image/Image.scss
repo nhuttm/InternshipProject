@@ -1,9 +1,24 @@
 @import "../../constant/constant.scss";
 
-.main-logo{
-    width: 96px;
-    height: 20px;
-    object-fit: contain;
-    padding-left: 650px;
-    padding-top: 25px;
+.category {
+	position: absolute;
+	left: 40%;
+	top: 60%;
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	text-align: center;
 }
+
+.line-white {
+	border: solid 1px white;
+	left: 10%;
+	top: 70%;
+	width: 80%;
+	position: absolute;
+}
+

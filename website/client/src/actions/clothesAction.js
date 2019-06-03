@@ -17,7 +17,7 @@ export const getAllClothes = (clothes) => {
     return {
         type: Types.GET_ALL_CLOTHES,
         payload:{
-            clothes: clothes
+            clothes
         }
     }
 }

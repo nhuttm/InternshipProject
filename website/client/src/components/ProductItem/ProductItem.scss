@@ -1,0 +1,16 @@
+@import "../../constant//constant.scss";
+
+.quick-shop{
+    position: absolute;
+    width: 500px;
+    top: 180px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity .35s ease;
+}
+
+.container-item:hover{
+    .quick-shop{
+        opacity: 1;
+    }
+}

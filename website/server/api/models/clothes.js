@@ -5,7 +5,8 @@ const clothesSchema = mongoose.Schema({
     size: String,
     price: Number,
     name: String,
-    brand: String
+    brand: String,
+    img: String
 });
 
 export default mongoose.model('Clothes', clothesSchema);

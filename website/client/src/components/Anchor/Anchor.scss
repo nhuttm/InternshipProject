@@ -1,0 +1,19 @@
+@import "../../constant//constant.scss";
+
+.shop-now{
+    border: none;
+    position: absolute;
+    top: 80%;
+    left: 30%;
+    text-align: center;
+    padding-top: 9px;
+    width: 120px;
+    height: 40px;
+    color: white;
+    text-decoration: none !important;
+    background-color: $pale-orange;
+  }
+
+  .shop-now:hover{
+      color: white;
+  }
