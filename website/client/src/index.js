@@ -5,7 +5,8 @@ import Products from './components/Product';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
-import clothesReducer from './reducer/clothesReducer';
+import reducer from './reducer/index';
+// import reducer from './reducer/clothesReducer';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch, faArrowDown } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +17,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 library.add(faSearch, faArrowDown);
 
-const store = createStore(clothesReducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
+console.log(store.getState());
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

@@ -2,15 +2,34 @@
 
 .quick-shop{
     position: absolute;
-    width: 500px;
-    top: 180px;
+    width: 180px;
+    top: 200px;
+    left: 30px;
+    margin-bottom: -100px;
+    height: 70px;
+    padding-top: 20px;
+    background-color: $pale-orange;
     text-align: center;
-    opacity: 1;
+    opacity: 0;
     transition: opacity .35s ease;
+    font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: white;
+}
+
+.container-item{
+    width: 20%;
+    position: relative;
 }
 
 .container-item:hover{
     .quick-shop{
         opacity: 1;
+        text-decoration: none;
+        color: white;
     }
 }
