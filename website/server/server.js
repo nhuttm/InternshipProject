@@ -9,6 +9,7 @@ import './api/models/clothes';
 import './api/models/category';
 
 import clothesRouter from './api/routers/clothesRouter';
+import categoryRouter from './api/routers/categoryRouter';
 
 let app = express(); //instance of express
 app.use(cors());
@@ -21,6 +22,7 @@ const Category = mongoose.model('Category');
 app.use(express.static(__dirname + '/public'));
 
 app.use('/api/clothes', clothesRouter);
+app.use('/api/category', categoryRouter);
 
 app.get('/createData', (req, res) => {
     console.log('run');

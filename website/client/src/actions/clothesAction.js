@@ -13,7 +13,6 @@ export const getAllClothesRequest = () => {
 }
 
 export const getAllClothes = (clothes) => {
-    console.log(Types.GET_ALL_CLOTHES);
     return {
         type: Types.GET_ALL_CLOTHES,
         payload:{
