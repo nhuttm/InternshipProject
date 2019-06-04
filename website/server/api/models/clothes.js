@@ -6,7 +6,9 @@ const clothesSchema = mongoose.Schema({
     price: Number,
     name: String,
     brand: String,
-    img: String
+    img: String,
+    kind: String,
+    ofArrayCategory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}]
 });
 
 export default mongoose.model('Clothes', clothesSchema);
