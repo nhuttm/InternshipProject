@@ -17,7 +17,6 @@
 .default{
     width: 168px;
   height: 22px;
-  font-family: Montserrat;
   font-size: 14px;
   font-weight: 500;
   font-style: normal;
@@ -29,14 +28,28 @@
 
 .name-product{
     @extend .default;
+    line-height: 1.5em;
+    height: 3em;
     display: block;
     margin: auto;
     font-weight: bold;
+    text-overflow: ellipsis;
 }
 
 .price-product{
     @extend .default;
     display: block;
     margin: auto;
-    padding-top: 20px;
+}
+
+.category-title{
+  width: 100px;
+  font-size: 18px;
+  padding-left: 70px;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.pagination-label{
+  font-size: 16px;
 }

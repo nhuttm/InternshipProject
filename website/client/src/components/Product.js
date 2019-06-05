@@ -4,13 +4,17 @@ import NavBar from './NavBar/NavBar';
 import { connect } from 'react-redux';
 import MenuBar from '../components/MenuBar/MenuBar';
 import "./App.scss";
+import queryString from 'query-string';
 import { getAllClothesRequest } from '../actions/clothesAction';
 import ProductItem from './ProductItem/ProductItem';
+import SelectBox from './SelectBox/SelectBox';
+import  Pagination  from './Pagination/Pagination';
 
 class Products extends React.Component {
-
     componentDidMount = () => {
-        this.props.getAllClothes();
+        const values = queryString.parse(this.props.location.search);
+        const pageNumber = values.pageNumber || 1;
+        this.props.getAllClothes(pageNumber);
     }
 
     render() {
@@ -25,7 +29,13 @@ class Products extends React.Component {
                             <MenuBar />
                         </div>
                         <div className="col-md-10">
-                        <div className="row">
+                        <div className="row" style={{paddingLeft: 13, paddingTop: 20}}>
+                            <SelectBox classNames="col-md-9"/>
+                            <Pagination classNames="col-md-3" 
+                                pageNumber={this.props.pageNumber}
+                                totalPages={this.props.totalPages}
+                                leftAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber)-1)}
+                                rightAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber)+1)}/>
                         </div>
                         <div className="row">
                         {
@@ -39,21 +49,28 @@ class Products extends React.Component {
                         </div>
                         </div>
                         </div>
+                        <Pagination classNames="container-fluid pagination-bottom" 
+                                pageNumber={this.props.pageNumber}
+                                totalPages={this.props.totalPages}
+                                leftAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber)-1)}
+                                rightAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber)+1)}/>
                     </div>
-            </React.Fragment>
+        </React.Fragment>
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        clothes: state.clothesReducer.clothes
+        clothes: state.clothesReducer.clothes,
+        totalPages: state.clothesReducer.totalPages,
+        pageNumber: state.clothesReducer.pageNumber
     }
 }
 
 const mapDispatchToProps = dispatch => {
 return {
-    getAllClothes: () => {
-        dispatch(getAllClothesRequest());
+    getAllClothes: (pageNumber) => {
+        dispatch(getAllClothesRequest(pageNumber));
     }
 }
 }

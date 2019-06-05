@@ -1,5 +1,12 @@
 @import "../../constant//constant.scss";
 
+@mixin paginate {
+    width: 16px;
+    height: 16px;
+  display: block;
+  margin-top: 4px;
+}
+
 .shop-now{
     border: none;
     position: absolute;
@@ -17,3 +24,28 @@
   .shop-now:hover{
       color: white;
   }
+
+  .menu-item{
+    width: 100%;
+    font-size: 15px;
+    padding-left: 70px;
+    padding-top: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #202124;
+  }
+
+  .left-anchor{
+     @include paginate;
+     margin-right: 20px;
+    background-image: url(../../back.png);
+  }
+
+  .right-anchor {
+@include paginate;
+margin-left: 20px;
+background-image: url(../../next.png);
+}

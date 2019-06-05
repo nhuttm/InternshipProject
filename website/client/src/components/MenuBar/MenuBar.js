@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAllCategoriesRequest } from '../../actions/categoryAction';
-import { BrowserRouter, Link } from 'react-router-dom';
 import Label from '../Label/Label';
+import Anchor from '../Anchor/Anchor';
 
 class MenuBar extends React.Component {
 
@@ -12,19 +12,19 @@ class MenuBar extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
-            <div class="row">
-                <Label title="Category" className="default" />
+            <React.Fragment>
+                <div class="row">
+                <Label title="Category" className="category-title" />
             </div>
                 {
                     this.props.categories.length != 0 ? this.props.categories.map(item => {
                         return (
                             <div class="row">
-                                 <Link to={"/" + item.name} >{item.name}</Link>
+                                 <Anchor link={"/products?pageNumber=2"} title={item.name} className="menu-item"/>
                             </div>)
                     }) : null
                 }
-            </BrowserRouter>
+            </React.Fragment>
         );
     }
 }

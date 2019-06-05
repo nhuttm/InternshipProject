@@ -1,35 +1,44 @@
 @import "../../constant//constant.scss";
 
-.quick-shop{
-    position: absolute;
-    width: 180px;
-    top: 200px;
-    left: 30px;
-    margin-bottom: -100px;
-    height: 70px;
-    padding-top: 20px;
-    background-color: $pale-orange;
-    text-align: center;
-    opacity: 0;
-    transition: opacity .35s ease;
-    font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.57;
-  letter-spacing: normal;
-  color: white;
+.quick-shop {
+	position: absolute;
+	width: 162px;
+	top: 186px;
+	left: 39px;
+	margin-bottom: -100px;
+	height: 70px;
+	padding-top: 20px;
+	background-color: $pale-orange;
+	text-align: center;
+	opacity: 0;
+	transition: opacity .6s ease;
+	font-size: 14px;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: white;
 }
 
-.container-item{
-    width: 20%;
-    position: relative;
+.container-item {
+	width: 20%;
+	position: relative;
 }
 
-.container-item:hover{
-    .quick-shop{
-        opacity: 1;
-        text-decoration: none;
-        color: white;
-    }
+.product-img {
+	transition: transform 0.4s;
+}
+
+.container-item:hover {
+	.product-img {
+		transform: scale(0.9);
+		transform-origin: 50% 50%;
+	}
+
+	.quick-shop {
+		opacity: 1;
+		text-decoration: none;
+		color: white;
+	}
 }
