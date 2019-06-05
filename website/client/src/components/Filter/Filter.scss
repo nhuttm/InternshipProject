@@ -1,0 +1,12 @@
+@import "../../constant/constant.scss";
+
+.size-bttn{
+    border: solid 1px #808080;
+    width: 40px;
+    height: 40px;
+}
+
+.size-bttn:focus{
+    outline-width: 0;
+    background-color: $pale-orange;
+}

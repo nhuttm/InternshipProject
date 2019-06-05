@@ -6,13 +6,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
 import reducer from './reducer/index';
-// import reducer from './reducer/clothesReducer';
+import HeaderBar from './components/HeaderBar/HeaderBar';
+import NavBar from './components/NavBar/NavBar';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import "semantic-ui-css/semantic.min.css";
 import thunk from 'redux-thunk';
-
 import 'bootstrap/dist/css/bootstrap.css';
 
 library.add(faSearch, faArrowDown);
@@ -22,9 +22,11 @@ console.log(store.getState());
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
+        <HeaderBar />
+        <NavBar />
         <Switch>
-            <Route path="/products" component={Products}/>
-            <Route path="/" component={App}/>
+            <Route key="products" path="/products" component={Products}/>
+            <Route key="app" path="/" component={App}/>
         </Switch>
         </BrowserRouter>
     </Provider>,

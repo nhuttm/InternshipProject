@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllCategoriesRequest } from '../../actions/categoryAction';
 import Label from '../Label/Label';
 import Anchor from '../Anchor/Anchor';
+import Filter from '../Filter/Filter';
 
 class MenuBar extends React.Component {
 
@@ -14,16 +15,21 @@ class MenuBar extends React.Component {
         return (
             <React.Fragment>
                 <div class="row">
-                <Label title="Category" className="category-title" />
-            </div>
+                    <Label title="Category" className="category-title" />
+                </div>
                 {
                     this.props.categories.length != 0 ? this.props.categories.map(item => {
                         return (
                             <div class="row">
-                                 <Anchor link={"/products?pageNumber=2"} title={item.name} className="menu-item"/>
+                                <Anchor link={"/products?category=" + item._id} title={item.name} className="menu-item" />
                             </div>)
                     }) : null
                 }
+
+                <div class="row">
+                    <Label title="Filter" className="filter-title" />
+                </div>
+                <Filter />
             </React.Fragment>
         );
     }

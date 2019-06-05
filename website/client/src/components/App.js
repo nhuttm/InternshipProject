@@ -10,8 +10,7 @@ export default class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                    <HeaderBar />
-                    <NavBar />
+                    
                     <div className="container-fluid">
                         <Image src={process.env.PUBLIC_URL + '/img/shopping.jpg'}
                             as='img'

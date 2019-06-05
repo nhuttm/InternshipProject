@@ -4,12 +4,14 @@ import LogoImage from '../Image/LogoImage';
 import Button from '../Button/Button';
 import LoginModal from '../Modal/LoginModal';
 import './HeaderBar.scss';
+import RegisterModal from '../Modal/RegisterModal';
 
 export default class HeaderBar extends React.Component {
     constructor() {
         super();
         this.state = {
-            loginClicked: false
+            loginClicked: false,
+            registerClicked: false
         }
     }
 
@@ -22,7 +24,11 @@ export default class HeaderBar extends React.Component {
     }
 
     handleRegister = () => {
+        this.setState({ registerClicked: true });
+    }
 
+    handleCloseRegister = () => {
+        this.setState({ registerClicked: false });
     }
 
     render() {
@@ -39,6 +45,7 @@ export default class HeaderBar extends React.Component {
                             <Button className="bttn-login" title="Login" onButtonClick={this.handleLogin} />
                         </div>
                         {this.state.loginClicked ? <LoginModal onClose={this.handleCloseLogin} /> : null}
+                        {this.state.registerClicked ? <RegisterModal onClose={this.handleCloseRegister} /> : null}
                     </div>
                 </div>
                 <div className="line"></div>

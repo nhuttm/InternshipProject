@@ -53,3 +53,7 @@
 .pagination-label{
   font-size: 16px;
 }
+
+.filter-title{
+  @extend .category-title;
+}
