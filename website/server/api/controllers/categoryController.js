@@ -6,7 +6,8 @@ export default class categoryController {
     listAllCategories = async (req, res) => {
         try{
             const result = await Category.find();
-            res.json(result);
+            let response = {"categories": result};
+            res.json(response);
         } catch (err) {
             console.log(err);
             res.status(500).send({err});

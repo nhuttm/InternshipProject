@@ -26,23 +26,23 @@ app.use('/api/category', categoryRouter);
 
 app.get('/createData', (req, res) => {
     console.log('run');
-    Clothes.find()
-    .then(clothes => {
-        for (let index = 0; index < clothes.length - 20; index++) {
-            clothes[index].kind = Types.BOY;
-            clothes[index].save();        
-        }
-        for (let index = clothes.length - 20; index < clothes.length; index++) {
-            clothes[index].kind = Types.LADIE;          
-            clothes[index].save();        
-        }
+    // Clothes.find()
+    // .then(clothes => {
+    //     for (let index = 0; index < clothes.length - 20; index++) {
+    //         clothes[index].kind = Types.BOY;
+    //         clothes[index].save();        
+    //     }
+    //     for (let index = clothes.length - 20; index < clothes.length; index++) {
+    //         clothes[index].kind = Types.LADIE;          
+    //         clothes[index].save();        
+    //     }
 
-    });
-    // const category = new Category({
-    //     _id: mongoose.Types.ObjectId(),
-    //     name: 'Going out dresses'
     // });
-    // category.save();
+    const category = new Category({
+        _id: mongoose.Types.ObjectId(),
+        name: 'Maxi / Midi dresses'
+    });
+    category.save();
     // Category.findOne({'name': 'Casual dresses'})
     // .then(cate => {
     //     console.log(cate);

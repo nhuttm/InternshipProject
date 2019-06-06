@@ -5,7 +5,7 @@ export const getAllCategoriesRequest = () => {
     return async (dispatch) => {
         try {
             const response = await axiosInstance.get('/category');
-            dispatch(getAllCategories(response.data));
+            dispatch(getAllCategories(response.data.categories));
         } catch (error) {
             console.log(error); 
         }
