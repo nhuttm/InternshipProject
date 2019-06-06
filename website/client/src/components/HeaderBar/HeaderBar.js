@@ -6,29 +6,30 @@ import LoginModal from '../Modal/LoginModal';
 import './HeaderBar.scss';
 import RegisterModal from '../Modal/RegisterModal';
 
+let isOpenModalRegister = false;
+let isOpenModalLogin = false;
+
 export default class HeaderBar extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            loginClicked: false,
-            registerClicked: false
-        }
-    }
+
 
     handleLogin = () => {
-        this.setState({ loginClicked: true });
+        isOpenModalLogin = true;
+        this.forceUpdate();
     }
 
     handleCloseLogin = () => {
-        this.setState({ loginClicked: false });
+        isOpenModalLogin = false;
+        this.forceUpdate();
     }
 
     handleRegister = () => {
-        this.setState({ registerClicked: true });
+        isOpenModalRegister = true;
+        this.forceUpdate();
     }
 
     handleCloseRegister = () => {
-        this.setState({ registerClicked: false });
+        isOpenModalRegister = false;
+        this.forceUpdate();
     }
 
     render() {
@@ -44,8 +45,8 @@ export default class HeaderBar extends React.Component {
                         <div className="col-md-1" style={{ margin: "auto" }}>
                             <Button className="bttn-login" title="Login" onButtonClick={this.handleLogin} />
                         </div>
-                        {this.state.loginClicked ? <LoginModal onClose={this.handleCloseLogin} /> : null}
-                        {this.state.registerClicked ? <RegisterModal onClose={this.handleCloseRegister} /> : null}
+                        <RegisterModal onClose={this.handleCloseRegister} isOpen={isOpenModalRegister}/>
+                        <LoginModal onClose={this.handleCloseLogin} isOpen={isOpenModalLogin}/>
                     </div>
                 </div>
                 <div className="line"></div>

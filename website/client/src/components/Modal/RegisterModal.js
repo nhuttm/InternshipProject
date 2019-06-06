@@ -15,7 +15,7 @@ export default class RegisterModal extends React.Component {
 
     render() {
         return (
-            <Modal open={true} center={true} classNames={{ modal: { 'register-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
+            <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'register-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
                 <div className="container-fluid">
                 <form>
                     <div className="row" style={{paddingBottom: 35}}>

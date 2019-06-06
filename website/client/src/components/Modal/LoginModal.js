@@ -14,8 +14,9 @@ export default class LoginModal extends React.Component {
     }
 
     render() {
+        console.log('modal login');
         return (
-            <Modal open={true} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
+            <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
                 <div className="container-fluid">
                 <form>
                     <div className="row" style={{paddingBottom: 35}}>
