@@ -14,7 +14,7 @@
   color: #202124;
 }
 
-.default{
+.default-label{
     width: 168px;
   height: 22px;
   font-size: 14px;
@@ -27,18 +27,18 @@
 }
 
 .name-product{
-    @extend .default;
+    @extend .default-label;
     line-height: 1.5em;
     height: 3em;
-    display: block;
+    overflow: hidden !important;
+    word-break: break-word;
     margin: auto;
     font-weight: bold;
     text-overflow: ellipsis;
 }
 
 .price-product{
-    @extend .default;
-    display: block;
+    @extend .default-label;
     margin: auto;
 }
 
@@ -54,6 +54,46 @@
   font-size: 16px;
 }
 
+.product-name{
+  overflow: hidden !important;
+  white-space: nowrap;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #202124
+}
+
+.product-price{
+  @extend .price-product;
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .filter-title{
   @extend .category-title;
+}
+
+.size-label{
+  @extend .default-label;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.color-label{
+  @extend .default-label;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.product-quantity{
+  @extend .default-label;
+  width: 100px;
+  font-weight: bold;
+  padding-top: 5px;
 }

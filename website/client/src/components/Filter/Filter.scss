@@ -1,12 +1,87 @@
 @import "../../constant/constant.scss";
 
-.size-bttn{
-    border: solid 1px #808080;
-    width: 40px;
-    height: 40px;
+.size-bttn {
+	border: solid 1px #808080;
+	width: 40px;
+	height: 40px;
 }
 
-.size-bttn:focus{
-    outline-width: 0;
-    background-color: $pale-orange;
+.size-bttn:focus {
+	outline-width: 0;
+	background-color: $pale-orange;
+}
+
+.color-container {
+	display: block;
+	position: relative;
+	padding-left: 10px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+	border-radius: 50%;
+}
+
+.color-container {
+	input:checked {
+        ~ .checkmark:after {
+            display: block;
+          }
+    }
+    .checkmark:after {
+        top: 5px;
+       left: 5px;
+       width: 16px;
+       height: 16px;
+    background-image: url('../checked.png');
+   }
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+.color-bttn {
+	cursor: pointer;
+	width: 25px;
+	height: 25px;
+	opacity: 0;
+	transform: scale(1.5);
+}
+
+.red {
+	background-color: red;
+}
+
+.yellow {
+	background-color: yellow;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.pale-orange {
+	background-color: $pale-orange;
+}
+
+.charcoal-grey {
+	background-color: rgba(61, 61, 63, 0.5);
+}
+
+.white-three {
+	background-color: rgba(237, 237, 237, 0.5);
 }
