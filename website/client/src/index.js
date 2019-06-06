@@ -25,8 +25,8 @@ ReactDOM.render(
         <HeaderBar />
         <NavBar />
         <Switch>
-            <Route key="products" path="/products" component={Products}/>
-            <Route key="app" path="/" component={App}/>
+            <Route path="/products" component={Products}/>
+            <Route path="/" component={App}/>
         </Switch>
         </BrowserRouter>
     </Provider>,

@@ -8,12 +8,14 @@ export default class ProductItem extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <div style={{width: 180, height: 269, overflow: 'hidden'}}>
                 <Image src={'http://localhost:2000' + this.props.imgSrc}
                     as='img'
                     size='large'
                     className="product-img"
                     centered
-                    style={{ width: 180, height: 269, paddingTop: 20, objectFit: 'cover' }} />
+                    style={{ width: 180, height: 269, objectFit: 'cover' }} />
+                </div>
                 <Label title={this.props.title} className="name-product" />
                 <Label title={this.props.price} className="price-product" />
                 <Anchor title="+Quick shop" link={"/products/" + this.props.id} className="quick-shop"/>

@@ -58,8 +58,9 @@ class Products extends React.Component {
                         <Pagination classNames="container-fluid pagination-bottom"
                             pageNumber={this.props.pageNumber}
                             totalPages={this.props.totalPages}
-                            leftAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber) - 1)}
-                            rightAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber) + 1)} />
+                            pathName="/products"
+                            searchLeft={"?pageNumber=" + (Number.parseInt(this.props.pageNumber) - 1)}
+                            searchRight={"?pageNumber=" + (Number.parseInt(this.props.pageNumber) + 1)} />
                     </div>
             </React.Fragment>
         )
