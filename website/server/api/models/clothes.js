@@ -6,8 +6,11 @@ const clothesSchema = mongoose.Schema({
     price: Number,
     name: String,
     brand: String,
-    img: String,
+    detail: String,
+    quantity: Number,
+    img: [String],
     kind: String,
+    ofArrayComment: [{"username": String,"date": Date, "title":String,"content": String, "rating":Number}],
     ofArrayCategory: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}]
 });
 

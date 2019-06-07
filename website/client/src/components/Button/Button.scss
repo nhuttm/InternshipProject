@@ -67,14 +67,22 @@
   background-image: url('../plus.png');
   background-size: cover;
   width: 32px;
-  height: 32px;
+  height: 100%;
+  border: none;
+  position: absolute;
+  left: 105px;
+  
 }
 
 .minus-bttn{
   background-image: url('../minus.png');
   background-size: contain;
   width: 32px;
-  height: 32px;
+  height: 90%;
+  border: none;
+  position: absolute;
+  left: 0px;
+  top: 2px;
 }
 
 .plus-bttn:focus{

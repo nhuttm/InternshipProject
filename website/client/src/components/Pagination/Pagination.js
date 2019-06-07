@@ -8,9 +8,13 @@ export default class Pagination extends React.Component{
         return(
             <div className={this.props.classNames}>
                 <div className="row">
-                <Link to={{ pathname: this.props.pathName, search: this.props.searchLeft }} className="left-anchor"></Link>
+                    {
+                        this.props.pageNumber != 1 ? <Link to={{ pathname: this.props.pathName, search: this.props.searchLeft }} className="left-anchor"></Link> : null
+                    }
                 <Label title={this.props.pageNumber + "/" + this.props.totalPages} className="pagination-label"/>
-                <Link to={{ pathname: this.props.pathName, search: this.props.searchRight }} className="right-anchor"></Link>
+                {
+                        this.props.pageNumber != this.props.totalPages ? <Link to={{ pathname: this.props.pathName, search: this.props.searchRight }} className="right-anchor"></Link> : null
+                }
                 </div>
             </div>
         )

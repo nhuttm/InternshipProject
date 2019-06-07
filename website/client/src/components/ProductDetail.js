@@ -8,6 +8,10 @@ import Color from './Filter/DropDownColor';
 import NumberPicker from './NumberPicker/NumberPicker';
 import Button from './Button/Button';
 import StarRatings from 'react-star-ratings';
+import CommentBox from './CommentBox/CommentBox';
+import CommentUser from './CommentBox/CommentUser';
+import Pagination from './Pagination/Pagination';
+import HintImage from './Image/HintImage';
 
 class ProductDetail extends React.Component {
 
@@ -116,8 +120,119 @@ class ProductDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row" style={{ marginTop: 20 }}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="line" style={{ height: 2, width: 100, marginTop: 10 }}></div>
+                            <Label title="Reviews" className="label-review" />
+                            <div className="line" style={{ height: 2, width: '85%', marginTop: 10 }}></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row" style={{ marginTop: 20 }}>
+                    <div className="container">
+                        <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
+                            <Pagination classNames="comment-paging"
+                                pageNumber={1}
+                                totalPages={7}
+                                pathName="/products"
+                                searchLeft={"#"}
+                                searchRight={"#"} />
+                        </div>
+                        <div className="row" style={{ paddingBottom: 20 }}>
+                            <div className="col-md-2">
+                                <CommentUser name="Julia Ryan" date="31 Jul" />
+                            </div>
+                            <div className="col-md-10">
+                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
+                            </div>
+                        </div>
+                        <div className="row" style={{ paddingBottom: 20 }}>
+                            <div className="col-md-2">
+                                <CommentUser name="Julia Ryan" date="31 Jul" />
+                            </div>
+                            <div className="col-md-10">
+                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
+                            </div>
+                        </div>
+                        <div className="row" style={{ paddingBottom: 20 }}>
+                            <div className="col-md-2">
+                                <CommentUser name="Julia Ryan" date="31 Jul" />
+                            </div>
+                            <div className="col-md-10">
+                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
+                            </div>
+                        </div>
+                        <div className="row" style={{ paddingBottom: 20 }}>
+                            <div className="col-md-2">
+                                <CommentUser name="Julia Ryan" date="31 Jul" />
+                            </div>
+                            <div className="col-md-10">
+                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
+                            </div>
+                        </div>
+                        <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
+                            <Pagination classNames="comment-paging"
+                                pageNumber={1}
+                                totalPages={7}
+                                pathName="/products"
+                                searchLeft={"#"}
+                                searchRight={"#"} />
+                        </div>
+                    </div>
+                </div>
+                <div className="row" style={{ marginTop: 20 }}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="line" style={{ height: 2, width: 100, marginTop: 10 }}></div>
+                            <Label title="You may also like" className="label-hint" />
+                            <div className="line" style={{ height: 2, width: '78%', marginTop: 10 }}></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="row">
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
 
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div className="col-md-6">
+                                <div className="row">
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                    <div className="col-md-3">
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
