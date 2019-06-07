@@ -3,6 +3,8 @@ import express from 'express'; //return functions reference
 import mongoose from 'mongoose';
 
 import cors from 'cors';
+import faker from 'faker';
+
 import * as Types from './api/constant';
 
 import './api/models/clothes';
@@ -24,8 +26,51 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api/clothes', clothesRouter);
 app.use('/api/category', categoryRouter);
 
-app.get('/createData', (req, res) => {
-    console.log('run');
+app.get('/createData', async (req, res) => {
+
+    const size = ['S','M','L'];
+    const kind = [Types.BOY, Types.GIRL, Types.LADIE, Types.MEN];
+    let uuid = await Category.find().select({ _id: 1 });
+
+    for (let index = 0; index < 100; index++) {
+        let imageUrl = [];
+        let categories = [];
+        let comments = [];
+        for (let x = 0; x < 4; x++) {
+            imageUrl.push(faker.image.image());
+        }
+        for (let x = 0; x < 2; x++) {
+            categories.push(uuid[Math.floor(Math.random() * 5)]._id);
+        }
+        for (let x = 0; x < 10; x++) {
+            let comment = {
+                "username": faker.name.findName(),
+                "date": faker.date.future(),
+                "title": faker.lorem.lines(),
+                "content": faker.lorem.paragraph(),
+                "rating": Math.floor(Math.random() * 5 + 1)
+            }
+            comments.push(comment);
+        }
+        const clothes = new Clothes({
+            _id: mongoose.Types.ObjectId(),
+            size: size[Math.floor(Math.random()*3)],
+            price: faker.random.number(),
+            name: faker.lorem.lines(),
+            brand: faker.lorem.lines(),
+            detail: faker.lorem.paragraph(),
+            quantity: faker.random.number(),
+            img: imageUrl,
+            rating: Math.floor(Math.random()*5+1),
+            kind: kind[Math.random()*4],
+            ofArrayComment: comments,
+            ofArrayCategory: categories
+        });
+        await clothes.save();
+    }
+
+
+    res.send('success');
     // Clothes.find()
     // .then(clothes => {
     //     for (let index = 0; index < clothes.length - 20; index++) {
@@ -38,11 +83,11 @@ app.get('/createData', (req, res) => {
     //     }
 
     // });
-    const category = new Category({
-        _id: mongoose.Types.ObjectId(),
-        name: 'Maxi / Midi dresses'
-    });
-    category.save();
+    // const category = new Category({
+    //     _id: mongoose.Types.ObjectId(),
+    //     name: 'Maxi / Midi dresses'
+    // });
+    // category.save();
     // Category.findOne({'name': 'Casual dresses'})
     // .then(cate => {
     //     console.log(cate);

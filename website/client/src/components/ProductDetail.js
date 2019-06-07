@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ProductImage from './Image/ProductImage';
-import logo from '../components/shopping.jpg';
 import Label from './Label/Label';
 import Size from './Filter/DropDownSize';
 import Color from './Filter/DropDownColor';
@@ -12,18 +11,33 @@ import CommentBox from './CommentBox/CommentBox';
 import CommentUser from './CommentBox/CommentUser';
 import Pagination from './Pagination/Pagination';
 import HintImage from './Image/HintImage';
+import { getClothesWithIdRequest } from '../actions/clothesAction';
+import queryString from 'query-string';
 
 class ProductDetail extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            quantity: 0
+            quantity: 0,
+            pageNumber: 1
         }
     }
 
+    componentDidMount = () => {
+        this.props.getClothesWithId(this.props.match.params.id);
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.location.search != this.props.location.search){
+            const values = queryString.parse(this.props.location.search);
+            const pageNumber = values.pageNumber || 1;
+            this.setState({pageNumber});
+        }
+
+    }
+
     handlePlusQuantity = () => {
-        console.log('run');
         let quantity = this.state.quantity + 1;
         this.setState({ quantity });
     }
@@ -39,36 +53,39 @@ class ProductDetail extends React.Component {
     }
 
     render() {
+        console.log(this.props.clothes);
         return (
             <div className="container-fluid" style={{ paddingTop: 50 }}>
-                <div className="row">
+                {
+                    this.props.clothes._id ? <React.Fragment>
+                         <div className="row">
                     <div className="col-md-2">
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[1]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[2]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[3]}></ProductImage>
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <ProductImage className="product-img" imgSrc={logo}></ProductImage>
+                        <ProductImage className="product-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
                     </div>
                     <div className="col-md-4">
                         <div class="row">
-                            <Label className="product-name" title="Collete Stretch Linen Minidress" />
+                            <Label className="product-name" title={this.props.clothes.name} />
                         </div>
                         <div className="row">
-                            <Label className="product-price" title="$69.00" />
+                            <Label className="product-price" title={this.props.clothes.price} />
                         </div>
                         <div className="row" style={{ paddingTop: 10 }}>
                             <StarRatings
-                                rating={4}
+                                rating={this.props.clothes.rating}
                                 starRatedColor="yellow"
                                 numberOfStars={5}
                                 name='rating'
@@ -96,7 +113,7 @@ class ProductDetail extends React.Component {
                         </div>
                         <div className="row line" style={{ marginTop: 20 }}></div>
                         <div className="row" style={{ paddingTop: 20 }}>
-                            <Label className="color-label" title="Model wearing size S" />
+                            <p className="detail-label">{this.props.clothes.detail}</p>
                         </div>
                     </div>
                     <div className="col-md-2">
@@ -104,19 +121,19 @@ class ProductDetail extends React.Component {
                             <Label title="More from" className="default-label" />
                         </div>
                         <div className="row">
-                            <Label title="Zara" className="default-label" />
+                            <Label title={this.props.clothes.brand} className="brand-label" />
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[1]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[2]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={logo}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[3]}></ProductImage>
                         </div>
                     </div>
                 </div>
@@ -133,51 +150,31 @@ class ProductDetail extends React.Component {
                     <div className="container">
                         <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
                             <Pagination classNames="comment-paging"
-                                pageNumber={1}
-                                totalPages={7}
-                                pathName="/products"
-                                searchLeft={"#"}
-                                searchRight={"#"} />
+                                pageNumber={this.state.pageNumber}
+                                totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
+                                pathName={"/products/" + this.props.clothes._id}
+                                searchLeft={"?pageNumber=" + (  Number.parseInt(this.state.pageNumber) - 1)}
+                                searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
-                        <div className="row" style={{ paddingBottom: 20 }}>
+                        {
+                            this.props.clothes.ofArrayComment.filter((item,index) => index < this.state.pageNumber*4 && index >= (this.state.pageNumber-1)*4).map(item => {
+                                return (<div className="row" style={{ paddingBottom: 20 }}>
                             <div className="col-md-2">
-                                <CommentUser name="Julia Ryan" date="31 Jul" />
+                                <CommentUser name={item.username} date={item.date} />
                             </div>
                             <div className="col-md-10">
-                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
+                                <CommentBox rating={item.rating} title={item.title} content={item.content} />
                             </div>
-                        </div>
-                        <div className="row" style={{ paddingBottom: 20 }}>
-                            <div className="col-md-2">
-                                <CommentUser name="Julia Ryan" date="31 Jul" />
-                            </div>
-                            <div className="col-md-10">
-                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
-                            </div>
-                        </div>
-                        <div className="row" style={{ paddingBottom: 20 }}>
-                            <div className="col-md-2">
-                                <CommentUser name="Julia Ryan" date="31 Jul" />
-                            </div>
-                            <div className="col-md-10">
-                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
-                            </div>
-                        </div>
-                        <div className="row" style={{ paddingBottom: 20 }}>
-                            <div className="col-md-2">
-                                <CommentUser name="Julia Ryan" date="31 Jul" />
-                            </div>
-                            <div className="col-md-10">
-                                <CommentBox rating={4} title="Super cute in black" content="I love the vintage pattern of the black dress. I got a size 6 and it fits well without being too tight. I can't tell if it's tru to size because everything fits a bit differently from store to store and brand to brand. I'm 5'4 with a 34D chest and it hit about mid thigh, which I like. I also like the material and structured shape of the dress because it's easy to dress up or down." />
-                            </div>
-                        </div>
+                        </div>)
+                           })
+                        }
                         <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
                             <Pagination classNames="comment-paging"
-                                pageNumber={1}
-                                totalPages={7}
-                                pathName="/products"
-                                searchLeft={"#"}
-                                searchRight={"#"} />
+                                pageNumber={this.state.pageNumber}
+                                totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
+                                pathName={"/products/" + this.props.clothes._id}
+                                searchLeft={"?pageNumber=" + (this.state.pageNumber - 1)}
+                                searchRight={"?pageNumber=" + (this.state.pageNumber + 1)} />
                         </div>
                     </div>
                 </div>
@@ -192,19 +189,19 @@ class ProductDetail extends React.Component {
                             <div className="col-md-6">
                                 <div className="row">
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[0]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[1]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[2]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[3]}/>
 
                                     </div>
                                 </div>
@@ -213,19 +210,19 @@ class ProductDetail extends React.Component {
                             <div className="col-md-6">
                                 <div className="row">
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[0]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[1]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[2]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={logo}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[3]}/>
 
                                     </div>
                                 </div>
@@ -234,9 +231,29 @@ class ProductDetail extends React.Component {
                         </div>
                     </div>
                 </div>
+                
+                    </React.Fragment> : null
+
+                }
+                
+               
             </div>
         )
     }
 }
 
-export default ProductDetail;
+const mapStateToProps = state => {
+    return {
+        clothes: state.clothesReducer.clothes
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getClothesWithId: id =>{
+            dispatch(getClothesWithIdRequest(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

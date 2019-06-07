@@ -9,7 +9,7 @@ export default class ProductItem extends React.Component {
         return (
             <React.Fragment>
                 <div style={{width: 180, height: 269, overflow: 'hidden'}}>
-                <Image src={'http://localhost:2000' + this.props.imgSrc}
+                <Image src={this.props.imgSrc}
                     as='img'
                     size='large'
                     className="product-img"

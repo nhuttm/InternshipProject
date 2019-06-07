@@ -48,7 +48,7 @@ class Products extends React.Component {
                                         this.props.clothes.length != 0 ? this.props.clothes.map((item, index) => {
                                             return (
                                                 <div className="container-item" key={item._id}>
-                                                    <ProductItem key={item._id} id={item._id} imgSrc={item.img} title={item.name} price={item.price} />
+                                                    <ProductItem key={item._id} id={item._id} imgSrc={item.img[0]} title={item.name} price={item.price} />
                                                 </div>)
                                         }) : null
                                     }

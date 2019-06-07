@@ -49,3 +49,8 @@
 margin-left: 20px;
 background-image: url(../../next.png);
 }
+
+.shop-home{
+  @extend .shop-now;
+  margin-left: 500px;
+}

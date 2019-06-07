@@ -12,6 +12,17 @@ export const getAllClothesRequest = (pageNumber) => {
     }
 }
 
+export const getClothesWithIdRequest = (id) => {
+    return async (dispatch) => {
+        try{
+            const response = await axiosInstance.get('/clothes/' + id);
+            dispatch(getClothesWithId(response.data.clothes));
+        } catch (error){
+            console.log(error);
+        }
+    }
+}
+
 export const getAllClothes = (clothes, totalPages, pageNumber) => {
     return {
         type: Types.GET_ALL_CLOTHES,
@@ -20,5 +31,12 @@ export const getAllClothes = (clothes, totalPages, pageNumber) => {
             totalPages,
             pageNumber
         }
+    }
+}
+
+export const getClothesWithId = (clothes) => {
+    return {
+        type: Types.GET_CLOTHES_WITH_ID,
+        payload: {clothes}
     }
 }
