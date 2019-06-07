@@ -84,13 +84,23 @@ class ProductDetail extends React.Component {
                             <Label className="product-price" title={this.props.clothes.price} />
                         </div>
                         <div className="row" style={{ paddingTop: 10 }}>
+                            <div className="col-md-5" style={{marginLeft: -17, marginTop: 7}}>
                             <StarRatings
                                 rating={this.props.clothes.rating}
                                 starRatedColor="yellow"
                                 numberOfStars={5}
                                 name='rating'
-                                starDimension={20}
+                                starDimension={15}
                             />
+                            </div>
+                            <div className="col-md-7">
+                                <div className="row" style={{height: '100%'}}>
+                                    <div className="line" style={{marginLeft: -30, marginTop: 7}}></div>
+                                    <div className="col-md-4" style={{marginTop: 10}}>
+                                        <Label title={this.props.clothes.ofArrayComment.length + " Reviews"} className="default-label"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="row" style={{ paddingTop: 10 }}>
                             <Label className="size-label" title="Size" />
