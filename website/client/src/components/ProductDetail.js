@@ -153,7 +153,7 @@ class ProductDetail extends React.Component {
                                 pageNumber={this.state.pageNumber}
                                 totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
                                 pathName={"/products/" + this.props.clothes._id}
-                                searchLeft={"?pageNumber=" + (  Number.parseInt(this.state.pageNumber) - 1)}
+                                searchLeft={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) - 1)}
                                 searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
                         {
@@ -173,8 +173,8 @@ class ProductDetail extends React.Component {
                                 pageNumber={this.state.pageNumber}
                                 totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
                                 pathName={"/products/" + this.props.clothes._id}
-                                searchLeft={"?pageNumber=" + (this.state.pageNumber - 1)}
-                                searchRight={"?pageNumber=" + (this.state.pageNumber + 1)} />
+                                searchLeft={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) - 1)}
+                                searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
                     </div>
                 </div>

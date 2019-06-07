@@ -15,6 +15,7 @@ import { faSearch, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import "semantic-ui-css/semantic.min.css";
 import thunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css';
+import Footer from './components/Footer/Footer';
 
 library.add(faSearch, faArrowDown);
 
@@ -30,6 +31,7 @@ ReactDOM.render(
             <Route path="/products" component={Products}/>
             <Route path="/" component={App}/>
         </Switch>
+        <Footer />
         </BrowserRouter>
     </Provider>,
  document.getElementById('root'));

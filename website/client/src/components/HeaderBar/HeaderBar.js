@@ -38,7 +38,9 @@ export default class HeaderBar extends React.Component {
                 <div className="container header-bar">
                     <div className="row" style={{ height: 100 }}>
                         <SearchBar />
-                        <LogoImage />
+                        <div className="col-md-5" style={{margin: 'auto', textAlign: 'center'}}>
+                            <LogoImage className="main-logo"/>
+                        </div>
                         <div className="col-md-1" style={{ margin: "auto" }}>
                             <Button className="bttn-register" title="register" onButtonClick={this.handleRegister} />
                         </div>
