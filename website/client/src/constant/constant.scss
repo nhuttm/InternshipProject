@@ -5,3 +5,7 @@ $black: #000000;
 @mixin line {
     border: solid 1px #ececec;
 }
+
+input {
+    outline: none !important;
+}

@@ -2,16 +2,16 @@
 
 .quick-shop {
 	position: absolute;
-	width: 162px;
-	top: 186px;
-	left: 39px;
+	width: 180px;
+	top: 219px;
+	left: 30px;
 	margin-bottom: -100px;
 	height: 70px;
 	padding-top: 20px;
 	background-color: $pale-orange;
 	text-align: center;
 	opacity: 0;
-	transition: opacity .6s ease;
+	transition: opacity .4s ease;
 	font-size: 14px;
 	font-weight: 500;
 	font-style: normal;
@@ -23,6 +23,8 @@
 
 .container-item {
 	width: 20%;
+	padding-left: 30px;
+	padding-top: 20px;
 	position: relative;
 }
 
@@ -32,7 +34,7 @@
 
 .container-item:hover {
 	.product-img {
-		transform: scale(0.9);
+		transform: scale(1.1);
 		transform-origin: 50% 50%;
 	}
 

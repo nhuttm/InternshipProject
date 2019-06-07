@@ -5,6 +5,7 @@ import HeaderBar from './HeaderBar/HeaderBar';
 import NavBar from './NavBar/NavBar';
 
 import "./App.scss";
+import Anchor from './Anchor/Anchor';
 
 export default class App extends React.Component {
     render() {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
                             as='img'
                             centered
                             style={{ width: 1100, height: 550, paddingTop: 30, objectFit: 'cover' }} />
+                        <Anchor title='Shop now' className='shop-home' link="/products"/>
                     </div>
                     <div className='container-fluid'>
                         <div className='row' style={{ width: 1100, margin: 'auto' }}>

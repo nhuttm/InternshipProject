@@ -1,14 +1,13 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
 import Label from '../Label/Label';
-import Anchor from '../Anchor/Anchor';
-import "./ProductItem.scss";
+import "./Image.scss";
 
-export default class ProductItem extends React.Component {
+export default class HintImage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{width: 180, height: 269, overflow: 'hidden'}}>
+                <div style={{width: '100%', height: 180, overflow: 'hidden'}}>
                 <Image src={this.props.imgSrc}
                     as='img'
                     size='large'
@@ -16,9 +15,7 @@ export default class ProductItem extends React.Component {
                     centered
                     style={{ width: 180, height: 269, objectFit: 'cover' }} />
                 </div>
-                <Label title={this.props.title} className="name-product" />
-                <Label title={this.props.price} className="price-product" />
-                <Anchor title="+Quick shop" link={"/products/" + this.props.id} className="quick-shop"/>
+                <Label title={this.props.title} className="hint-product" />
             </React.Fragment>
         )
     }

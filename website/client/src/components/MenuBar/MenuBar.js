@@ -14,19 +14,19 @@ class MenuBar extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div class="row">
+                <div className="row">
                     <Label title="Category" className="category-title" />
                 </div>
                 {
                     this.props.categories.length != 0 ? this.props.categories.map(item => {
                         return (
-                            <div class="row">
+                            <div className="row">
                                 <Anchor link={"/products?category=" + item._id} title={item.name} className="menu-item" />
                             </div>)
                     }) : null
                 }
 
-                <div class="row">
+                <div className="row">
                     <Label title="Filter" className="filter-title" />
                 </div>
                 <Filter />

@@ -48,7 +48,7 @@ class Products extends React.Component {
                                         this.props.clothes.length != 0 ? this.props.clothes.map((item, index) => {
                                             return (
                                                 <div className="container-item" key={item._id}>
-                                                    <ProductItem key={item._id} id={item._id} imgSrc={item.img} title={item.name} price={item.price} />
+                                                    <ProductItem key={item._id} id={item._id} imgSrc={item.img[0]} title={item.name} price={item.price} />
                                                 </div>)
                                         }) : null
                                     }
@@ -58,8 +58,9 @@ class Products extends React.Component {
                         <Pagination classNames="container-fluid pagination-bottom"
                             pageNumber={this.props.pageNumber}
                             totalPages={this.props.totalPages}
-                            leftAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber) - 1)}
-                            rightAnchor={"/products?pageNumber=" + (Number.parseInt(this.props.pageNumber) + 1)} />
+                            pathName="/products"
+                            searchLeft={"?pageNumber=" + (Number.parseInt(this.props.pageNumber) - 1)}
+                            searchRight={"?pageNumber=" + (Number.parseInt(this.props.pageNumber) + 1)} />
                     </div>
             </React.Fragment>
         )

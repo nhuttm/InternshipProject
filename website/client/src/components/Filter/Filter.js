@@ -3,6 +3,7 @@ import React from 'react';
 import { Accordion, Icon } from 'semantic-ui-react'
 import './Filter.scss';
 import DropDownSize from './DropDownSize';
+import DropDownColor from './DropDownColor';
 export default class Filter extends React.Component {
   state = { activeIndex: -1 }
 
@@ -32,11 +33,7 @@ export default class Filter extends React.Component {
             Color
         </Accordion.Title>
         <Accordion.Content style={{paddingLeft: 50}} active={activeIndex === 1}>
-          <p>
-            There are many breeds of dogs. Each breed varies in size and temperament. Owners often
-            select a breed of dog that they find to be compatible with their own lifestyle and
-            desires from a companion.
-          </p>
+          <DropDownColor />
         </Accordion.Content>
 
         <Accordion.Title style={{paddingLeft: 50}} active={activeIndex === 2} index={2} onClick={this.handleClick}>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import Products from './components/Product';
+import ProductDetail from './components/ProductDetail';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
@@ -25,8 +26,9 @@ ReactDOM.render(
         <HeaderBar />
         <NavBar />
         <Switch>
-            <Route key="products" path="/products" component={Products}/>
-            <Route key="app" path="/" component={App}/>
+            <Route path="/products/:id" component={ProductDetail}/>
+            <Route path="/products" component={Products}/>
+            <Route path="/" component={App}/>
         </Switch>
         </BrowserRouter>
     </Provider>,
