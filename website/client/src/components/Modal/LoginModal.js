@@ -8,9 +8,30 @@ import "./Modal.scss";
 
 export default class LoginModal extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            email: ' ',
+            pass: ' '
+        }
+    } 
 
-    handleLogin = () => {
+    handleLogin = (event) => {
+        event.preventDefault();
+        const form = {
+            name: this.state.name,
+            email: this.state.email
+           }
+        this.setState({
+            name: ' ',
+            email: ' '
+        })
+    }
 
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     render() {
@@ -22,16 +43,16 @@ export default class LoginModal extends React.Component {
                         <Label title="Log In" className="login-label"/>
                     </div>
                     <div className="row">
-                        <TextField title='E-MAIL' placeholder='Enter your email' />
+                        <TextField title='E-MAIL' placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' placeholder='Enter your password' />
+                        <TextField title='PASSWORD' placeholder='Enter your password' name="pass" value={this.state.pass} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div classNames="row">
                         <Checkbox label='Remember password' className="check-box"/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
-                        <Button type="submit" className="bttn-login-sub" title="Login" onButtonClick={this.handleLogin} />
+                        <Button type="submit" className="bttn-login-sub" title="Login" onButtonClick={e => this.handleLogin(e)} />
                     </div>
                 </form>
                 <div className="line" style={{marginTop: 50}}></div>
