@@ -18,7 +18,6 @@ import Routes from './components/Routes/Routes';
 library.add(faSearch, faArrowDown);
 
 const store = createStore(reducer, applyMiddleware(thunk));
-console.log(store.getState());
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
