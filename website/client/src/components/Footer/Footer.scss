@@ -1,0 +1,23 @@
+.main-footer{
+    padding: 20px;
+    margin: auto;
+    color: #b7b7b7
+}
+
+.sub-footer{
+    @extend .main-footer;
+    font-size: 10px;
+    margin: 0;
+}
+
+.privacy-anchor{
+    @extend .sub-footer;
+    float: right;
+    margin-right: -90px
+}
+
+.term-anchor{
+    @extend .sub-footer;
+    float: right;
+    margin-right: -20px;
+}

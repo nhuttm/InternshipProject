@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-import Products from './components/Product';
-import ProductDetail from './components/ProductDetail';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux'; 
+import { Provider } from 'react-redux';
 import reducer from './reducer/index';
 import HeaderBar from './components/HeaderBar/HeaderBar';
 import NavBar from './components/NavBar/NavBar';
@@ -15,6 +12,8 @@ import { faSearch, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import "semantic-ui-css/semantic.min.css";
 import thunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css';
+import Footer from './components/Footer/Footer';
+import Routes from './components/Routes/Routes';
 
 library.add(faSearch, faArrowDown);
 
@@ -23,16 +22,13 @@ console.log(store.getState());
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-        <HeaderBar />
-        <NavBar />
-        <Switch>
-            <Route path="/products/:id" component={ProductDetail}/>
-            <Route path="/products" component={Products}/>
-            <Route path="/" component={App}/>
-        </Switch>
+            <HeaderBar />
+            <NavBar />
+            <Routes />
+            <Footer />
         </BrowserRouter>
     </Provider>,
- document.getElementById('root'));
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

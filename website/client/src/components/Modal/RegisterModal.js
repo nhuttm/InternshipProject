@@ -8,6 +8,7 @@ import "./Modal.scss";
 
 export default class RegisterModal extends React.Component {
 
+    
 
     handleLogin = () => {
 
