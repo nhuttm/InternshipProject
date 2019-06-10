@@ -1,30 +1,32 @@
 import React from 'react'
 import Modal from 'react-responsive-modal';
+import { connect } from 'react-redux';
+import { postLoginRequest } from '../../actions/userAction';
 import TextField from '../Field/TextField';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import { Checkbox } from 'semantic-ui-react';
 import "./Modal.scss";
+import axiosInstance from '../../instances/axiosInstance';
 
-export default class LoginModal extends React.Component {
+class LoginModal extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            email: ' ',
-            pass: ' '
+            email: '',
+            password: ''
         }
     } 
 
     handleLogin = (event) => {
+        
         event.preventDefault();
-        const form = {
-            name: this.state.name,
-            email: this.state.email
-           }
+        this.props.postLogin(this.state.email, this.state.password);
+
         this.setState({
-            name: ' ',
-            email: ' '
+            email: ' ',
+            password: ' '
         })
     }
 
@@ -46,7 +48,7 @@ export default class LoginModal extends React.Component {
                         <TextField title='E-MAIL' placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' placeholder='Enter your password' name="pass" value={this.state.pass} onChange={e => this.handleChange(e)}/>
+                        <TextField title='PASSWORD' placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div classNames="row">
                         <Checkbox label='Remember password' className="check-box"/>
@@ -65,3 +67,21 @@ export default class LoginModal extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        clothes: state.clothesReducer.clothes,
+        totalPages: state.clothesReducer.totalPages,
+        pageNumber: state.clothesReducer.pageNumber
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        postLogin: (email, password) => {
+            dispatch(postLoginRequest(email, password));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
