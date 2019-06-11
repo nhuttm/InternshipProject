@@ -31,15 +31,15 @@ export default class DropDownSize extends React.Component {
             <div className="row" style={{paddingLeft: 13}}>
                 <label className="size-container" style={{paddingLeft: 30}}>
                     <input type="radio" className="color-bttn" name="size" />
-                    <span class="checkmark">S</span>
+                    <span className="checkmark">S</span>
                 </label>
                 <label className="size-container" style={{paddingLeft: 30}}>
                     <input type="radio" className="color-bttn" name="size"/>
-                    <span class="checkmark">M</span>
+                    <span className="checkmark">M</span>
                 </label>
                 <label className="size-container" style={{paddingLeft: 30}}>
                     <input type="radio" className="color-bttn" name="size"/>
-                    <span class="checkmark">L</span>
+                    <span className="checkmark">L</span>
                 </label>
                 </div>
         )

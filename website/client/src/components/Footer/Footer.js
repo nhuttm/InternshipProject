@@ -10,7 +10,7 @@ export default class Footer extends React.Component {
             <React.Fragment>
                 <div className="container-fluid" style={{ paddingTop: 50 }}>
                     <div className="row line"></div>
-                    <div class="container">
+                    <div className="container">
                     <div className="row">
                         <div className="col-md-3" style={{ paddingTop: 20 }}>
                             <LogoImage className="footer-logo"/>

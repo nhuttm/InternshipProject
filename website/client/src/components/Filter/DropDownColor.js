@@ -6,27 +6,27 @@ export default class DropDownColor extends React.Component{
             <div className="row" style={{paddingLeft: 20}}>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color" />
-                    <span class="red checkmark"></span>
+                    <span className="red checkmark"></span>
                 </label>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color"/>
-                    <span class="yellow checkmark"></span>
+                    <span className="yellow checkmark"></span>
                 </label>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color"/>
-                    <span class="blue checkmark"></span>
+                    <span className="blue checkmark"></span>
                 </label>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color"/>
-                    <span class="pale-orange checkmark"></span>
+                    <span className="pale-orange checkmark"></span>
                 </label>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color"/>
-                    <span class="charcoal-grey checkmark"></span>
+                    <span className="charcoal-grey checkmark"></span>
                 </label>
                 <label className="color-container">
                     <input type="radio" className="color-bttn" name="color"/>
-                    <span class="white-three checkmark"></span>
+                    <span className="white-three checkmark"></span>
                 </label>
             </div>
         )

@@ -45,7 +45,8 @@ app.get('/createData', async (req, res) => {
         username: 'admin',
         password: '1',
         role: Types.IS_ADMIN,
-        fullname: 'ADMIN SIMA'
+        fullname: 'ADMIN SIMA',
+        img: faker.image.avatar()
     });
 
 
@@ -54,7 +55,8 @@ app.get('/createData', async (req, res) => {
         username: 'user',
         password: '1',
         role: Types.IS_USER,
-        fullname: 'USER SIMA'
+        fullname: 'USER SIMA',
+        img: faker.image.avatar()
     });
 
     await user1.save();

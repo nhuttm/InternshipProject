@@ -7,3 +7,45 @@
 .line{
     @include line;
 }
+  
+  .dropdown-user {
+    display: inline-block;
+    .dropdown-content-ava {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 50px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+          }
+      }
+      .user-avatar {
+        margin-left: 100px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+  }
+    
+  .dropdown-user:hover{
+       .dropdown-content-ava {
+            display: block;
+       }
+  }
+
+  .wrapped-ava{
+      position: relative;
+      margin: 0;
+      padding: 0;
+  }

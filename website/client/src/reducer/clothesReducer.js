@@ -8,7 +8,6 @@ const clothesReducer = (state = initialState, action ) => {
             return {...state, clothes: action.payload.clothes, totalPages: action.payload.totalPages, pageNumber: action.payload.pageNumber};
         }
         case Types.GET_CLOTHES_WITH_ID: {
-            console.log(state);
             return {...state, clothes: action.payload.clothes};
         }
         default:

@@ -2,11 +2,12 @@ import mongoose from 'mongoose';
 import JWT from 'jsonwebtoken';
 import passport from 'passport';
 import * as Types from '../constant';
+import { JWT_SECRET } from '../key';
 
 const User = mongoose.model('User');
 
 const createToken = user => {
-    return JWT.sign({user},Types.JWT_SECRET, { 
+    return JWT.sign({id: user._id, role: user.role},JWT_SECRET, { 
         expiresIn: new Date().setDate(new Date().getDate() + 1),
         subject: 'app_token',
         issuer: 'nhuttm'
@@ -19,7 +20,8 @@ export default class userController {
             res.status(401).json({message: req.user.message});
         } else{
             const token = createToken(req.user);
-            res.status(200).json({token, message: 'Login success'});
+            console.log(req.user);
+            res.status(200).json({token, user:req.user, message: 'Login success'});
         }
     }
 

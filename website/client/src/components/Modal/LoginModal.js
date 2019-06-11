@@ -7,27 +7,22 @@ import Button from '../Button/Button';
 import Label from '../Label/Label';
 import { Checkbox } from 'semantic-ui-react';
 import "./Modal.scss";
-import axiosInstance from '../../instances/axiosInstance';
-
 class LoginModal extends React.Component {
 
     constructor() {
         super();
         this.state = {
             email: '',
-            password: ''
+            password: '',
         }
     } 
 
-    handleLogin = (event) => {
+    handleLogin = async (event) => {
         
         event.preventDefault();
-        this.props.postLogin(this.state.email, this.state.password);
+        await this.props.postLogin(this.state.email, this.state.password);
+        window.location.reload();
 
-        this.setState({
-            email: ' ',
-            password: ' '
-        })
     }
 
     handleChange = (event) => {
@@ -38,7 +33,8 @@ class LoginModal extends React.Component {
 
     render() {
         return (
-            <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
+            <React.Fragment>
+                 <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
                 <div className="container-fluid">
                 <form>
                     <div className="row" style={{paddingBottom: 35}}>
@@ -50,7 +46,7 @@ class LoginModal extends React.Component {
                     <div className="row">
                         <TextField title='PASSWORD' placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
-                    <div classNames="row">
+                    <div className="row">
                         <Checkbox label='Remember password' className="check-box"/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
@@ -64,6 +60,7 @@ class LoginModal extends React.Component {
                 </div>
                 </div>
             </Modal>
+            </React.Fragment>
         )
     }
 }

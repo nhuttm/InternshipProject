@@ -10,6 +10,7 @@ export const postLoginRequest = (email, password) => {
             });
 
             if (response.data.token){
+                localStorage.setItem('user', JSON.stringify(response.data.user));
                 localStorage.setItem('user_token', response.data.token);
             }
 
@@ -54,5 +55,11 @@ export const postRegister = (message) => {
         payload:{
             message
         }
+    }
+}
+
+export const getUser = () => {
+    return {
+        type: Types.GET_USER
     }
 }

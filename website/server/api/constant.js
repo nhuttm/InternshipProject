@@ -6,5 +6,3 @@ export const PAGE_LIMIT = 20;
 //role
 export const IS_ADMIN = 1;
 export const IS_USER = 0;
-
-export const JWT_SECRET = 'nhuttm11101998';
