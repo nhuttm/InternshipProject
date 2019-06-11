@@ -11,10 +11,13 @@ import * as Types from './api/constant';
 import './api/models/clothes';
 import './api/models/category';
 import './api/models/user';
+import './api/passport';
 
 import clothesRouter from './api/routers/clothesRouter';
 import categoryRouter from './api/routers/categoryRouter';
 import userRouter from './api/routers/userRouter';
+
+import passport from 'passport';
 
 let app = express(); //instance of express
 app.use(cors());
@@ -22,6 +25,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(passport.initialize());
+
 mongoose.connect('mongodb://localhost:27017/local');
 
 const Clothes = mongoose.model('Clothes');

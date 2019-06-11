@@ -1,16 +1,19 @@
 import * as Types from '../constant/constant';
 import axiosInstance from '../instances/axiosInstance';
 
-export const postLoginRequest = (email, password, fullname) => {
+export const postLoginRequest = (email, password) => {
     return async (dispatch) => {
         try {
             const response = await axiosInstance.post('/user/login', {
                 email,
-                password,
-                fullname
+                password
             });
-            console.log(response);
-            dispatch(postLogin(response));
+
+            if (response.data.token){
+                localStorage.setItem('user_token', response.data.token);
+            }
+
+            dispatch(postLogin(response.data.message));
         } catch(error){
             console.log(error);
         }
@@ -36,11 +39,11 @@ export const postRegisterRequest = (email, password, fullname) => {
     }
 }
 
-export const postLogin = (token) => {
+export const postLogin = (message) => {
     return {
         type: Types.POST_LOGIN,
         payload:{
-            token
+            message
         }
     }
 }

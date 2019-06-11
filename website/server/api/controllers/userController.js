@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import JWT from 'jsonwebtoken';
-
+import passport from 'passport';
 import * as Types from '../constant';
 
 const User = mongoose.model('User');
@@ -14,9 +14,13 @@ const createToken = user => {
 }
 
 export default class userController {
-    handleLogin = async (req, res) => {
-        console.log('post-login');
-        console.log(req.body);
+    handleLogin = (req, res) => {
+        if (req.user.message){
+            res.status(401).json({message: req.user.message});
+        } else{
+            const token = createToken(req.user);
+            res.status(200).json({token, message: 'Login success'});
+        }
     }
 
     handleRegister = async (req, res) => {
