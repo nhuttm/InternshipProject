@@ -1,0 +1,21 @@
+@import "../../../constant/constant.scss";
+
+.admin{
+    background-image: url(../../admintheme.png);
+    height: 100%;
+    position: relative;
+}
+
+.admin-modal-login{
+    width: 30%;
+    height: 70%;
+    left: 35%;
+    top: 15%;
+    position: absolute;
+    opacity: 0.8;
+  border-radius: 2px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.08);
+  background-color: rgba(61, 61, 63, 0.8);
+}

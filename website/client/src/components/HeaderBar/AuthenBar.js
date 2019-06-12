@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import './HeaderBar.scss';
 import RegisterModal from '../Modal/RegisterModal';
 import Button from '../Button/Button';
-import { getUser } from '../../actions/userAction';
 import UserAva from './UserAva';
 
 class AuthenBar extends React.Component {
@@ -15,10 +14,6 @@ class AuthenBar extends React.Component {
             isOpenModalRegister: false,
             isOpenModalLogin: false
         }
-    }
-
-    componentDidMount = () => {
-        this.props.getUser();
     }
 
     handleLogin = () => {
@@ -43,11 +38,11 @@ class AuthenBar extends React.Component {
         return (
             <React.Fragment>
                 {
-                    this.props.avatar ?
+                    this.props.user ?
                         <React.Fragment>
                         <div className="col-md-2" style={{ margin: "auto" }}>
                         <div className="wrapped-ava">
-                                <UserAva imgSrc={this.props.avatar} />
+                                <UserAva imgSrc={this.props.user.img} />
                         </div>
                         </div>
                         </React.Fragment>
@@ -69,19 +64,9 @@ class AuthenBar extends React.Component {
 };
 
 const mapStateToProps = state => {
-    console.log('authen');
-    console.log(state);
     return {
-        avatar: state.userReducer.avatar
+        user: state.userReducer.user
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getUser: () => {
-            dispatch(getUser());
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthenBar);
+export default connect(mapStateToProps, null)(AuthenBar);

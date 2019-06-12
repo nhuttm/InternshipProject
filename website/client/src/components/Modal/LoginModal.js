@@ -33,7 +33,7 @@ class LoginModal extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                  <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
                 <div className="container-fluid">
                 <form>
@@ -41,10 +41,10 @@ class LoginModal extends React.Component {
                         <Label title="Log In" className="login-label"/>
                     </div>
                     <div className="row">
-                        <TextField title='E-MAIL' placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
+                        <TextField title='E-MAIL' classNameInput="input-field" classNameLabel="title-label" placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
+                        <TextField title='PASSWORD' classNameInput="input-field" classNameLabel="title-label"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
                         <Checkbox label='Remember password' className="check-box"/>
@@ -60,7 +60,7 @@ class LoginModal extends React.Component {
                 </div>
                 </div>
             </Modal>
-            </React.Fragment>
+            </>
         )
     }
 }

@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProductImage from './Image/ProductImage';
-import Label from './Label/Label';
-import Size from './Filter/DropDownSize';
-import Color from './Filter/DropDownColor';
-import NumberPicker from './NumberPicker/NumberPicker';
-import Button from './Button/Button';
+import ProductImage from '../Image/ProductImage';
+import Label from '../Label/Label';
+import Size from '../Filter/DropDownSize';
+import Color from '../Filter/DropDownColor';
+import NumberPicker from '../NumberPicker/NumberPicker';
+import Button from '../Button/Button';
 import StarRatings from 'react-star-ratings';
-import CommentBox from './CommentBox/CommentBox';
-import CommentUser from './CommentBox/CommentUser';
-import Pagination from './Pagination/Pagination';
-import HintImage from './Image/HintImage';
-import { getClothesWithIdRequest } from '../actions/clothesAction';
+import CommentBox from '../CommentBox/CommentBox';
+import CommentUser from '../CommentBox/CommentUser';
+import Pagination from '../Pagination/Pagination';
+import HintImage from '../Image/HintImage';
+import { getClothesWithIdRequest } from '../../actions/clothesAction';
 import queryString from 'query-string';
 
 class ProductDetail extends React.Component {

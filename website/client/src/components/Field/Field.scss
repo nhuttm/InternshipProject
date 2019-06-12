@@ -24,3 +24,12 @@
 .input-field:focus{
     outline-width: 0;
 }
+
+.title-label-admin{
+  @extend .title-label;
+  color: #acacac;
+}
+
+.input-field-admin{
+  @extend .input-field;
+}

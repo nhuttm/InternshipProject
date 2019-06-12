@@ -20,7 +20,7 @@ export default class userController {
             res.status(401).json({message: req.user.message});
         } else{
             const token = createToken(req.user);
-            res.status(200).json({token, avatar:req.user.img, message: 'Login success'});
+            res.status(200).json({token, user:req.user, message: 'Login success'});
         }
     }
 
