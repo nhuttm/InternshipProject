@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { postLoginRequest } from '../../../actions/userAction';
 import Label from '../../Label/Label';
 import TextField from '../../Field/TextField';
 import Button from '../../Button/Button';
 import Anchor from '../../Anchor/Anchor';
+import { withRouter } from 'react-router-dom';
 
-export default class AdminModalLogin extends React.Component{
+class AdminModalLogin extends React.Component{
 
     constructor() {
         super();
@@ -19,7 +22,7 @@ export default class AdminModalLogin extends React.Component{
         event.preventDefault();
         await this.props.postLogin(this.state.email, this.state.password);
 
-        this.props.onClose();
+        this.props.history.push('/admin/products');
     }
 
     handleChange = (event) => {
@@ -53,3 +56,13 @@ export default class AdminModalLogin extends React.Component{
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        postLogin: (email, password) => {
+            dispatch(postLoginRequest(email, password));
+        }
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(AdminModalLogin));

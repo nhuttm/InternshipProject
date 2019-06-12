@@ -7,6 +7,7 @@ import ProductDetail from '../Pages/ProductDetail';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import AdminLogin from '../Pages/Admin/AdminLogin';
 import PublicRoutes from './PublicRoutes';
+import AdminProducts from '../Pages/Admin/AdminProducts';
 
 class Routes extends React.Component {
     render() {
@@ -16,7 +17,8 @@ class Routes extends React.Component {
                     <PublicRoutes exact path="/" component={App} />
                     <PublicRoutes exact path="/products" component={Products} />
                     <PublicRoutes exact path="/products/:id" component={ProductDetail} />
-                    <PrivateRouteAdmin exact path="/admin" user={this.props.user} component={Products} />
+                    <PrivateRouteAdmin exact path="/admin" user={this.props.user} component={AdminProducts} />
+                    <PrivateRouteAdmin exact path="/admin/products" user={this.props.user} component={AdminProducts} />
                     <Route exact path="/admin/login" component={AdminLogin}/>
                 </Switch>
             </>
