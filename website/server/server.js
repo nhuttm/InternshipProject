@@ -1,4 +1,5 @@
 import express from 'express'; //return functions reference
+import bcrypt from 'bcrypt';
 
 import mongoose from 'mongoose';
 
@@ -40,10 +41,11 @@ app.use('/api/category', categoryRouter);
 app.use('/api/user', userRouter);
 app.get('/createData', async (req, res) => {
 
+    let hashPass = await bcrypt.hash('1', Types.SALT);
     let user1 = new User({
         _id: mongoose.Types.ObjectId(),
         username: 'admin',
-        password: '1',
+        password: hashPass,
         role: Types.IS_ADMIN,
         fullname: 'ADMIN SIMA',
         img: faker.image.avatar()
@@ -53,7 +55,7 @@ app.get('/createData', async (req, res) => {
     let user2 = new User({
         _id: mongoose.Types.ObjectId(),
         username: 'user',
-        password: '1',
+        password: hashPass,
         role: Types.IS_USER,
         fullname: 'USER SIMA',
         img: faker.image.avatar()

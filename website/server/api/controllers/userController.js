@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import JWT from 'jsonwebtoken';
-import passport from 'passport';
+import bcrypt from 'bcrypt';
 import * as Types from '../constant';
 import { JWT_SECRET } from '../key';
 
@@ -20,7 +20,6 @@ export default class userController {
             res.status(401).json({message: req.user.message});
         } else{
             const token = createToken(req.user);
-            console.log(req.user);
             res.status(200).json({token, avatar:req.user.img, message: 'Login success'});
         }
     }
@@ -36,11 +35,13 @@ export default class userController {
             if (findUser){
                 return res.status(403).json({error: 'Email is already in use'});
             }
+
+            const hashPass = await bcrypt.hash(password, Types.SALT);
     
             const user = new User({
                 _id: mongoose.Types.ObjectId(),
                 username: email,
-                password: password,
+                password: hashPass,
                 fullname: fullname,
                 role: Types.IS_USER
             });

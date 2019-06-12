@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import passport from 'passport';
+import bcrypt from 'bcrypt';
+import { SALT } from './constant';
 import passportLocal from 'passport-local';
 import passportJWT from 'passport-jwt';
 import { JWT_SECRET } from './key';
@@ -21,7 +23,9 @@ passport.use('local', new LocalStrategy({
             return done(null, { message: 'Email does not exist' });
         }
 
-        if (password == findUser.password) {
+        let hashPass = await bcrypt.hash(password, SALT);
+
+        if (bcrypt.compare(hashPass, findUser.password)) {
             return done(null, findUser);
         } else {
             return done(null, { message: 'Incorect password' });
