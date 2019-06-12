@@ -1,17 +1,42 @@
 import React from 'react'
 import Modal from 'react-responsive-modal';
 import TextField from '../Field/TextField';
+import { connect } from 'react-redux';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import { Checkbox } from 'semantic-ui-react';
 import "./Modal.scss";
+import { postRegisterRequest } from '../../actions/userAction';
 
-export default class RegisterModal extends React.Component {
+class RegisterModal extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            email: '',
+            password: '',
+            fullname: ''
+        }
+    }
     
 
-    handleLogin = () => {
+    handleLogin = (event) => {
+        event.preventDefault();
+        this.props.postRegister(this.state.email, this.state.password, this.state.fullname);
 
+        this.setState({
+            email: '',
+            password: '',
+            fullname: ''
+        })
+
+        this.props.onClose();
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     render() {
@@ -23,15 +48,15 @@ export default class RegisterModal extends React.Component {
                         <Label title="Register" className="login-label"/>
                     </div>
                     <div className="row">
-                        <TextField title='NAME' placeholder='Enter your name' />
+                        <TextField title='NAME' placeholder='Enter your name' name="fullname" value={this.state.fullname} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='E-MAIL' placeholder='Enter your email' />
+                        <TextField title='E-MAIL' placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' placeholder='Enter your password' />
+                        <TextField title='PASSWORD' placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
-                    <div classNames="row">
+                    <div className="row">
                         <Checkbox label='Remember password' className="check-box"/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
@@ -48,3 +73,19 @@ export default class RegisterModal extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        token: state.userReducer.token
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        postRegister: (email, password, fullname) => {
+            dispatch(postRegisterRequest(email, password, fullname));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer/index';
 import HeaderBar from './components/HeaderBar/HeaderBar';
@@ -17,8 +17,7 @@ import Routes from './components/Routes/Routes';
 
 library.add(faSearch, faArrowDown);
 
-const store = createStore(reducer, applyMiddleware(thunk));
-console.log(store.getState());
+const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

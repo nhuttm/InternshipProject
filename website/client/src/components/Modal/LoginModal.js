@@ -1,31 +1,28 @@
 import React from 'react'
 import Modal from 'react-responsive-modal';
+import { connect } from 'react-redux';
+import { postLoginRequest } from '../../actions/userAction';
 import TextField from '../Field/TextField';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import { Checkbox } from 'semantic-ui-react';
 import "./Modal.scss";
-
-export default class LoginModal extends React.Component {
+class LoginModal extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            email: ' ',
-            pass: ' '
+            email: '',
+            password: '',
         }
     } 
 
-    handleLogin = (event) => {
+    handleLogin = async (event) => {
+        
         event.preventDefault();
-        const form = {
-            name: this.state.name,
-            email: this.state.email
-           }
-        this.setState({
-            name: ' ',
-            email: ' '
-        })
+        await this.props.postLogin(this.state.email, this.state.password);
+
+        this.props.onClose();
     }
 
     handleChange = (event) => {
@@ -36,7 +33,8 @@ export default class LoginModal extends React.Component {
 
     render() {
         return (
-            <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
+            <React.Fragment>
+                 <Modal open={this.props.isOpen} center={true} classNames={{ modal: { 'login-form': 'none' } }} showCloseIcon={true} onClose={this.props.onClose}>
                 <div className="container-fluid">
                 <form>
                     <div className="row" style={{paddingBottom: 35}}>
@@ -46,9 +44,9 @@ export default class LoginModal extends React.Component {
                         <TextField title='E-MAIL' placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' placeholder='Enter your password' name="pass" value={this.state.pass} onChange={e => this.handleChange(e)}/>
+                        <TextField title='PASSWORD' placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
-                    <div classNames="row">
+                    <div className="row">
                         <Checkbox label='Remember password' className="check-box"/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
@@ -62,6 +60,17 @@ export default class LoginModal extends React.Component {
                 </div>
                 </div>
             </Modal>
+            </React.Fragment>
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        postLogin: (email, password) => {
+            dispatch(postLoginRequest(email, password));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LoginModal);

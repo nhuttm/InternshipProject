@@ -13,8 +13,8 @@ export default class CategoryImage extends React.Component {
                                 centered
                                 style={{width: 400, height: 365, paddingTop: 30, objectFit: 'cover'}}
                                 />
-                                <div class='category'>{this.props.title}</div>
-                                <div class='line-white'></div>
+                                <div className='category'>{this.props.title}</div>
+                                <div className='line-white'></div>
                                 <Anchor title='Shop now' className='shop-now' link={this.props.link}/>
             </React.Fragment>
         )
