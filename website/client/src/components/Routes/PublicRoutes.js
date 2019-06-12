@@ -9,7 +9,7 @@ const PublicRoutes = ({ component: Component, ...rest }) =>
         <>
             <HeaderBar /> <NavBar />
             <Route {...rest} render={ (props) =>
-                <Component />
+                <Component {...props}/>
             } />
             <Footer />
         </>

@@ -8,7 +8,7 @@ export default class App extends React.Component {
         return (
             <React.Fragment>
                     
-                    <div className="container-fluid">
+                    <div className="container-fluid" style={{position: 'relative'}}>
                         <Image src={process.env.PUBLIC_URL + '/img/shopping.jpg'}
                             as='img'
                             centered
