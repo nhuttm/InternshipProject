@@ -7,52 +7,47 @@ import Button from '../Button/Button';
 import { getUser } from '../../actions/userAction';
 import UserAva from './UserAva';
 
-let isOpenModalRegister = false;
-let isOpenModalLogin = false;
-
-
 class AuthenBar extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            isOpenModalRegister: false,
+            isOpenModalLogin: false
+        }
+    }
+
     componentDidMount = () => {
         this.props.getUser();
     }
 
-    componentDidUpdate = () => {
-        this.props.getUser();
-
-        console.log('did update');
-    }
-
     handleLogin = () => {
-        isOpenModalLogin = true;
-        this.forceUpdate();
+        this.setState({isOpenModalLogin: true});
     }
 
-    handleCloseLogin = async () => {
-        isOpenModalLogin = false;
-        console.log('updatexx');
-        this.forceUpdate();
+    handleCloseLogin = () => {
+        this.setState({isOpenModalLogin: false});
+
     }
 
     handleRegister = () => {
-        isOpenModalRegister = true;
-        this.forceUpdate();
+        this.setState({isOpenModalRegister: true});
+
     }
 
     handleCloseRegister = () => {
-        isOpenModalRegister = false;
-        this.forceUpdate();
+        this.setState({isOpenModalRegister: false});
     }
 
     render() {
-        console.log('update');
         return (
             <React.Fragment>
                 {
-                    this.props.user ?
+                    this.props.avatar ?
                         <React.Fragment>
                         <div className="col-md-2" style={{ margin: "auto" }}>
                         <div className="wrapped-ava">
-                                <UserAva imgSrc={this.props.user.img} />
+                                <UserAva imgSrc={this.props.avatar} />
                         </div>
                         </div>
                         </React.Fragment>
@@ -64,8 +59,8 @@ class AuthenBar extends React.Component {
                         <div className="col-md-1" style={{ margin: "auto" }}>
                             <Button className="bttn-login" title="Login" onButtonClick={this.handleLogin} />
                         </div>
-                            <RegisterModal onClose={this.handleCloseRegister} isOpen={isOpenModalRegister} />
-                            <LoginModal onClose={this.handleCloseLogin} isOpen={isOpenModalLogin} />
+                            <RegisterModal onClose={this.handleCloseRegister} isOpen={this.state.isOpenModalRegister} />
+                            <LoginModal onClose={this.handleCloseLogin} isOpen={this.state.isOpenModalLogin} />
                         </React.Fragment>
                 }
             </React.Fragment>
@@ -74,9 +69,10 @@ class AuthenBar extends React.Component {
 };
 
 const mapStateToProps = state => {
+    console.log('authen');
     console.log(state);
     return {
-        user: state.userReducer.user
+        avatar: state.userReducer.avatar
     }
 }
 

@@ -1,13 +1,11 @@
 import * as Types from '../constant/constant';
 
-let initialState = {user: JSON.parse(localStorage.getItem('user')), message: ' '};
+let initialState = {avatar: localStorage.getItem('user'), message: ' '};
 
 const userReducer = (state = initialState, action) => {
     switch (action.type){
         case Types.POST_LOGIN:{
-            console.log('login post');
-            console.log(JSON.parse(localStorage.getItem('user')));
-            return {...state, message: action.payload.message};
+            return {...state, avatar: action.payload.avatar, message: action.payload.message};
         }
         case Types.POST_REGISTER: {
             return {...state, message: action.payload.message};

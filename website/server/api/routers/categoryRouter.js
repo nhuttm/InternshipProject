@@ -5,6 +5,6 @@ import categoryController from '../controllers/categoryController';
 let categoryRouter = express.Router();
 
 let categoryControllerInstance = new categoryController();
-categoryRouter.get('/', passport.authenticate('jwt', {session: false}),categoryControllerInstance.listAllCategories);
+categoryRouter.get('/',categoryControllerInstance.listAllCategories);
 
 export default categoryRouter;

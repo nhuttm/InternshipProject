@@ -10,11 +10,11 @@ export const postLoginRequest = (email, password) => {
             });
 
             if (response.data.token){
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                localStorage.setItem('user', response.data.avatar);
                 localStorage.setItem('user_token', response.data.token);
             }
 
-            dispatch(postLogin(response.data.message));
+            dispatch(postLogin(response.data.avatar, response.data.message));
         } catch(error){
             console.log(error);
         }
@@ -40,11 +40,12 @@ export const postRegisterRequest = (email, password, fullname) => {
     }
 }
 
-export const postLogin = (message) => {
+export const postLogin = (avatar, message) => {
     return {
         type: Types.POST_LOGIN,
         payload:{
-            message
+            message,
+            avatar
         }
     }
 }

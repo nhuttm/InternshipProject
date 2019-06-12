@@ -21,8 +21,8 @@ class LoginModal extends React.Component {
         
         event.preventDefault();
         await this.props.postLogin(this.state.email, this.state.password);
-        window.location.reload();
 
+        this.props.onClose();
     }
 
     handleChange = (event) => {
@@ -65,14 +65,6 @@ class LoginModal extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        clothes: state.clothesReducer.clothes,
-        totalPages: state.clothesReducer.totalPages,
-        pageNumber: state.clothesReducer.pageNumber
-    }
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         postLogin: (email, password) => {
@@ -81,4 +73,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default connect(null, mapDispatchToProps)(LoginModal);

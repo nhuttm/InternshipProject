@@ -29,6 +29,8 @@ class RegisterModal extends React.Component {
             password: '',
             fullname: ''
         })
+
+        this.props.onClose();
     }
 
     handleChange = (event) => {
