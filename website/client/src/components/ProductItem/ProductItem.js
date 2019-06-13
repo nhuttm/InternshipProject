@@ -18,7 +18,7 @@ export default class ProductItem extends React.Component {
                 </div>
                 <Label title={this.props.title} className="name-product" />
                 <Label title={this.props.price} className="price-product" />
-                <Link to={{ pathname: "/products/" + this.props.id, search: this.props.searchLeft }} className="quick-shop"></Link>
+                <Link to={{ pathname: "/products/" + this.props.id}} className="quick-shop">+Quick shop</Link>
             </React.Fragment>
         )
     }

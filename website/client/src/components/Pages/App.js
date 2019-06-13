@@ -1,8 +1,7 @@
 import React from 'react';
 import CategoryImage from '../Image/CategoryImage';
 import { Image } from 'semantic-ui-react';
-import Anchor from '../Anchor/Anchor';
-
+import { Link } from 'react-router-dom';
 export default class App extends React.Component {
     render() {
         return (
@@ -13,7 +12,7 @@ export default class App extends React.Component {
                             as='img'
                             centered
                             style={{ width: 1100, height: 550, paddingTop: 30, objectFit: 'cover' }} />
-                        <Anchor title='Shop now' className='shop-home' link="/products"/>
+                            <Link to={{ pathname: "/products"}} className="shop-home">Shop now</Link>
                     </div>
                     <div className='container-fluid'>
                         <div className='row' style={{ width: 1100, margin: 'auto' }}>

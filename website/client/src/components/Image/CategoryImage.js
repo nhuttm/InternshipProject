@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
-import Anchor from '../Anchor/Anchor';
 import './Image.scss';
+import { Link } from 'react-router-dom';
 
 export default class CategoryImage extends React.Component {
     render(){
@@ -15,7 +15,7 @@ export default class CategoryImage extends React.Component {
                                 />
                                 <div className='category'>{this.props.title}</div>
                                 <div className='line-white'></div>
-                                <Anchor title='Shop now' className='shop-now' link={this.props.link}/>
+                                <Link to={{ pathname: this.props.link}} className="shop-now">Shop now</Link>
             </React.Fragment>
         )
     }
