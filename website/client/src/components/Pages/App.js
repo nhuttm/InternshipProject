@@ -1,18 +1,14 @@
 import React from 'react';
-import CategoryImage from './Image/CategoryImage';
+import CategoryImage from '../Image/CategoryImage';
 import { Image } from 'semantic-ui-react';
-import HeaderBar from './HeaderBar/HeaderBar';
-import NavBar from './NavBar/NavBar';
-
-import "./App.scss";
-import Anchor from './Anchor/Anchor';
+import Anchor from '../Anchor/Anchor';
 
 export default class App extends React.Component {
     render() {
         return (
             <React.Fragment>
                     
-                    <div className="container-fluid">
+                    <div className="container-fluid" style={{position: 'relative'}}>
                         <Image src={process.env.PUBLIC_URL + '/img/shopping.jpg'}
                             as='img'
                             centered

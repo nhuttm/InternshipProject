@@ -117,3 +117,12 @@
 .bttn-logout{
   @extend .bttn-account;
 }
+
+.bttn-login-admin{
+  @extend .bttn-login;
+  width: 100%;
+  border-radius: 0;
+  background-color: $pale-orange;
+  color: white;
+  height: 50px;
+}

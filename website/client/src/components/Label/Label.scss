@@ -184,3 +184,8 @@
   text-overflow: ellipsis;
   font-weight: bold;
 }
+
+.login-label-admin{
+  @extend .login-label;
+  color: $pale-orange;
+}

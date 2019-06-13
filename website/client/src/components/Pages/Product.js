@@ -1,11 +1,10 @@
 import React from 'react';
-import MenuBar from '../components/MenuBar/MenuBar';
-import "./App.scss";
-import ProductItem from './ProductItem/ProductItem';
-import SelectBox from './SelectBox/SelectBox';
-import Pagination from './Pagination/Pagination';
+import MenuBar from '../MenuBar/MenuBar';
+import ProductItem from '../ProductItem/ProductItem';
+import SelectBox from '../SelectBox/SelectBox';
+import Pagination from '../Pagination/Pagination';
 import { connect } from 'react-redux';
-import { getAllClothesRequest } from '../actions/clothesAction';
+import { getAllClothesRequest } from '../../actions/clothesAction';
 import queryString from 'query-string';
 
 class Products extends React.Component {
