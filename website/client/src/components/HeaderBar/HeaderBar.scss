@@ -49,3 +49,25 @@
       margin: 0;
       padding: 0;
   }
+
+  .cart {
+    background-image: url(../../cart.png);
+    height: 24px;
+    width: 24px;
+    display: block;
+    float: right;
+    position: relative;
+}
+
+.number-cart{
+  margin-left: 35%;
+  position: absolute;
+  color: white;
+  background-color: $pale-orange;
+  border: solid 1px $pale-orange;
+  border-radius: 20px;
+  font-size: 13px;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+}

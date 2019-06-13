@@ -34,9 +34,9 @@ export const getAllClothes = (clothes, totalPages, pageNumber) => {
     }
 }
 
-export const getClothesWithId = (clothes) => {
+export const getClothesWithId = (cloth) => {
     return {
         type: Types.GET_CLOTHES_WITH_ID,
-        payload: {clothes}
+        payload: {cloth}
     }
 }

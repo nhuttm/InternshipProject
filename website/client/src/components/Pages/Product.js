@@ -25,6 +25,8 @@ class Products extends React.Component {
     }
 
     render() {
+        console.log('xxx');
+        console.log(this.props.clothes)
         return (
             <React.Fragment>
                     <div className="container-fluid">

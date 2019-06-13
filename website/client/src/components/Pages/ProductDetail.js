@@ -20,6 +20,8 @@ class ProductDetail extends React.Component {
         super();
         this.state = {
             quantity: 0,
+            color: '',
+            size: '',
             pageNumber: 1
         }
     }
@@ -34,59 +36,67 @@ class ProductDetail extends React.Component {
             const pageNumber = values.pageNumber || 1;
             this.setState({pageNumber});
         }
-
     }
 
-    handlePlusQuantity = () => {
+    handlePlusQuantity = (e) => {
+        e.preventDefault();
         let quantity = this.state.quantity + 1;
         this.setState({ quantity });
     }
 
-    handleMinusQuantity = () => {
+    handleMinusQuantity = (e) => {
+        e.preventDefault();
         let quantity = this.state.quantity - 1;
         if (quantity >= 0)
             this.setState({ quantity });
     }
 
-    changeRating = () => {
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
+    handleAddToCart = (e) => {
+        e.preventDefault();
+        console.log(this.state);
     }
 
     render() {
-        console.log(this.props.clothes);
+        console.log(this.props.cloth);
         return (
             <div className="container-fluid" style={{ paddingTop: 50 }}>
                 {
-                    this.props.clothes._id ? <React.Fragment>
+                    this.props.cloth ? <React.Fragment>
                          <div className="row">
                     <div className="col-md-2">
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[1]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[1]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[2]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[2]}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[3]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[3]}></ProductImage>
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <ProductImage className="product-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
+                        <ProductImage className="product-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
                     </div>
                     <div className="col-md-4">
                         <div class="row">
-                            <Label className="product-name" title={this.props.clothes.name} />
+                            <Label className="product-name" title={this.props.cloth.name} />
                         </div>
                         <div className="row">
-                            <Label className="product-price" title={this.props.clothes.price} />
+                            <Label className="product-price" title={this.props.cloth.price} />
                         </div>
                         <div className="row" style={{ paddingTop: 10 }}>
                             <div className="col-md-5" style={{marginLeft: -17, marginTop: 7}}>
                             <StarRatings
-                                rating={this.props.clothes.rating}
+                                rating={this.props.cloth.rating}
                                 starRatedColor="yellow"
                                 numberOfStars={5}
                                 name='rating'
@@ -97,33 +107,35 @@ class ProductDetail extends React.Component {
                                 <div className="row" style={{height: '100%'}}>
                                     <div className="line" style={{marginLeft: -30, marginTop: 7}}></div>
                                     <div className="col-md-4" style={{marginTop: 10}}>
-                                        <Label title={this.props.clothes.ofArrayComment.length + " Reviews"} className="default-label"/>
+                                        <Label title={this.props.cloth.ofArrayComment.length + " Reviews"} className="default-label"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <form>
                         <div className="row" style={{ paddingTop: 10 }}>
                             <Label className="size-label" title="Size" />
                         </div>
                         <div className="row" style={{ paddingTop: 5 }}>
-                            <Size />
+                            <Size onChange={e => this.handleChange(e)}/>
                         </div>
                         <div className="row" style={{ paddingTop: 20 }}>
                             <Label className="color-label" title="Color" />
                         </div>
                         <div className="row" style={{ paddingTop: 10 }}>
-                            <Color />
+                            <Color onChange={e => this.handleChange(e)}/>
                         </div>
                         <div className="row" style={{ paddingTop: 20 }}>
                             <Label title="Quantity" className="product-quantity" />
-                            <NumberPicker quantity={this.state.quantity} plusQuantity={this.handlePlusQuantity} minusQuantity={this.handleMinusQuantity} />
+                            <NumberPicker quantity={this.state.quantity} plusQuantity={e => this.handlePlusQuantity(e)} minusQuantity={e=> this.handleMinusQuantity(e)} />
                         </div>
                         <div className="row" style={{ paddingTop: 40 }}>
-                            <Button title="Add to cart" className="bttn-cart" />
+                            <Button type="submit" title="Add to cart" className="bttn-cart" onButtonClick={e => this.handleAddToCart(e)}/>
                         </div>
+                        </form>
                         <div className="row line" style={{ marginTop: 20 }}></div>
                         <div className="row" style={{ paddingTop: 20 }}>
-                            <p className="detail-label">{this.props.clothes.detail}</p>
+                            <p className="detail-label">{this.props.cloth.detail}</p>
                         </div>
                     </div>
                     <div className="col-md-2">
@@ -131,19 +143,19 @@ class ProductDetail extends React.Component {
                             <Label title="More from" className="default-label" />
                         </div>
                         <div className="row">
-                            <Label title={this.props.clothes.brand} className="brand-label" />
+                            <Label title={this.props.cloth.brand} className="brand-label" />
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[0]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[1]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[1]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[2]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[2]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.clothes.img[3]}></ProductImage>
+                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[3]}></ProductImage>
                         </div>
                     </div>
                 </div>
@@ -161,13 +173,13 @@ class ProductDetail extends React.Component {
                         <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
                             <Pagination classNames="comment-paging"
                                 pageNumber={this.state.pageNumber}
-                                totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
-                                pathName={"/products/" + this.props.clothes._id}
+                                totalPages={Math.ceil(this.props.cloth.ofArrayComment.length/4)}
+                                pathName={"/products/" + this.props.cloth._id}
                                 searchLeft={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) - 1)}
                                 searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
                         {
-                            this.props.clothes.ofArrayComment.filter((item,index) => index < this.state.pageNumber*4 && index >= (this.state.pageNumber-1)*4).map(item => {
+                            this.props.cloth.ofArrayComment.filter((item,index) => index < this.state.pageNumber*4 && index >= (this.state.pageNumber-1)*4).map(item => {
                                 return (<div className="row" style={{ paddingBottom: 20 }}>
                             <div className="col-md-2">
                                 <CommentUser name={item.username} date={item.date} />
@@ -181,8 +193,8 @@ class ProductDetail extends React.Component {
                         <div className="row" style={{ paddingBottom: 20, paddingLeft: 1000 }}>
                             <Pagination classNames="comment-paging"
                                 pageNumber={this.state.pageNumber}
-                                totalPages={Math.ceil(this.props.clothes.ofArrayComment.length/4)}
-                                pathName={"/products/" + this.props.clothes._id}
+                                totalPages={Math.ceil(this.props.cloth.ofArrayComment.length/4)}
+                                pathName={"/products/" + this.props.cloth._id}
                                 searchLeft={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) - 1)}
                                 searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
@@ -199,19 +211,19 @@ class ProductDetail extends React.Component {
                             <div className="col-md-6">
                                 <div className="row">
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[0]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[0]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[1]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[1]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[2]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[2]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[3]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[3]}/>
 
                                     </div>
                                 </div>
@@ -220,19 +232,19 @@ class ProductDetail extends React.Component {
                             <div className="col-md-6">
                                 <div className="row">
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[0]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[0]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[1]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[1]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[2]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[2]}/>
 
                                     </div>
                                     <div className="col-md-3">
-                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.clothes.img[3]}/>
+                                    <HintImage title="Collete Stretch Linen Minidress" imgSrc={this.props.cloth.img[3]}/>
 
                                     </div>
                                 </div>
@@ -254,7 +266,7 @@ class ProductDetail extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        clothes: state.clothesReducer.clothes
+        cloth: state.clothesReducer.cloth
     }
 }
 

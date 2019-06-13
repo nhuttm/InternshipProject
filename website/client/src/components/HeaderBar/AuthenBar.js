@@ -40,7 +40,7 @@ class AuthenBar extends React.Component {
                 {
                     this.props.user ?
                         <React.Fragment>
-                        <div className="col-md-2" style={{ margin: "auto" }}>
+                        <div className="col-md-3" style={{ margin: "auto" }}>
                         <div className="wrapped-ava">
                                 <UserAva imgSrc={this.props.user.img} />
                         </div>
@@ -48,7 +48,7 @@ class AuthenBar extends React.Component {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                        <div className="col-md-1" style={{ margin: "auto" }}>
+                        <div className="col-md-2" style={{ margin: "auto" }}>
                             <Button className="bttn-register" title="register" onButtonClick={this.handleRegister} />
                         </div>
                         <div className="col-md-1" style={{ margin: "auto" }}>

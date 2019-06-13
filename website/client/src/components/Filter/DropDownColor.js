@@ -1,33 +1,22 @@
 import React from 'react';
 import './Filter.scss';
-export default class DropDownColor extends React.Component{
-    render(){
+import ColorRadioButton from './ColorRadioButton';
+import * as Color from '../../constant/constantColor';
+export default class DropDownColor extends React.Component {
+    render() {
         return (
-            <div className="row" style={{paddingLeft: 20}}>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color" />
-                    <span className="red checkmark"></span>
-                </label>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color"/>
-                    <span className="yellow checkmark"></span>
-                </label>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color"/>
-                    <span className="blue checkmark"></span>
-                </label>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color"/>
-                    <span className="pale-orange checkmark"></span>
-                </label>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color"/>
-                    <span className="charcoal-grey checkmark"></span>
-                </label>
-                <label className="color-container">
-                    <input type="radio" className="color-bttn" name="color"/>
-                    <span className="white-three checkmark"></span>
-                </label>
+            <div className="row" style={{ paddingLeft: 20 }} onChange={this.props.onChange}>
+                <ColorRadioButton colorName={Color.RED} />
+                <ColorRadioButton colorName={Color.YELLOW} />
+
+                <ColorRadioButton colorName={Color.BLUE} />
+
+                <ColorRadioButton colorName={Color.PALE_ORANGE} />
+
+                <ColorRadioButton colorName={Color.CHARCOAL_GREY} />
+
+                <ColorRadioButton colorName={Color.WHITE_THREE} />
+
             </div>
         )
     }

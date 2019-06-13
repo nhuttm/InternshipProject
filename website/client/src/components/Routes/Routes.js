@@ -13,7 +13,7 @@ class Routes extends React.Component {
     render() {
         return (
             <>
-                <Switch>
+                <Switch> 
                     <PublicRoutes exact path="/" component={App} />
                     <PublicRoutes exact path="/products" component={Products} />
                     <PublicRoutes exact path="/products/:id" component={ProductDetail} />
