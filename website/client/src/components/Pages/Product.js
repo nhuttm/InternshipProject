@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuBar from '../MenuBar/MenuBar';
-import ProductItem from '../ProductItem/ProductItem';
+import ProductItem from '../Item/ProductItem';
 import SelectBox from '../SelectBox/SelectBox';
 import Pagination from '../Pagination/Pagination';
 import { connect } from 'react-redux';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from '../Label/Label';
+import Label from '../../Label/Label';
 import StarRatings from 'react-star-ratings';
 import './CommentBox.scss';
 

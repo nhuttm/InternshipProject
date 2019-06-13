@@ -73,7 +73,8 @@ app.get('/createData', async (req, res) => {
         let categories = [];
         let comments = [];
         for (let x = 0; x < 4; x++) {
-            imageUrl.push(faker.image.image());
+            let number = Math.floor(Math.random()*99+1);
+            imageUrl.push("https://picsum.photos/id/" + number + "/200/300");
         }
         for (let x = 0; x < 2; x++) {
             categories.push(uuid[Math.floor(Math.random() * 5)]._id);

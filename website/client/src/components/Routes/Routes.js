@@ -8,6 +8,7 @@ import PrivateRouteAdmin from './PrivateRouteAdmin';
 import AdminLogin from '../Pages/Admin/AdminLogin';
 import PublicRoutes from './PublicRoutes';
 import AdminProducts from '../Pages/Admin/AdminProducts';
+import CartPage from '../Pages/CartPage';
 
 class Routes extends React.Component {
     render() {
@@ -17,6 +18,7 @@ class Routes extends React.Component {
                     <PublicRoutes exact path="/" component={App} />
                     <PublicRoutes exact path="/products" component={Products} />
                     <PublicRoutes exact path="/products/:id" component={ProductDetail} />
+                    <PublicRoutes exact path="/checkout/cart" component={CartPage} />
                     <PrivateRouteAdmin exact path="/admin" user={this.props.user} component={AdminProducts} />
                     <PrivateRouteAdmin exact path="/admin/products" user={this.props.user} component={AdminProducts} />
                     <Route exact path="/admin/login" component={AdminLogin}/>

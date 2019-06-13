@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'semantic-ui-react';
 import Label from '../Label/Label';
 import { Link } from 'react-router-dom';
-import "./ProductItem.scss";
+import "./Item.scss";
 
 export default class ProductItem extends React.Component {
     render() {
