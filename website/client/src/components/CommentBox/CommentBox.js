@@ -16,7 +16,7 @@ export default class CommentBox extends React.Component {
                         starRatedColor="yellow"
                         numberOfStars={5}
                         name='rating'
-                        starDimension={15}
+                        starDimension='15'
                     />
                 </div>
                 <div className="row" style={{margin: 0, padding: 10}}>

@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
 import LogoImage from '../Image/LogoImage';
 import './HeaderBar.scss';
 import AuthenBar from './AuthenBar';
 import Cart from './Cart';
 
-export default class HeaderBar extends React.Component {
+class HeaderBar extends React.Component {
+
+    componentDidMount
 
     render() {
         return (
@@ -20,7 +23,7 @@ export default class HeaderBar extends React.Component {
                         </div>
                         <AuthenBar />
                         <div className="col-md-1" style={{margin: 'auto', textAlign: 'center'}}>
-                            <Cart number="1"/>
+                            <Cart number={this.props.numberProduct}/>
                         </div>
                     </div>
                 </div>
@@ -29,3 +32,11 @@ export default class HeaderBar extends React.Component {
         );
     }
 };
+
+const mapStateToProps = state => {
+    return {
+        numberProduct: state.cartReducer.numberProduct
+    }
+}
+
+export default connect(mapStateToProps, null)(HeaderBar);

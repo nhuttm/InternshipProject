@@ -12,6 +12,8 @@ import CommentUser from '../CommentBox/CommentUser';
 import Pagination from '../Pagination/Pagination';
 import HintImage from '../Image/HintImage';
 import { getClothesWithIdRequest } from '../../actions/clothesAction';
+import { addProductIntoCart } from '../../actions/cartAction';
+
 import queryString from 'query-string';
 
 class ProductDetail extends React.Component {
@@ -57,9 +59,16 @@ class ProductDetail extends React.Component {
         })
     }
 
-    handleAddToCart = (e) => {
+    handleAddToCart = async (e) => {
         e.preventDefault();
-        console.log(this.state);
+
+        let config = {
+            quantity: this.state.quantity,
+            color: this.state.color,
+            size: this.state.size
+        }
+
+        await this.props.addProductIntoCart(this.props.cloth, config);
     }
 
     render() {
@@ -87,7 +96,7 @@ class ProductDetail extends React.Component {
                         <ProductImage className="product-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
                     </div>
                     <div className="col-md-4">
-                        <div class="row">
+                        <div className="row">
                             <Label className="product-name" title={this.props.cloth.name} />
                         </div>
                         <div className="row">
@@ -100,7 +109,7 @@ class ProductDetail extends React.Component {
                                 starRatedColor="yellow"
                                 numberOfStars={5}
                                 name='rating'
-                                starDimension={15}
+                                starDimension='15'
                             />
                             </div>
                             <div className="col-md-7">
@@ -179,8 +188,8 @@ class ProductDetail extends React.Component {
                                 searchRight={"?pageNumber=" + (Number.parseInt(this.state.pageNumber) + 1)} />
                         </div>
                         {
-                            this.props.cloth.ofArrayComment.filter((item,index) => index < this.state.pageNumber*4 && index >= (this.state.pageNumber-1)*4).map(item => {
-                                return (<div className="row" style={{ paddingBottom: 20 }}>
+                            this.props.cloth.ofArrayComment.filter((item,index) => index < this.state.pageNumber*4 && index >= (this.state.pageNumber-1)*4).map((item, index) => {
+                                return (<div key={index} className="row" style={{ paddingBottom: 20 }}>
                             <div className="col-md-2">
                                 <CommentUser name={item.username} date={item.date} />
                             </div>
@@ -265,6 +274,7 @@ class ProductDetail extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state.cartReducer);
     return {
         cloth: state.clothesReducer.cloth
     }
@@ -274,6 +284,9 @@ const mapDispatchToProps = dispatch => {
     return {
         getClothesWithId: id =>{
             dispatch(getClothesWithIdRequest(id));
+        },
+        addProductIntoCart: (product, config) => {
+            dispatch(addProductIntoCart(product, config));
         }
     }
 }
