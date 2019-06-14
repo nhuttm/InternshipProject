@@ -1,23 +1,23 @@
 import React from 'react';
 import Label from '../Label/Label';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import "./Item.scss";
 import NumberPicker from '../NumberPicker/NumberPicker';
 import Button from '../Button/Button';
+import { increaseQuantityProduct, decreaseQuantityProduct } from '../../actions/cartAction';
 
-export default class CartItem extends React.Component {
+class CartItem extends React.Component {
 
-    handlePlusQuantity = (e) => {
+    handlePlusQuantity = async (e) => {
         e.preventDefault();
-        let quantity = this.state.quantity + 1;
-        this.setState({ quantity });
+        await this.props.increaseQuantityProduct(this.props.index);
     }
 
-    handleMinusQuantity = (e) => {
+    handleMinusQuantity = async (e) => {
         e.preventDefault();
-        let quantity = this.state.quantity - 1;
-        if (quantity >= 0)
-            this.setState({ quantity });
+        if (this.props.config.quantity === 0)
+            return;
+        await this.props.decreaseQuantityProduct(this.props.index);
     }
 
     render() {
@@ -64,3 +64,16 @@ export default class CartItem extends React.Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        increaseQuantityProduct: (index) => {
+            dispatch(increaseQuantityProduct(index));
+        },
+        decreaseQuantityProduct: (index) => {
+            dispatch(decreaseQuantityProduct(index));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

@@ -39,7 +39,7 @@ class CartPage extends React.Component{
                                 return (
                                     <>
                                     <div className="row">
-                                    <CartItem key={index} product={item.product} config={item.config}/>
+                                    <CartItem key={item.config.quantity} index={index} product={item.product} config={item.config}/>
                                     </div>
                                     <div className="row line"></div>
                                     </>
