@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from '../Label/Label';
+import Label from '../../Label/Label';
 import StarRatings from 'react-star-ratings';
 import './CommentBox.scss';
 
@@ -16,7 +16,7 @@ export default class CommentBox extends React.Component {
                         starRatedColor="yellow"
                         numberOfStars={5}
                         name='rating'
-                        starDimension={15}
+                        starDimension='15'
                     />
                 </div>
                 <div className="row" style={{margin: 0, padding: 10}}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IS_ADMIN } from '../../constant/constant';
+import { ADMIN } from '../../constant/constant';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRouteAdmin = ({ component: Component, ...rest }) =>
@@ -8,7 +8,7 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) =>
             (props) =>
                 (
                     rest.user ? (
-                        rest.user.role === IS_ADMIN ? <Component {...props}/> : <Redirect to='/admin/login' />
+                        rest.user.role === ADMIN ? <Component {...props}/> : <Redirect to='/admin/login' />
                     ) : <Redirect to='/admin/login' />
                 )
         } />

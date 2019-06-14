@@ -13,7 +13,7 @@ class MenuBar extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <div className="row">
                     <Label title="Category" className="category-title" />
                 </div>
@@ -30,7 +30,7 @@ class MenuBar extends React.Component {
                     <Label title="Filter" className="filter-title" />
                 </div>
                 <Filter />
-            </React.Fragment>
+                </>
         );
     }
 }

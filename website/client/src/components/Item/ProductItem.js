@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
 import Label from '../Label/Label';
-import Anchor from '../Anchor/Anchor';
-import "./ProductItem.scss";
+import { Link } from 'react-router-dom';
+import "./Item.scss";
 
 export default class ProductItem extends React.Component {
     render() {
@@ -18,7 +18,7 @@ export default class ProductItem extends React.Component {
                 </div>
                 <Label title={this.props.title} className="name-product" />
                 <Label title={this.props.price} className="price-product" />
-                <Anchor title="+Quick shop" link={"/products/" + this.props.id} className="quick-shop"/>
+                <Link to={{ pathname: "/products/" + this.props.id}} className="quick-shop">+Quick shop</Link>
             </React.Fragment>
         )
     }

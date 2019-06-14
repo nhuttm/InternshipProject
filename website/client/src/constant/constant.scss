@@ -18,6 +18,34 @@ button {
     outline: none !important;
 }
 
+div {
+    outline: none !important;
+}
+
 #root{
     height: 100%;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.pale-orange {
+    background-color: $pale-orange;
+}
+
+.charcoal-grey {
+    background-color: rgba(61, 61, 63, 0.5);
+}
+
+.white-three {
+    background-color: rgba(237, 237, 237, 0.5);
 }
