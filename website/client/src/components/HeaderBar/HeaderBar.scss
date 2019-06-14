@@ -10,6 +10,7 @@
   
   .dropdown-user {
     display: inline-block;
+    margin-left: 20px;
     .dropdown-content-ava {
         display: none;
         position: absolute;
@@ -24,13 +25,9 @@
             display: block;
           }
       }
-      .user-avatar {
+      .user-name {
+        margin: auto;
         margin-left: 100px;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        color: white;
         padding: 16px;
         font-size: 16px;
         border: none;
@@ -70,4 +67,25 @@
   width: 20px;
   height: 20px;
   top: -10px;
+}
+
+.mail{
+  @extend .cart;
+  background-image: url(../../mail.png);
+
+}
+
+.notify{
+  @extend .cart;
+  background-image: url(../../notification.png);
+}
+
+.number-mail{
+  @extend .number-cart;
+  background-color: red;
+}
+
+.number-notify{
+  @extend .number-cart;
+  background-color: red;
 }

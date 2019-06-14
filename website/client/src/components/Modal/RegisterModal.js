@@ -54,7 +54,7 @@ class RegisterModal extends React.Component {
                         <TextField title='E-MAIL' classNameInput="input-field" classNameLabel="title-label"  placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' classNameInput="input-field" classNameLabel="title-label"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
+                        <TextField title='PASSWORD' classNameInput="input-field pass" classNameLabel="title-label"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
                         <Checkbox label='Remember password' className="check-box"/>

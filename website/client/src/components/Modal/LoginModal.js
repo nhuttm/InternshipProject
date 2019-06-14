@@ -44,10 +44,7 @@ class LoginModal extends React.Component {
                         <TextField title='E-MAIL' classNameInput="input-field" classNameLabel="title-label" placeholder='Enter your email' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' classNameInput="input-field" classNameLabel="title-label"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
-                    </div>
-                    <div className="row">
-                        <Checkbox label='Remember password' className="check-box"/>
+                        <TextField title='PASSWORD' classNameInput="input-field pass" classNameLabel="title-label"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
                         <Button type="submit" className="bttn-login-sub" title="Login" onButtonClick={e => this.handleLogin(e)} />

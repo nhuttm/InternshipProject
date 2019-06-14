@@ -9,6 +9,31 @@ import queryString from 'query-string';
 
 class Products extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            options: [{
+                key: 'Popularity',
+                text: 'Popularity',
+                value: 'Popularity',
+            }, 
+            {
+                key: 'NameAZ',
+                text: 'Name: A-Z',
+                value: 'NameAZ',
+            },
+            {
+                key: 'Price1',
+                text: 'Price: lowest to highest',
+                value: 'Price1',
+            },
+            {
+                key: 'Price2',
+                text: 'Price: highest to lowest',
+                value: 'Price2',
+            }]
+        }
+    }
     componentDidMount = () => {
         const values = queryString.parse(this.props.location.search);
         const pageNumber = values.pageNumber || 1;
@@ -25,8 +50,6 @@ class Products extends React.Component {
     }
 
     render() {
-        console.log('xxx');
-        console.log(this.props.clothes)
         return (
             <React.Fragment>
                     <div className="container-fluid">
@@ -36,7 +59,7 @@ class Products extends React.Component {
                             </div>
                             <div className="col-md-10">
                                 <div className="row" style={{ paddingLeft: 13, paddingTop: 20 }}>
-                                    <SelectBox classNames="col-md-9" />
+                                    <SelectBox classNames="col-md-9" options={this.state.options}/>
                                     <Pagination classNames="col-md-3"
                                         pageNumber={this.props.pageNumber}
                                         totalPages={this.props.totalPages}

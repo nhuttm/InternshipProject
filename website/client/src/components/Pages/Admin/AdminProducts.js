@@ -23,7 +23,6 @@ class AdminProducts extends React.Component {
     render() {
         return (
            <div className="container-fluid">
-               <p>Admin products</p>
            </div>
         )
     }

@@ -1,0 +1,19 @@
+.menubar-admin{
+    .wrapped-logo{
+        margin: auto;
+        height: 20%;
+        .admin-logo{
+            object-fit: scale-down;
+            margin: auto;
+        }
+    }
+    .wrapped-menu-item{
+        padding: 10%;
+        margin-left: 10px;
+        
+        .admin-menu-item{
+            padding-left: 20%;
+            color: black;
+        }
+    }
+}

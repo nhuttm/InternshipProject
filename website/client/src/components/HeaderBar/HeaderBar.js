@@ -4,12 +4,10 @@ import SearchBar from '../SearchBar/SearchBar';
 import LogoImage from '../Image/LogoImage';
 import './HeaderBar.scss';
 import AuthenBar from './AuthenBar';
-import Cart from './Cart';
+import IconHeadbar from './IconHeadbar';
 
 class HeaderBar extends React.Component {
-
-    componentDidMount
-
+    
     render() {
         return (
             <React.Fragment>
@@ -23,7 +21,7 @@ class HeaderBar extends React.Component {
                         </div>
                         <AuthenBar />
                         <div className="col-md-1" style={{margin: 'auto', textAlign: 'center'}}>
-                            <Cart number={this.props.numberProduct}/>
+                            <IconHeadbar number={this.props.numberProduct} link="/checkout/cart" classNameLink="cart" classNameLabel="number-cart"/>
                         </div>
                     </div>
                 </div>

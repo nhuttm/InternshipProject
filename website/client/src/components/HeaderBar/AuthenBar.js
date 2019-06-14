@@ -42,7 +42,7 @@ class AuthenBar extends React.Component {
                         <React.Fragment>
                         <div className="col-md-3" style={{ margin: "auto" }}>
                         <div className="wrapped-ava">
-                                <UserAva imgSrc={this.props.user.img} />
+                                <UserAva name={this.props.user.fullname} />
                         </div>
                         </div>
                         </React.Fragment>
