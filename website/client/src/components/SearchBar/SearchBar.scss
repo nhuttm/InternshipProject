@@ -21,3 +21,26 @@
         border: none;
     }
 }
+
+.form-search-admin{
+    display: flex;
+    flex-direction: row-reverse;
+    .search-input{
+        padding-left: 30px;
+        border: solid 1px #b7b7b7;
+        width: 181px;
+        height: 35px;
+    }
+    .search-input:focus{
+        outline-width: 0;
+    }
+
+    .search-button{
+        display: inline;
+        margin-right: -30px;
+        background-color: transparent;
+        object-fit: contain;
+        opacity: 0.6;
+        border: none;
+    }
+}

@@ -14,7 +14,7 @@ class HeaderBar extends React.Component {
                 <div className="container header-bar">
                     <div className="row" style={{ height: 100 }}>
                     <div className="col-md-3" style={{margin: 'auto', textAlign: 'center'}}>
-                        <SearchBar />
+                        <SearchBar classNameSearch="form-search"/>
                     </div>
                         <div className="col-md-5" style={{margin: 'auto', textAlign: 'center'}}>
                             <LogoImage className="main-logo"/>
