@@ -36,6 +36,17 @@ const cartReducer = (state = initialState, action ) => {
             localStorage.setItem('productCart', JSON.stringify(state));
             return state;
         }
+        case Types.REMOVE_PRODUCT_IN_CART: {
+            const index = action.payload.index;
+            let productRemove = state.productList[index];
+            let totalAfter = state.total;
+
+            totalAfter -= productRemove.product.price * productRemove.config.quantity;
+
+            state = {...state, total: totalAfter, productList: [...state.productList.slice(0, index), ...state.productList.slice(index+1, state.productList.length+1)]};
+            localStorage.setItem('productCart', JSON.stringify(state));
+            return state;
+        }
         default:
             return state;
     }

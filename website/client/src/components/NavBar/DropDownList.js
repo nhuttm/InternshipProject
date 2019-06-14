@@ -1,17 +1,17 @@
 import React from 'react';
 import "./NavBar.scss";
-
+import { Link } from 'react-router-dom';
 export default class DropDownList extends React.Component{
     render(){
         return(
                 <ul className="dropdown-content">
-                    <a className="element-dropdown" href={this.props.tops}>Tops</a>
-                    <a className="element-dropdown" href={this.props.bottoms}>Bottoms</a>
-                    <a className="element-dropdown" href={this.props.dresses}>Dresses</a>
-                    <a className="element-dropdown" href={this.props.jackets}>Jackets</a>
-                    <a className="element-dropdown" href={this.props.shoes}>Shoes</a>
-                    <a className="element-dropdown" href={this.props.accesories}>Accesories</a>
-                    <a className="element-dropdown" href={this.props.sales}>Sales</a>
+                    <Link className="element-dropdown" to={this.props.tops}>Tops</Link>
+                    <Link className="element-dropdown" to={this.props.bottoms}>Bottoms</Link>
+                    <Link className="element-dropdown" to={this.props.dresses}>Dresses</Link>
+                    <Link className="element-dropdown" to={this.props.jackets}>Jackets</Link>
+                    <Link className="element-dropdown" to={this.props.shoes}>Shoes</Link>
+                    <Link className="element-dropdown" to={this.props.accesories}>Accesories</Link>
+                    <Link className="element-dropdown" to={this.props.sales}>Sales</Link>
                 </ul>
         );
     }

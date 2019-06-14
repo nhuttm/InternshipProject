@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import "./Item.scss";
 import NumberPicker from '../NumberPicker/NumberPicker';
 import Button from '../Button/Button';
-import { increaseQuantityProduct, decreaseQuantityProduct } from '../../actions/cartAction';
+import { increaseQuantityProduct, decreaseQuantityProduct, removeProductInCart } from '../../actions/cartAction';
 
 class CartItem extends React.Component {
 
@@ -18,6 +18,11 @@ class CartItem extends React.Component {
         if (this.props.config.quantity === 0)
             return;
         await this.props.decreaseQuantityProduct(this.props.index);
+    }
+
+    handleRemoveProduct = async (e) => {
+        e.preventDefault();
+        await this.props.removeProductInCart(this.props.index);
     }
 
     render() {
@@ -40,7 +45,7 @@ class CartItem extends React.Component {
 
                                 </div>
                                 <div className="col-md-6">
-                                <Button className="bttnmodify-cart" title="Remove"/>
+                                <Button className="bttnmodify-cart" title="Remove" onButtonClick={(e) => this.handleRemoveProduct(e)}/>
 
                                 </div>
 
@@ -72,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         decreaseQuantityProduct: (index) => {
             dispatch(decreaseQuantityProduct(index));
+        },
+        removeProductInCart: (index) => {
+            dispatch(removeProductInCart(index));
         }
     }
 }

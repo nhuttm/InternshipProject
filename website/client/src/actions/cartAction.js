@@ -27,3 +27,12 @@ export const decreaseQuantityProduct = (index) => {
         }
     }
 }
+
+export const removeProductInCart = (index) => {
+    return {
+        type: Types.REMOVE_PRODUCT_IN_CART,
+        payload: {
+            index
+        }
+    }
+}

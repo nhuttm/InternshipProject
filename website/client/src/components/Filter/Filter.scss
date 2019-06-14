@@ -99,3 +99,24 @@
 
 }
 
+.wrapped-title-checkbox{
+	padding-top: 5px;
+	.title-checkbox{
+		font-size: 15px;
+		margin-left: 10px;
+	}
+}
+
+.checkbox{
+	position: absolute;
+	left: 80%;
+	top: 30%;
+	font-size: 50px;
+
+}
+
+.dropdown-brand{
+	margin-top: 5px;
+	 background-color: #fafafa;
+	  position: relative;
+  }
