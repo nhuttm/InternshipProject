@@ -6,8 +6,8 @@ const Clothes = mongoose.model('Clothes')
 export default class clothesController {
     listAllClothes = async (req, res) => {
         try{
-            const pageNumber = req.query.pageNumber || 1;
-            const pageLimit = req.query.pageLimit || PAGE_LIMIT;
+            const pageNumber = parseInt(req.query.pageNumber) || 1;
+            const pageLimit = parseInt(req.query.pageLimit) || PAGE_LIMIT;
 
             const offSet = (pageNumber - 1) * pageLimit;
             let result = await Clothes.find();
@@ -23,15 +23,16 @@ export default class clothesController {
 
     listAllClothesAdmin = async (req, res) => {
         try{
-            const pageNumber = req.query.pageNumber || 1;
-            const pageLimit = req.query.pageLimit || PAGE_LIMIT_ADMIN;
+            const pageNumber = parseInt(req.query.pageNumber) || 1;
+            const pageLimit =  parseInt(req.query.pageLimit) || PAGE_LIMIT_ADMIN;
 
             const offSet = (pageNumber - 1) * pageLimit;
-            let result = await Clothes.find();
+            let result = await Clothes.find().populate('ofArrayCategory', 'name');
             let totalEntry = result.length;
 
             const totalPages = Math.ceil(totalEntry / pageLimit);
             result = result.slice(offSet, offSet + pageLimit);
+            
             let response = {"clothes": result, "pageNumber": pageNumber, "pageLimit": pageLimit ,"totalPages": totalPages, "totalEntry": totalEntry};
             res.json(response);
         } catch (err) {

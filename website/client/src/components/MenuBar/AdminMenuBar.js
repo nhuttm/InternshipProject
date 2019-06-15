@@ -14,19 +14,19 @@ export default class AdminMenuBar extends Component {
                     <AdminMenuItem  link="/admin/overview" name="Overview" img="/img/overview.png"/>
                 </div>
                 <div className="row wrapped-menu-item">
-                    <AdminMenuItem  name="Orders" img="/img/orders.png"/>
+                    <AdminMenuItem  link="/admin/overview" name="Orders" img="/img/orders.png"/>
                 </div>
                 <div className="row wrapped-menu-item">
-                    <AdminMenuItem  name="Products" img="/img/products.png"/>
+                    <AdminMenuItem  link="/admin/overview" name="Products" img="/img/products.png"/>
                 </div>
                 <div className="row wrapped-menu-item">
-                    <AdminMenuItem  name="Payments" img="/img/payment.png"/>
+                    <AdminMenuItem  link="/admin/overview" name="Payments" img="/img/payment.png"/>
                 </div>
                 <div className="row wrapped-menu-item">
-                    <AdminMenuItem  name="Promotions" img="/img/promotion.png"/>
+                    <AdminMenuItem  link="/admin/overview" name="Promotions" img="/img/promotion.png"/>
                 </div>
                 <div className="row wrapped-menu-item">
-                    <AdminMenuItem  name="Setting" img="/img/setting.png"/>
+                    <AdminMenuItem  link="/admin/overview" name="Setting" img="/img/setting.png"/>
                 </div>
             </div>
         )

@@ -14,7 +14,7 @@ export const getAllClothesRequestAdmin = (pageNumber, pageLimit) => {
 
 export const getAllClothesAdmin = (clothes, totalPages, pageNumber, totalEntry, pageLimit) => {
     return {
-        type: Types.GET_ALL_CLOTHES,
+        type: Types.GET_ALL_CLOTHES_ADMIN,
         payload:{
             clothes,
             totalPages,

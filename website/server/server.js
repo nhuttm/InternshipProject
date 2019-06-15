@@ -103,6 +103,7 @@ app.get('/createData', async (req, res) => {
             img: imageUrl,
             rating: Math.floor(Math.random()*5+1),
             kind: kind[Math.random()*4],
+            dateAdd: new Date(),
             ofArrayComment: comments,
             ofArrayCategory: categories
         });

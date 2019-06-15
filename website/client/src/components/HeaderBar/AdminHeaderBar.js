@@ -8,7 +8,7 @@ import Label from '../Label/Label';
 class AdminHeaderBar extends Component {
     render() {
         return (
-            <div className="row" style={{ height: '20%' }}>
+            <div className="row" style={{ height: '10%' }}>
                 <div className="col-md-7">
                     <Label className="title-page-admin" />
                 </div>

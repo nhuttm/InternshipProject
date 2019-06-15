@@ -11,7 +11,7 @@
   font-size: 13px;
 }
 
-body{
+.admin-body{
   background-color: #f6f6f6;
   height: 100vh;
 }
@@ -133,7 +133,6 @@ body{
       display: flex;
       width: 53%;
       .pagination-admin{
-        width: 90%;
         margin-left: 10px;
       }
     }
@@ -151,18 +150,28 @@ body{
       @include product-fix;
       .wrapped-detail{
         display: flex;
+        margin-left: 10px;
+        width: 100%;
         padding-top: 10px;
         font-size: 13px;
         flex-direction: column;
         align-self: center;
         .title-product{
           font-weight: bold;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .category-product{
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
         }
       }
       .item-img{
         object-fit: cover;
-        height: 100%;
-        margin-right: 20px;
+        margin: auto;
+        height: 80%;
         width: 20%;
       }
     }

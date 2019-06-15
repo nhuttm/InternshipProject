@@ -15,27 +15,26 @@ class AdminProducts extends React.Component {
     constructor() {
         super();
         this.state = {
-            pageLimit: 10
+            pageLimit: 10,
+            activePage: 1
         }
     }
 
     componentDidMount = () => {
+        document.body.className = "admin-body";
         const values = queryString.parse(this.props.location.search);
         const pageNumber = values.pageNumber || 1;
-        this.props.getAllClothes(pageNumber);
+        this.props.getAllClothes(pageNumber, this.state.pageLimit);
     }
 
-    componentDidUpdate = (prevProps) => {
-        if (prevProps.location.search != this.props.location.search) {
-            const values = queryString.parse(this.props.location.search);
-            const pageNumber = values.pageNumber || 1;
-            this.props.getAllClothes(pageNumber);
-        }
-
+    handleChangePageLimit = (data) => {
+        this.setState({pageLimit: data.value});
+        this.props.getAllClothes(this.state.activePage, data.value);
     }
 
-    handleChangePage = () => {
-        
+    handleChangePageNumber = (e, { activePage }) => {
+        this.setState({activePage});
+        this.props.getAllClothes(activePage, this.state.pageLimit);
     }
 
     render() {
@@ -65,17 +64,16 @@ class AdminProducts extends React.Component {
                         <Label title="" className="content-title-field" />
                     </div>
                     <div className="line"></div>
-                    <ProductAdminItem />
-                    <ProductAdminItem />
-                    <ProductAdminItem />
-                    <ProductAdminItem />
-                    <ProductAdminItem />
-                    <ProductAdminItem />
+                    {
+                        this.props.clothes.length != 0 ? this.props.clothes.map((item, index) => {
+                            return (<ProductAdminItem key={item._id} product={item}/>)
+                        }) : null
+                    }
                     <div className="footer-product-admin">
-                        <Label className="entries-product" title="Show 1 to 10 of 123 entries"/>
+                        <Label className="entries-product" title={`Show ${this.state.pageLimit*(this.props.pageNumber-1)+1} to ${this.state.pageLimit*this.props.pageNumber} of ${this.props.totalEntry} entries`}/>
                         <div className="option-paging">
-                            <SelectBox onChange={this.handleChangePage} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page"/>
-                            <Pagination className="pagination-admin" defaultActivePage={5} totalPages={10}/>
+                            <SelectBox onChange={this.handleChangePageLimit} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page"/>
+                            <Pagination className="pagination-admin" defaultActivePage={1} totalPages={this.props.totalPages} onPageChange={this.handleChangePageNumber}/>
                         </div>
                     </div>
                 </div>
@@ -87,11 +85,11 @@ class AdminProducts extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
-        clothes: state.clothesReducer.clothes,
-        totalPages: state.clothesReducer.totalPages,
-        pageNumber: state.clothesReducer.pageNumber
+        clothes: state.adminReducer.clothes,
+        totalPages: state.adminReducer.totalPages,
+        pageNumber: state.adminReducer.pageNumber,
+        totalEntry: state.adminReducer.totalEntry
     }
 }
 

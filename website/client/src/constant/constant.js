@@ -1,4 +1,5 @@
 export const GET_ALL_CLOTHES = 'Get All Clothes';
+export const GET_ALL_CLOTHES_ADMIN = 'Get All Clothes Admin';
 export const GET_ALL_CATEGORIES = 'Get All Categories';
 export const GET_CLOTHES_WITH_ID = 'Get Clothes With ID';
 export const ADD_PRODUCT_INTO_CART = 'Add product into cart';
