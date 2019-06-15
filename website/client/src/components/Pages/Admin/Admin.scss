@@ -37,7 +37,8 @@ body{
 }
 
 .sortBy{
-  width: 54px;
+  width: 15%;
+  margin-left: 30px;
   height: 18px;
   margin-right: 20px;
   margin-top: 10px;
@@ -119,12 +120,22 @@ body{
     }
   }
 
+
   .footer-product-admin{
     display: flex;
     justify-content: space-between;
     margin: 20px;
+    margin-right: 50px;
     .entries-product{
       margin-top: auto;
+    }
+    .option-paging{
+      display: flex;
+      width: 53%;
+      .pagination-admin{
+        width: 90%;
+        margin-left: 10px;
+      }
     }
   }
 

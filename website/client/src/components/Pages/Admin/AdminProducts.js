@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllClothesRequest } from '../../../actions/clothesAction';
+import { getAllClothesRequestAdmin } from '../../../actions/adminAction';
 import queryString from 'query-string';
 import SelectBox from '../../SelectBox/SelectBox';
 import Label from '../../Label/Label';
@@ -9,31 +9,13 @@ import Button from '../../Button/Button';
 import exportImg from '../../export.png';
 import ProductAdminItem from '../../Item/ProductAdminItem';
 import { Pagination } from 'semantic-ui-react'
+import { optionsPage, optionsSortBy } from '../../../constant/options';
 
 class AdminProducts extends React.Component {
     constructor() {
         super();
         this.state = {
-            options: [{
-                key: 'Popularity',
-                text: 'Popularity',
-                value: 'Popularity',
-            },
-            {
-                key: 'NameAZ',
-                text: 'Name: A-Z',
-                value: 'NameAZ',
-            },
-            {
-                key: 'Price1',
-                text: 'Price: lowest to highest',
-                value: 'Price1',
-            },
-            {
-                key: 'Price2',
-                text: 'Price: highest to lowest',
-                value: 'Price2',
-            }]
+            pageLimit: 10
         }
     }
 
@@ -52,13 +34,17 @@ class AdminProducts extends React.Component {
 
     }
 
+    handleChangePage = () => {
+        
+    }
+
     render() {
         return (
             <>
                 <div className="wrapped-top-products">
                     <div className="wrapped-sortBy">
                         <Label title="SORT BY" className="sortBy" />
-                        <SelectBox options={this.state.options} />
+                        <SelectBox className="wrapped-select" classNameSelect="select-sortby-admin" options={optionsSortBy} />
                     </div>
                     <div className="wrapped-form">
                         <SearchBar classNameSearch="form-search-admin" />
@@ -87,7 +73,10 @@ class AdminProducts extends React.Component {
                     <ProductAdminItem />
                     <div className="footer-product-admin">
                         <Label className="entries-product" title="Show 1 to 10 of 123 entries"/>
-                        <Pagination className="pagination-admin" defaultActivePage={5} totalPages={10}/>
+                        <div className="option-paging">
+                            <SelectBox onChange={this.handleChangePage} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page"/>
+                            <Pagination className="pagination-admin" defaultActivePage={5} totalPages={10}/>
+                        </div>
                     </div>
                 </div>
 
@@ -108,8 +97,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllClothes: (pageNumber) => {
-            dispatch(getAllClothesRequest(pageNumber));
+        getAllClothes: (pageNumber, pageLimit) => {
+            dispatch(getAllClothesRequestAdmin(pageNumber, pageLimit));
         }
     }
 }
