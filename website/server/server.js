@@ -17,6 +17,7 @@ import './api/passport';
 import clothesRouter from './api/routers/clothesRouter';
 import categoryRouter from './api/routers/categoryRouter';
 import userRouter from './api/routers/userRouter';
+import adminRouter from './api/routers/adminRouter';
 
 import passport from 'passport';
 
@@ -39,6 +40,8 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api/clothes', clothesRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/user', userRouter);
+app.use('/api/admin', adminRouter);
+
 app.get('/createData', async (req, res) => {
 
     // let hashPass = await bcrypt.hash('1', Types.SALT);
