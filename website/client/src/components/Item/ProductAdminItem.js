@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Image } from 'semantic-ui-react';
 import Label from '../Label/Label';
-import exportImg from '../export.png';
 import Button from '../Button/Button';
+import { connect } from 'react-redux';
+import { removeClothesWithIdRequestAdmin } from '../../actions/adminAction';
 
-export default class ProductAdminItem extends Component {
+class ProductAdminItem extends Component {
 
     showCategory = () => {
         const listCategory = [...this.props.product.ofArrayCategory];
@@ -22,6 +23,12 @@ export default class ProductAdminItem extends Component {
         }
 
         return categories;
+    }
+
+    handleRemoveItem = async () => {
+        await this.props.removeClothesWithId(this.props.product._id);
+
+        this.props.reload();
     }
 
     render() {
@@ -51,7 +58,7 @@ export default class ProductAdminItem extends Component {
                             <a className="action-product">Actions
                                 <div className="dropdown-action">
                                     <Button className="edit-bttn" title="Edit"/>
-                                    <Button className="remove-bttn" title="Remove"/>
+                                    <Button className="remove-bttn" title="Remove" onButtonClick={this.handleRemoveItem}/>
                                 </div>
                             </a>
                         </div>
@@ -60,3 +67,13 @@ export default class ProductAdminItem extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        removeClothesWithId: (id) => {
+            dispatch(removeClothesWithIdRequestAdmin(id));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProductAdminItem);

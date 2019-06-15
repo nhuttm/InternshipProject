@@ -6,6 +6,7 @@ export const ADD_PRODUCT_INTO_CART = 'Add product into cart';
 export const INCREARE_QUANTITY_PRODUCT = 'Increase quantity product in cart';
 export const DECREARE_QUANTITY_PRODUCT = 'Decrease quantity product in cart';
 export const REMOVE_PRODUCT_IN_CART = 'Remove product in cart';
+export const REMOVE_CLOTHES_WITH_ID_ADMIN= 'Remove product in database with id';
 
 export const POST_LOGIN = 'Post login';
 export const POST_REGISTER = 'Post register';

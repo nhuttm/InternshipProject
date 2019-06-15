@@ -12,6 +12,17 @@ export const getAllClothesRequestAdmin = (pageNumber, pageLimit) => {
     }
 }
 
+export const removeClothesWithIdRequestAdmin = (id) => {
+    return async (dispatch) => {
+        try {
+            const response = await axiosInstance.delete('/admin/delete/clothes/' + id);
+            dispatch(removeClothesWithIdAdmin(response.data.message));
+        } catch (error) {
+            console.log(error); 
+        }
+    }
+}
+
 export const getAllClothesAdmin = (clothes, totalPages, pageNumber, totalEntry, pageLimit) => {
     return {
         type: Types.GET_ALL_CLOTHES_ADMIN,
@@ -21,6 +32,15 @@ export const getAllClothesAdmin = (clothes, totalPages, pageNumber, totalEntry, 
             pageNumber,
             totalEntry,
             pageLimit
+        }
+    }
+}
+
+export const removeClothesWithIdAdmin = (message) => {
+    return {
+        type: Types.REMOVE_CLOTHES_WITH_ID_ADMIN,
+        payload: {
+            message
         }
     }
 }

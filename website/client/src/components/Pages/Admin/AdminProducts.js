@@ -22,9 +22,7 @@ class AdminProducts extends React.Component {
 
     componentDidMount = () => {
         document.body.className = "admin-body";
-        const values = queryString.parse(this.props.location.search);
-        const pageNumber = values.pageNumber || 1;
-        this.props.getAllClothes(pageNumber, this.state.pageLimit);
+        this.props.getAllClothes(this.state.activePage, this.state.pageLimit);
     }
 
     handleChangePageLimit = (data) => {
@@ -35,6 +33,10 @@ class AdminProducts extends React.Component {
     handleChangePageNumber = (e, { activePage }) => {
         this.setState({activePage});
         this.props.getAllClothes(activePage, this.state.pageLimit);
+    }
+
+    reloadPage = () => {
+        this.props.getAllClothes(this.state.activePage, this.state.pageLimit);
     }
 
     render() {
@@ -66,11 +68,11 @@ class AdminProducts extends React.Component {
                     <div className="line"></div>
                     {
                         this.props.clothes.length != 0 ? this.props.clothes.map((item, index) => {
-                            return (<ProductAdminItem key={item._id} product={item}/>)
+                            return (<ProductAdminItem key={item._id} product={item} reload={this.reloadPage}/>)
                         }) : null
                     }
                     <div className="footer-product-admin">
-                        <Label className="entries-product" title={`Show ${this.state.pageLimit*(this.props.pageNumber-1)+1} to ${this.state.pageLimit*this.props.pageNumber} of ${this.props.totalEntry} entries`}/>
+                        <Label className="entries-product" title={`Show ${this.state.pageLimit*(this.props.pageNumber-1)+1} to ${this.props.pageNumber != this.props.totalPages ? this.state.pageLimit*this.props.pageNumber : this.props.totalEntry} of ${this.props.totalEntry} entries`}/>
                         <div className="option-paging">
                             <SelectBox onChange={this.handleChangePageLimit} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page"/>
                             <Pagination className="pagination-admin" defaultActivePage={1} totalPages={this.props.totalPages} onPageChange={this.handleChangePageNumber}/>

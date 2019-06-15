@@ -52,4 +52,16 @@ export default class clothesController {
             res.status(500).send({err});
         }
     }
+
+    removeClothesWithId = async (req,res) => {
+        try{
+            const id = req.params.id;
+            await Clothes.deleteOne({"_id": id});
+            let response = {"message": "remove success"};
+            res.status(200).json(response);
+        } catch (err){
+            console.log(err);
+            res.status(500).send({err});
+        }
+    }
 }
