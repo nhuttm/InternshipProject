@@ -10,7 +10,7 @@ export default class PreviewImage extends Component {
                         this.props.img.map((item, index) => {
                             return (<div className="preview-image-item">
                                 <img src={item} className="file-img" />
-                                <input type="file" className="input-file-img" onChange={this.props.imgChange(index)}/>
+                                <input type="file" className="input-file-img" onChange={e => this.props.imgChange(e, index)}/>
                             </div>)
                         })
                     }

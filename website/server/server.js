@@ -18,6 +18,7 @@ import clothesRouter from './api/routers/clothesRouter';
 import categoryRouter from './api/routers/categoryRouter';
 import userRouter from './api/routers/userRouter';
 import adminRouter from './api/routers/adminRouter';
+import multer from 'multer';
 
 import passport from 'passport';
 

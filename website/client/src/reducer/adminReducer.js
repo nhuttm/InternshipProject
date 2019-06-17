@@ -17,6 +17,9 @@ const adminReducer = (state = initialState, action ) => {
             return state;
         }
 
+        case Types.ADD_CLOTHES_INTO_DB_ADMIN: {
+            return {...state, message: action.payload.message};
+        }
         default:
             return state;
     }

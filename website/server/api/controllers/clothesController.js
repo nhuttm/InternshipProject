@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { PAGE_LIMIT, PAGE_LIMIT_ADMIN } from '../constant';
+import { upload } from '../middleware';
 
 const Clothes = mongoose.model('Clothes')
+const Category = mongoose.model('Category');
 
 export default class clothesController {
     listAllClothes = async (req, res) => {
@@ -51,6 +53,54 @@ export default class clothesController {
             console.log(err);
             res.status(500).send({err});
         }
+    }
+
+    addProductIntoDB = (req, res) => {
+        upload(req, res, async (err) => {
+            try{
+                let imgArray = [];
+                for (let index = 0; index < req.files.length; index++) {
+                    const element = req.files[index];
+                    imgArray.push('/public/img/' + element.filename);
+                }
+                let categories = [];
+                let categoriesQuery = await Category.find({'_id': {
+                        $in: req.body.categories            
+                    }
+                });
+                for (let index = 0; index < categoriesQuery.length; index++) {
+                    const element = categoriesQuery[index];
+                    categories.push(element);
+                }
+                let clothes = new Clothes({
+                    _id: mongoose.Types.ObjectId(),
+                    sizes: req.body.sizes,
+                    colors: req.body.colors,
+                    price: req.body.price,
+                    name: req.body.name,
+                    brand: req.body.brand,
+                    description: req.body.description,
+                    quantity: req.body.quantity,
+                    img: imgArray,
+                    dateAdd: new Date(),
+                    rating: 4,
+                    ofArrayCategory: categories,
+                    ofArrayComment: []
+                })
+                await clothes.save();
+                //push product into category
+                for (let index = 0; index < categoriesQuery.length; index++) {
+                    let newArrayProduct = [...categoriesQuery[index].ofArrayProduct];
+                    newArrayProduct.push(clothes);
+                    categoriesQuery[index].ofArrayProduct = [...newArrayProduct];
+                    await categoriesQuery[index].save();
+                }
+                res.status(200).json({"message": "add product success"});
+            } catch (err){
+                console.log(err);
+                res.status(500).send({err});
+            }
+        })
     }
 
     removeClothesWithId = async (req,res) => {
