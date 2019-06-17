@@ -1,26 +1,22 @@
 import React, { Component } from 'react'
-import exportX from '../admintheme.png';
+import Label from '../Label/Label';
 
 export default class PreviewImage extends Component {
     render() {
         return (
-            <div className="upload-file">
-                <div className="preview-image-item">
-                    <img src={exportX} className="file-img"/>
-                    <input type="file" className="input-file-img"/>
+            <div className="wrapped-uploadfile">
+                <div className="upload-file">
+                    {
+                        this.props.img.map((item, index) => {
+                            return (<div className="preview-image-item">
+                                <img src={item} className="file-img" />
+                                <input type="file" className="input-file-img" onChange={this.props.imgChange(index)}/>
+                            </div>)
+                        })
+                    }
+
                 </div>
-                <div className="preview-image-item">
-                    <img src={exportX} className="file-img"/>
-                    <input type="file" className="input-file-img"/>
-                </div>
-                <div className="preview-image-item">
-                    <img src={exportX} className="file-img"/>
-                    <input type="file" className="input-file-img"/>
-                </div>
-                <div className="preview-image-item">
-                    <img src={exportX} className="file-img"/>
-                    <input type="file" className="input-file-img"/>
-                </div>
+                <Label title="You can add up to 8 photos. The 1st photo will be set as cover (main photo)." className="hint-label" />
             </div>
         )
     }

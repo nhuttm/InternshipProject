@@ -4,7 +4,8 @@ import Label from '../../Label/Label';
 import TextField from '../../Field/TextField';
 import { connect } from 'react-redux';
 import { setTitlePageAdmin } from '../../../actions/adminAction';
-
+import { getAllCategoriesRequest } from '../../../actions/categoryAction';
+import defaultImg from '../../defaultImg.png';
 import * as Option from '../../../constant/options';
 import MultiSelectBox from '../../SelectBox/MultiSelectBox';
 import SelectBox from '../../SelectBox/SelectBox';
@@ -15,44 +16,88 @@ class AdminAddProduct extends Component {
     constructor() {
         super();
         this.state = {
-            name: ''
+            name: '',
+            categories: [],
+            brand: Option.optionsBrand[0],
+            colors: [],
+            description: '',
+            price: '',
+            quantity: '',
+            img: Array.from({length: 4}, () => (defaultImg)),
+            optionCategories: []
         }
     }
 
     componentDidMount = () => {
-        this.props.setTitlePage('Add product');
+         this.props.setTitlePage('Add product');
+         this.props.getAllCategories();
     }
 
-    handleChangeName = () => {
-
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.categories != this.props.categories){
+            this.setOptionCategories(this.props.categories);
+        }
     }
 
-    handleChangeBrand = () => {
-
+    setOptionCategories = (categories) => {
+        let optionCategories = [];
+        for (let index = 0; index < categories.length; index++) {
+            const element = categories[index];
+            optionCategories.push({
+                label: element.name,
+                value: element._id
+            })
+        }
+        this.setState({optionCategories});
     }
 
-    handleChangeCategories = () => {
-
-    }
-
-    handleChangeColor = () => {
-
-    }
-
-    handleChangeDescription = () => {
-
-    }
-
-    handleChangePrice = () => {
-
-    }
-
-    handleChangeQuantity = () => {
+    handleImgChange = () => {
 
     }
 
-    handleChangeSize = () => {
+    handleChangeName = (e) => {
+        this.setState({name: e.target.value});
+    }
 
+    handleChangeBrand = (data) => {
+        this.setState({brand: data.value});
+    }
+
+    handleChangeCategories = (data) => {
+        
+    }
+
+    handleChangeColor = (data) => {
+        let colors = [];
+        for (let index = 0; index < data.length; index++) {
+            colors.push(data[index].value);
+        }
+
+        this.setState({colors});
+    }
+
+    handleChangeDescription = (e) => {
+        this.setState({description: e.target.value});
+
+    }
+
+    handleChangePrice = (e) => {
+        this.setState({price: e.target.value});
+
+    }
+
+    handleChangeQuantity = (e) => {
+        this.setState({quantity: e.target.value});
+
+    }
+
+    handleChangeSize = (data) => {
+        let sizes = [];
+        for (let index = 0; index < data.length; index++) {
+            sizes.push(data[index].value);
+        }
+
+        this.setState({sizes});
     }
 
     handleComplete = () => {
@@ -64,17 +109,22 @@ class AdminAddProduct extends Component {
     }
 
     render() {
+        console.log(this.state.optionCategories);
         return (
-            <div class="add-product-page">
+            <div className="add-product-page">
                 <div className="wrapped-label">
                 <Label title="PHOTOS" className="title-label"/>
                 </div>
-                <PreviewImage />
+                <PreviewImage img={this.state.img} imgChange={this.handleImgChange}/>
                 <TextField title='NAME' classNameInput="input-name-field" classNameLabel="title-label" wrappedLabel="wrapped-label" placeholder='Enter name of product' name="name" value={this.state.name} onChange={e => this.handleChangeName(e)} />
                 <div className="wrapped-label">
                 <Label title="CATEGORIES" className="title-label"/>
                 </div>
-                <MultiSelectBox onChange={this.handleChangeCategories} options={Option.optionsBrand} className="wrapped-selectpage" classNameSelect="select-multi" />
+                {
+                    this.state.optionCategories.length != 0 ? <MultiSelectBox onChange={this.handleChangeCategories} options={this.state.optionCategories} className="wrapped-selectpage" classNameSelect="select-multi" /> 
+                    : null
+
+                }
                 <div className="wrapped-label">
                 <Label title="BRAND" className="title-label"/>
                 </div>
@@ -103,10 +153,7 @@ class AdminAddProduct extends Component {
 
 const mapStateToProps = state => {
     return {
-        clothes: state.adminReducer.clothes,
-        totalPages: state.adminReducer.totalPages,
-        pageNumber: state.adminReducer.pageNumber,
-        totalEntry: state.adminReducer.totalEntry
+        categories: state.categoriesReducer.categories
     }
 }
 
@@ -114,6 +161,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setTitlePage: title => {
             dispatch(setTitlePageAdmin(title));
+        },
+        getAllCategories: () => {
+            dispatch(getAllCategoriesRequest());
         }
     }
 }
