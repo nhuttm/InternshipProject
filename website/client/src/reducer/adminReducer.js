@@ -1,6 +1,6 @@
 import * as Types from '../constant/constant';
 
-let initialState = {clothes: [], totalEntry: 0, totalPages: 0, pageNumber: 1, pageLimit: 10, message: ''};
+let initialState = {clothes: [], totalEntry: 0, totalPages: 0, pageNumber: 1, pageLimit: 10, message: '', titlePage: 'Products'};
 
 const adminReducer = (state = initialState, action ) => {
     switch (action.type){
@@ -10,6 +10,11 @@ const adminReducer = (state = initialState, action ) => {
 
         case Types.REMOVE_CLOTHES_WITH_ID_ADMIN: {
             return {...state, message: action.payload.message};
+        }
+
+        case Types.SET_TITLE_PAGE_ADMIN: {
+            state = {...state, titlePage: action.payload.title};
+            return state;
         }
 
         default:

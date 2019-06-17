@@ -11,9 +11,19 @@
   font-size: 13px;
 }
 
+@mixin input-custom{
+  border-radius: 2px;
+    border: solid 1px #ededed;
+    padding-left: 10px;
+    background-color: white;
+    height: 80%;
+    width: 100%;
+    margin: auto;
+}
+
 .admin-body{
   background-color: #f6f6f6;
-  height: 100vh;
+  height: 130vh;
 }
 
 .admin{
@@ -50,7 +60,9 @@
   letter-spacing: normal;
   color: #acacac;
 }
-
+.products-page{
+  padding-top: 20px;
+}
 .wrapped-top-products{
   display: flex;
 }
@@ -233,4 +245,72 @@
       }
     }
   }
+}
+
+.add-product-page{
+  width: 80%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 60% repeat(10, 10% [row-start]);
+  .title-label{
+  font-size: 12px;
+  padding-top: 5px;
+  align-items: center;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  margin: auto;
+  text-align: right;
+  color: #202124;
+  }
+  .wrapped-label{
+    text-align: right;
+    align-self: center;
+    padding-right: 15px;
+  }
+  .wrapped-selectpage{
+    width: 100% !important;
+  }
+
+  .input-img-field{
+    @include input-custom;
+  }
+
+  .input-name-field{
+    @include input-custom;
+  }
+
+  .input-price-field{
+    @include input-custom;
+  }
+
+  .input-quantity-field{
+    @include input-custom;
+  }
+
+  .input-description-field{
+    @include input-custom;
+  }
+
+  .grouped-bttn{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    text-align: -webkit-right;
+    .cancel-bttn{
+      width: 25%;
+      margin-right: 10px;
+      color: $pale-orange;
+      border: solid 1px #ededed;
+      background-color: white;
+    }
+    .complete-bttn{
+      border-radius: 2px;
+      background-color: $pale-orange;
+      color: white;
+    }
+  }
+  
 }

@@ -35,7 +35,7 @@ class Products extends React.Component {
                             </div>
                             <div className="col-md-10">
                                 <div className="row" style={{ paddingLeft: 13, paddingTop: 20 }}>
-                                    <SelectBox className="col-md-9" classNameSelect="select-box" options={optionsSortBy}/>
+                                    <SelectBox className="col-md-9" classNameSelect="select-box" options={optionsSortBy} defaultValue={optionsSortBy[0]}/>
                                     <Pagination classNames="col-md-3"
                                         pageNumber={this.props.pageNumber}
                                         totalPages={this.props.totalPages}

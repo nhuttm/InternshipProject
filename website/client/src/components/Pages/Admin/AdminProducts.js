@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllClothesRequestAdmin } from '../../../actions/adminAction';
+import { getAllClothesRequestAdmin, setTitlePageAdmin } from '../../../actions/adminAction';
 import queryString from 'query-string';
 import SelectBox from '../../SelectBox/SelectBox';
 import Label from '../../Label/Label';
@@ -8,6 +8,7 @@ import SearchBar from '../../SearchBar/SearchBar';
 import Button from '../../Button/Button';
 import exportImg from '../../export.png';
 import ProductAdminItem from '../../Item/ProductAdminItem';
+import { withRouter } from 'react-router-dom';
 import { Pagination } from 'semantic-ui-react'
 import { optionsPage, optionsSortBy } from '../../../constant/options';
 
@@ -21,8 +22,8 @@ class AdminProducts extends React.Component {
     }
 
     componentDidMount = () => {
-        document.body.className = "admin-body";
         this.props.getAllClothes(this.state.activePage, this.state.pageLimit);
+        this.props.setTitlePage('Products');
     }
 
     handleChangePageLimit = (data) => {
@@ -39,17 +40,21 @@ class AdminProducts extends React.Component {
         this.props.getAllClothes(this.state.activePage, this.state.pageLimit);
     }
 
+    handleAddProduct = () => {
+        this.props.history.push('/admin/addproduct');
+    }
+
     render() {
         return (
-            <>
+            <div className="products-page">
                 <div className="wrapped-top-products">
                     <div className="wrapped-sortBy">
                         <Label title="SORT BY" className="sortBy" />
-                        <SelectBox className="wrapped-select" classNameSelect="select-sortby-admin" options={optionsSortBy} />
+                        <SelectBox className="wrapped-select" classNameSelect="select-sortby-admin" options={optionsSortBy} defaultValue={optionsSortBy[0]}/>
                     </div>
                     <div className="wrapped-form">
                         <SearchBar classNameSearch="form-search-admin" />
-                        <Button title="+ Add product" className="add-product-admin" />
+                        <Button title="+ Add product" className="add-product-admin" onButtonClick={this.handleAddProduct}/>
                         <div className="wrapped-export">
                             <Button title="Export" className='export-bttn' />
                             <img src={exportImg} className="img-export" />
@@ -74,13 +79,13 @@ class AdminProducts extends React.Component {
                     <div className="footer-product-admin">
                         <Label className="entries-product" title={`Show ${this.state.pageLimit*(this.props.pageNumber-1)+1} to ${this.props.pageNumber != this.props.totalPages ? this.state.pageLimit*this.props.pageNumber : this.props.totalEntry} of ${this.props.totalEntry} entries`}/>
                         <div className="option-paging">
-                            <SelectBox onChange={this.handleChangePageLimit} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page"/>
+                            <SelectBox onChange={this.handleChangePageLimit} options={optionsPage} className="wrapped-selectpage" classNameSelect="select-page" defaultValue={optionsPage[0]}/>
                             <Pagination className="pagination-admin" defaultActivePage={1} totalPages={this.props.totalPages} onPageChange={this.handleChangePageNumber}/>
                         </div>
                     </div>
                 </div>
 
-            </>
+            </div>
         )
     }
 
@@ -99,8 +104,11 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllClothes: (pageNumber, pageLimit) => {
             dispatch(getAllClothesRequestAdmin(pageNumber, pageLimit));
+        },
+        setTitlePage: title => {
+            dispatch(setTitlePageAdmin(title));
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminProducts));

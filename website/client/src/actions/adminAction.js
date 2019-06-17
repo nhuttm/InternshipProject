@@ -23,6 +23,15 @@ export const removeClothesWithIdRequestAdmin = (id) => {
     }
 }
 
+export const setTitlePageAdmin = (title) => {
+     return {
+        type: Types.SET_TITLE_PAGE_ADMIN,
+        payload:{
+            title
+        }
+    }
+}
+
 export const getAllClothesAdmin = (clothes, totalPages, pageNumber, totalEntry, pageLimit) => {
     return {
         type: Types.GET_ALL_CLOTHES_ADMIN,

@@ -8,9 +8,9 @@ import Label from '../Label/Label';
 class AdminHeaderBar extends Component {
     render() {
         return (
-            <div className="row" style={{ height: '10%' }}>
-                <div className="col-md-7">
-                    <Label className="title-page-admin" />
+            <div className="row" style={{ height: 100 }}>
+                <div className="col-md-7" style={{margin: 'auto'}}>
+                    <Label className="title-page-admin" title={this.props.titlePage}/>
                 </div>
                 <div className="col-md-5" style={{ margin: 'auto' }}>
                     <div className="row">
@@ -32,7 +32,8 @@ class AdminHeaderBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        titlePage: state.adminReducer.titlePage
     }
 }
 

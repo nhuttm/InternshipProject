@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import './SelectBox.scss';
 
-export default class SelectBox extends React.Component{
+export default class MultiSelectBox extends React.Component{
 
     constructor(props){
         super(props);
@@ -17,7 +17,8 @@ export default class SelectBox extends React.Component{
                 <Select className={this.props.classNameSelect} 
                 options={this.state.options} 
                 defaultValue={this.props.defaultValue} 
-                onChange={this.props.onChange} />
+                onChange={this.props.onChange} 
+                isMulti/>
             </div>
         )
     }
