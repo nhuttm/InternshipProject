@@ -20,6 +20,10 @@ const adminReducer = (state = initialState, action ) => {
         case Types.ADD_CLOTHES_INTO_DB_ADMIN: {
             return {...state, message: action.payload.message, cloth: action.payload.cloth};
         }
+
+        case Types.EDIT_CLOTHES_ADMIN: {
+            return {...state, message: action.payload.message, cloth: action.payload.cloth};
+        }
         default:
             return state;
     }

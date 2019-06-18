@@ -274,7 +274,6 @@ class ProductDetail extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.cartReducer);
     return {
         cloth: state.clothesReducer.cloth
     }

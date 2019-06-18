@@ -3,6 +3,7 @@ import { Image } from 'semantic-ui-react';
 import Label from '../Label/Label';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { removeClothesWithIdRequestAdmin } from '../../actions/adminAction';
 
 class ProductAdminItem extends Component {
@@ -31,6 +32,10 @@ class ProductAdminItem extends Component {
         this.props.reload();
     }
 
+    openEditPage = () => {
+        this.props.history.push('/admin/edit_product/' + this.props.product._id);
+    }
+
     render() {
         return (
             <>
@@ -57,7 +62,7 @@ class ProductAdminItem extends Component {
                         <div className="action-field">
                             <a className="action-product">Actions
                                 <div className="dropdown-action">
-                                    <Button className="edit-bttn" title="Edit"/>
+                                    <Button className="edit-bttn" title="Edit" onButtonClick={this.openEditPage}/>
                                     <Button className="remove-bttn" title="Remove" onButtonClick={this.handleRemoveItem}/>
                                 </div>
                             </a>
@@ -76,4 +81,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductAdminItem);
+export default withRouter(connect(null, mapDispatchToProps)(ProductAdminItem));

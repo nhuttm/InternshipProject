@@ -14,7 +14,7 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) =>
                             <div className="container-fluid">
                                 <div className="row">
                                     <AdminMenuBar />
-                                    <div className="col-md-10">
+                                    <div className="col-md-10" style={{height: 1000}}>
                                         <AdminHeaderBar />
                                         <Component {...props} />
                                     </div>

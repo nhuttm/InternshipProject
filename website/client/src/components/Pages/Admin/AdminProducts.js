@@ -41,7 +41,7 @@ class AdminProducts extends React.Component {
     }
 
     handleAddProduct = () => {
-        this.props.history.push('/admin/addproduct');
+        this.props.history.push('/admin/add_product');
     }
 
     render() {

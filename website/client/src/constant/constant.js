@@ -11,6 +11,8 @@ export const SET_TITLE_PAGE_ADMIN = 'Set title page admin';
 export const POST_LOGIN = 'Post login';
 export const POST_REGISTER = 'Post register';
 export const ADD_CLOTHES_INTO_DB_ADMIN = 'Add product into db';
+export const EDIT_CLOTHES_ADMIN = 'Edit product in db';
 
+export const regImg = new RegExp("image/");
 export const ADMIN = 1;
 export const USER = 0;

@@ -33,27 +33,27 @@ export const optionsPage = [{
 }];
 
 export const optionsColor = [{
-    label: 'Red',
+    label: Color.RED,
     value: Color.RED
 },
 {
-    label: 'Yellow',
+    label: Color.YELLOW,
     value: Color.YELLOW  
 },
 {
-    label: 'Blue',
+    label: Color.BLUE,
     value: Color.BLUE  
 },
 {
-    label: 'Pale orange',
+    label: Color.PALE_ORANGE ,
     value: Color.PALE_ORANGE  
 },
 {
-    label: 'White three',
+    label: Color.WHITE_THREE,
     value: Color.WHITE_THREE  
 },
 {
-    label: 'Charcoal grey',
+    label: Color.CHARCOAL_GREY,
     value: Color.CHARCOAL_GREY  
 }]
 

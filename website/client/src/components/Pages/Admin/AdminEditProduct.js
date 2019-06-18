@@ -4,8 +4,9 @@ import Label from '../../Label/Label';
 import TextField from '../../Field/TextField';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setTitlePageAdmin, addProductIntoDBRequest } from '../../../actions/adminAction';
+import { setTitlePageAdmin, editProductRequest } from '../../../actions/adminAction';
 import { getAllCategoriesRequest } from '../../../actions/categoryAction';
+import { getClothesWithIdRequest } from '../../../actions/clothesAction';
 import { regImg } from '../../../constant/constant';
 import defaultImg from '../../defaultImg.png';
 import * as Option from '../../../constant/options';
@@ -13,7 +14,7 @@ import MultiSelectBox from '../../SelectBox/MultiSelectBox';
 import SelectBox from '../../SelectBox/SelectBox';
 import Button from '../../Button/Button';
 
-class AdminAddProduct extends Component {
+class AdminEditProduct extends Component {
 
     constructor() {
         super();
@@ -23,12 +24,16 @@ class AdminAddProduct extends Component {
             brand: Option.optionsBrand[0].value,
             colors: [],
             description: '',
-            sisez: [],
+            sizes: [],
             price: '',
             quantity: '',
             img: [],
             previewImg: Array.from({ length: 4 }, () => (defaultImg)),
-            optionCategories: []
+            optionCategories: [],
+            sizeValue: [],
+            colorValue: [],
+            categoriesValue: [],
+            brandValue: null
         }
     }
 
@@ -50,9 +55,52 @@ class AdminAddProduct extends Component {
         }
     }
 
+    setUpState = (cloth) => {
+        let previewImg = [];
+        for (let index = 0; index < cloth.img.length; index++) {
+            const element = cloth.img[index];
+            previewImg.push("http://localhost:2000" + element);
+        }
+        let brandValue = {label: cloth.brand, value: cloth.brand}
+        let colorValue = [];
+        for (let index = 0; index < cloth.colors.length; index++) {
+            const element = cloth.colors[index];
+            colorValue.push({label:element, value:element});
+        }
+        let sizeValue = [];
+        for (let index = 0; index < cloth.sizes.length; index++) {
+            const element = cloth.sizes[index];
+            sizeValue.push({label:element, value:element});
+        }
+        let categoriesValue = [];
+        let categories = [];
+        for (let index = 0; index < cloth.ofArrayCategory.length; index++) {
+            const element = cloth.ofArrayCategory[index];
+            categoriesValue.push({label:element.name, value:element._id});
+            categories.push(element._id);
+        }
+        this.setState({
+            name: cloth.name,
+            categories,
+            brand: cloth.brand,
+            colors: cloth.colors,
+            description: cloth.description,
+            sizes: cloth.sizes,
+            price: cloth.price,
+            quantity: cloth.quantity,
+            img: [],
+            previewImg,
+            brandValue,
+            colorValue,
+            categoriesValue,
+            sizeValue
+        });
+    } 
+
     componentDidMount = () => {
-        this.props.setTitlePage('Add product');
+        this.props.setTitlePage('Edit product');
         this.props.getAllCategories();
+        this.props.getClothesWithId(this.props.match.params.id);
     }
 
     componentDidUpdate = (prevProps) => {
@@ -60,6 +108,9 @@ class AdminAddProduct extends Component {
             this.setOptionCategories(this.props.categories);
         }
         if (prevProps.cloth != this.props.cloth) {
+            this.setUpState(this.props.cloth);
+        }
+        if (prevProps.clothAfterEdit != this.props.clothAfterEdit) {
             this.props.history.push('/admin');
         }
     }
@@ -156,7 +207,7 @@ class AdminAddProduct extends Component {
             for (let index = 0; index < data.length; index++) {
                 sizes.push(data[index].value);
             }
-
+            console.log('>>>' + sizes);
             this.setState({ sizes });
         }
     }
@@ -164,6 +215,7 @@ class AdminAddProduct extends Component {
     handleComplete = (e) => {
         e.preventDefault();
         const formData = new FormData();
+        formData.append('id', this.props.cloth._id);
         formData.append('name', this.state.name);
         formData.append('brand', this.state.brand);
         formData.append('description', this.state.description);
@@ -173,8 +225,8 @@ class AdminAddProduct extends Component {
             const element = this.state.colors[index];
             formData.append('colors', element);
         }
-        for (let index = 0; index < this.state.sisez.length; index++) {
-            const element = this.state.sisez[index];
+        for (let index = 0; index < this.state.sizes.length; index++) {
+            const element = this.state.sizes[index];
             formData.append('sizes', element);
         }
         for (let index = 0; index < this.state.categories.length; index++) {
@@ -186,7 +238,7 @@ class AdminAddProduct extends Component {
             formData.append('img', element);
         }
 
-        this.props.addProductIntoDB(formData);
+        this.props.editProduct(formData);
     }
 
     handleCancel = (e) => {
@@ -206,23 +258,32 @@ class AdminAddProduct extends Component {
                     <Label title="CATEGORIES" className="title-label" />
                 </div>
                 {
-                    this.state.optionCategories.length != 0 ? <MultiSelectBox onChange={this.handleChangeCategories} options={this.state.optionCategories} className="wrapped-selectpage" classNameSelect="select-multi" />
+                    this.state.optionCategories.length != 0 && this.state.categoriesValue.length != 0 ? <MultiSelectBox onChange={this.handleChangeCategories} options={this.state.optionCategories} defaultValue={this.state.categoriesValue} className="wrapped-selectpage" classNameSelect="select-multi" />
                         : null
 
                 }
                 <div className="wrapped-label">
                     <Label title="BRAND" className="title-label" />
                 </div>
-                <SelectBox onChange={this.handleChangeBrand} options={Option.optionsBrand} className="wrapped-selectpage" classNameSelect="select-page" defaultValue={Option.optionsBrand[0]} />
+                {
+                    this.state.brandValue ? <SelectBox onChange={this.handleChangeBrand} defaultValue={this.state.brandValue} options={Option.optionsBrand} className="wrapped-selectpage" classNameSelect="select-page" />
+                        : null
+                }
                 <TextField title='PRICE' classNameInput="input-price-field" classNameLabel="title-label" wrappedLabel="wrapped-label" placeholder='Enter price of product' name="price" value={this.state.price} onChange={e => this.handleChangePrice(e)} />
                 <div className="wrapped-label">
                     <Label title="SIZE" className="title-label" />
                 </div>
-                <MultiSelectBox onChange={this.handleChangeSize} options={Option.optionsSize} className="wrapped-selectpage" classNameSelect="select-multi" />
+                {
+                    this.state.sizeValue.length != 0 ?  <MultiSelectBox onChange={this.handleChangeSize} defaultValue={this.state.sizeValue} options={Option.optionsSize} className="wrapped-selectpage" classNameSelect="select-multi" />
+                        : null
+                }
                 <div className="wrapped-label">
                     <Label title="COLORS" className="title-label" />
                 </div>
-                <MultiSelectBox onChange={this.handleChangeColor} options={Option.optionsColor} className="wrapped-selectpage" classNameSelect="select-multi" />
+                {
+                    this.state.colorValue.length != 0 ? <MultiSelectBox onChange={this.handleChangeColor} defaultValue={this.state.colorValue} options={Option.optionsColor} className="wrapped-selectpage" classNameSelect="select-multi" />
+                        : null
+                }
 
                 <TextField title='QUANTITY' classNameInput="input-quantity-field" classNameLabel="title-label" wrappedLabel="wrapped-label" placeholder='Enter quantity of product' name="quantity" value={this.state.quantity} onChange={e => this.handleChangeQuantity(e)} />
                 <TextField title='DESCRIPTION' classNameInput="input-description-field" classNameLabel="title-label" wrappedLabel="wrapped-label" placeholder='Enter description of product' name="description" value={this.state.description} onChange={e => this.handleChangeDescription(e)} />
@@ -238,23 +299,27 @@ class AdminAddProduct extends Component {
 
 const mapStateToProps = state => {
     return {
+        cloth: state.clothesReducer.cloth,
         categories: state.categoriesReducer.categories,
-        cloth: state.adminReducer.cloth
+        clothAfterEdit: state.adminReducer.cloth
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        getClothesWithId: id =>{
+            dispatch(getClothesWithIdRequest(id));
+        },
         setTitlePage: title => {
             dispatch(setTitlePageAdmin(title));
         },
         getAllCategories: () => {
             dispatch(getAllCategoriesRequest());
         },
-        addProductIntoDB: (product) => {
-            dispatch(addProductIntoDBRequest(product));
+        editProduct: (product) => {
+            dispatch(editProductRequest(product));
         }
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminAddProduct));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminEditProduct));

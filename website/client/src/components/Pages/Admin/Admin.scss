@@ -24,7 +24,7 @@
 
 .admin-body{
   background-color: #f6f6f6;
-  height: 130vh;
+  height: 120vh;
 }
 
 .admin{
@@ -250,10 +250,12 @@
 
 .add-product-page{
   width: 80%;
+  padding: 10px;
   height: 100%;
+  background-color: white;
   display: grid;
   grid-template-columns: 15% 85%;
-  grid-template-rows: 60% repeat(10, 10% [row-start]);
+  grid-template-rows: 30% repeat(10, 7% [row-start]);
   .title-label{
   font-size: 12px;
   padding-top: 5px;

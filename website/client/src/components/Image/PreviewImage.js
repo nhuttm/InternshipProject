@@ -10,13 +10,13 @@ export default class PreviewImage extends Component {
                         this.props.img.map((item, index) => {
                             return (<div className="preview-image-item">
                                 <img src={item} className="file-img" />
-                                <input type="file" className="input-file-img" onChange={e => this.props.imgChange(e, index)}/>
+                                <input type="file" multiple accept="image/*" className="input-file-img" onChange={e => this.props.imgChange(e, index)}/>
                             </div>)
                         })
                     }
 
                 </div>
-                <Label title="You can add up to 8 photos. The 1st photo will be set as cover (main photo)." className="hint-label" />
+                <Label title="You can add up to 4 photos. The 1st photo will be set as cover (main photo)." className="hint-label" />
             </div>
         )
     }

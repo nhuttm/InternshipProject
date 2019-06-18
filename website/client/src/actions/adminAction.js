@@ -36,6 +36,19 @@ export const addProductIntoDBRequest = (product) => {
     }
 }
 
+export const editProductRequest = (product) => {
+    return async (dispatch) => {
+        try{
+            const response = await axiosInstance.post('/admin/clothes/edit_product', product, {headers: {
+                'content-type': 'multipart/form-data'
+            }});
+            dispatch(editProduct(response.data.message, response.data.cloth));
+        } catch(error) {
+            console.log(error);
+        }
+    }
+}
+
 export const setTitlePageAdmin = (title) => {
      return {
         type: Types.SET_TITLE_PAGE_ADMIN,
@@ -70,6 +83,16 @@ export const removeClothesWithIdAdmin = (message) => {
 export const addProductIntoDB = (message, cloth) => {
     return {
         type: Types.ADD_CLOTHES_INTO_DB_ADMIN,
+        payload: {
+            message,
+            cloth
+        }
+    }
+}
+
+export const editProduct = (message, cloth) => {
+    return {
+        type: Types.EDIT_CLOTHES_ADMIN,
         payload: {
             message,
             cloth

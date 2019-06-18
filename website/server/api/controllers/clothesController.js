@@ -61,7 +61,7 @@ export default class clothesController {
     getClothesWithId = async (req,res) => {
         try{
             const id = req.params.id;
-            const result = await Clothes.findOne({"_id": id});
+            const result = await Clothes.findOne({"_id": id}).populate('ofArrayCategory');
             let response = {"clothes": result};
             res.json(response);
         } catch (err){
@@ -112,6 +112,61 @@ export default class clothesController {
                     await categoriesQuery[index].save();
                 }
                 res.status(200).json({"message": "add product success", 'cloth': clothes});
+            } catch (err){
+                console.log(err);
+                res.status(500).send({err});
+            }
+        })
+    }
+
+    editProductDB = (req, res) => {
+        upload(req, res, async (err) => {
+            try{
+                let cloth = await Clothes.findOne({'_id': req.body.id}).populate('ofArrayCategory');
+                //remove product from old category
+                for (let index = 0; index < cloth.ofArrayCategory.length; index++) {
+                    let oldCategories = cloth.ofArrayCategory[index];
+                    let newArrayProduct = [...oldCategories.ofArrayProduct];
+                    let indexRemove = newArrayProduct.indexOf(cloth._id);
+                    newArrayProduct.splice(indexRemove, 1);
+                    oldCategories.ofArrayProduct = [...newArrayProduct];
+                    await oldCategories.save();
+                }
+
+                let imgArray = [...cloth.img];
+                for (let index = 0; index < req.files.length; index++) {
+                    const element = req.files[index];
+                    imgArray[index] = '/public/img/' + element.filename;
+                }
+                let categories = [];
+                let categoriesQuery = await Category.find({'_id': {
+                        $in: req.body.categories            
+                    }
+                });
+                for (let index = 0; index < categoriesQuery.length; index++) {
+                    const element = categoriesQuery[index]._id;
+                    categories.push(element);
+                }
+                cloth.sizes = req.body.sizes;
+                cloth.colors = req.body.colors;
+                cloth.price = req.body.price;
+                cloth.name = req.body.name;
+                cloth.brand = req.body.brand;
+                cloth.description = req.body.description;
+                cloth.quantity = req.body.quantity;
+                cloth.img = imgArray;
+                cloth.dateAdd = new Date();
+                cloth.ofArrayCategory = categories;
+
+                await cloth.save();
+                //push product into category
+                for (let index = 0; index < categoriesQuery.length; index++) {
+                    let newArrayProduct = [...categoriesQuery[index].ofArrayProduct];
+                    newArrayProduct.push(cloth._id);
+                    categoriesQuery[index].ofArrayProduct = [...newArrayProduct];
+                    await categoriesQuery[index].save();
+                }
+                res.status(200).json({"message": "edit product success", 'cloth': cloth});
             } catch (err){
                 console.log(err);
                 res.status(500).send({err});
