@@ -18,13 +18,14 @@ import queryString from 'query-string';
 
 class ProductDetail extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             quantity: 0,
             color: '',
             size: '',
-            pageNumber: 1
+            pageNumber: 1,
+            contentImage: null
         }
     }
 
@@ -38,6 +39,13 @@ class ProductDetail extends React.Component {
             const pageNumber = values.pageNumber || 1;
             this.setState({pageNumber});
         }
+        if (prevProps.cloth != this.props.cloth){
+            this.setState({contentImage: this.props.cloth.img[0]});
+        }
+    }
+
+    handleChangeImage = (e, index) => {
+        this.setState({contentImage: this.props.cloth.img[index]});
     }
 
     handlePlusQuantity = (e) => {
@@ -80,20 +88,20 @@ class ProductDetail extends React.Component {
                          <div className="row">
                     <div className="col-md-2">
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-active" imgSrc={this.props.cloth.img[0]} imgIndex={0} onChangeImage={this.handleChangeImage}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[1]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-active" imgSrc={this.props.cloth.img[1]} imgIndex={1} onChangeImage={this.handleChangeImage}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[2]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-active" imgSrc={this.props.cloth.img[2]} imgIndex={2} onChangeImage={this.handleChangeImage}></ProductImage>
                         </div>
                         <div className="row thumb-left">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[3]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-active" imgSrc={this.props.cloth.img[3]} imgIndex={3} onChangeImage={this.handleChangeImage}></ProductImage>
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <ProductImage className="product-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
+                        <ProductImage className="product-img" classNameButton="thumb-img-unactive" imgSrc={this.state.contentImage}></ProductImage>
                     </div>
                     <div className="col-md-4">
                         <div className="row">
@@ -144,7 +152,7 @@ class ProductDetail extends React.Component {
                         </form>
                         <div className="row line" style={{ marginTop: 20 }}></div>
                         <div className="row" style={{ paddingTop: 20 }}>
-                            <p className="detail-label">{this.props.cloth.detail}</p>
+                            <p className="detail-label">{this.props.cloth.description}</p>
                         </div>
                     </div>
                     <div className="col-md-2">
@@ -155,16 +163,16 @@ class ProductDetail extends React.Component {
                             <Label title={this.props.cloth.brand} className="brand-label" />
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[0]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-unactive" imgSrc={this.props.cloth.img[0]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[1]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-unactive" imgSrc={this.props.cloth.img[1]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[2]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-unactive" imgSrc={this.props.cloth.img[2]}></ProductImage>
                         </div>
                         <div className="row thumb-right">
-                            <ProductImage className="thumb-img" imgSrc={this.props.cloth.img[3]}></ProductImage>
+                            <ProductImage className="thumb-img" classNameButton="thumb-img-unactive" imgSrc={this.props.cloth.img[3]}></ProductImage>
                         </div>
                     </div>
                 </div>

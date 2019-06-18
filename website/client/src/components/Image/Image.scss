@@ -90,3 +90,14 @@
 		color: #acacac;
 	}
 }
+
+.thumb-img-active{
+	position: absolute;
+	width: 85px;
+	height: 116px;
+	opacity: 0;
+}
+
+.thumb-img-unactive{
+	display: none;
+}

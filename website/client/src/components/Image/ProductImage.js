@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react';
+import Button from '../Button/Button';
 
 export default class ProductImage extends React.Component{
     render(){
@@ -10,6 +11,7 @@ export default class ProductImage extends React.Component{
                                 centered
                                 className={this.props.className}
                                 />
+                <Button className={this.props.classNameButton} onButtonClick={e => this.props.onChangeImage(e, this.props.imgIndex)}/>
             </React.Fragment>
         )
     }
