@@ -36,7 +36,7 @@ class ProductAdminItem extends Component {
             <>
                  <div className="product-item-admin">
                         <div className="product-field">
-                            <Image src={this.props.product.img[0]}
+                            <Image src={process.env.REACT_APP_PATH_IMAGE + this.props.product.img[0]}
                                 as='img'
                                 className="item-img"
                             />

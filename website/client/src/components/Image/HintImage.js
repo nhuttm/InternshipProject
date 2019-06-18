@@ -8,7 +8,7 @@ export default class HintImage extends React.Component {
         return (
             <React.Fragment>
                 <div style={{width: '100%', height: 180, overflow: 'hidden'}}>
-                <Image src={this.props.imgSrc}
+                <Image src={process.env.REACT_APP_PATH_IMAGE + this.props.imgSrc}
                     as='img'
                     size='large'
                     className="product-img"

@@ -15,7 +15,7 @@ export const checkRoleUser = (req, res, next) => {
 }
 
 let storage = multer.diskStorage({
-    destination: '../public/img',
+    destination: './public/img',
     filename: (req, file, callback) => {
         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }

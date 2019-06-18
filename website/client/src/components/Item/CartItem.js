@@ -31,7 +31,7 @@ class CartItem extends React.Component {
                 <div className="col-md-3" style={{height: '100%'}}>
                     <div className="row">
                         <div className="col-md-6">
-                            <img src={this.props.product.img[0]}
+                            <img src={process.env.REACT_APP_PATH_IMAGE + this.props.product.img[0]}
                                 className="cart-img"
                                 />
                         </div>

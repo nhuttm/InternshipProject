@@ -24,6 +24,7 @@ import passport from 'passport';
 
 let app = express(); //instance of express
 app.use(cors());
+app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -35,8 +36,6 @@ mongoose.connect('mongodb://localhost:27017/local');
 const Clothes = mongoose.model('Clothes');
 const Category = mongoose.model('Category');
 const User = mongoose.model('User');
-
-app.use(express.static(__dirname + '/public'));
 
 app.use('/api/clothes', clothesRouter);
 app.use('/api/category', categoryRouter);

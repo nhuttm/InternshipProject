@@ -3,6 +3,7 @@ import PreviewImage from '../../Image/PreviewImage';
 import Label from '../../Label/Label';
 import TextField from '../../Field/TextField';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { setTitlePageAdmin, addProductIntoDBRequest } from '../../../actions/adminAction';
 import { getAllCategoriesRequest } from '../../../actions/categoryAction';
 import defaultImg from '../../defaultImg.png';
@@ -18,13 +19,14 @@ class AdminAddProduct extends Component {
         this.state = {
             name: '',
             categories: [],
-            brand: Option.optionsBrand[0],
+            brand: Option.optionsBrand[0].value,
             colors: [],
             description: '',
             sisez: [],
             price: '',
             quantity: '',
-            img: Array.from({ length: 4 }, () => (defaultImg)),
+            img: [],
+            previewImg: Array.from({ length: 4 }, () => (defaultImg)),
             optionCategories: []
         }
     }
@@ -37,6 +39,9 @@ class AdminAddProduct extends Component {
     componentDidUpdate = (prevProps) => {
         if (prevProps.categories != this.props.categories) {
             this.setOptionCategories(this.props.categories);
+        }
+        if (prevProps.cloth != this.props.cloth){
+            this.props.history.push('/products/' + this.props.cloth._id);
         }
     }
 
@@ -54,9 +59,10 @@ class AdminAddProduct extends Component {
 
     handleImgChange = (e, index) => {
         if (e.target.files.length != 0) {
-            let imgFile = URL.createObjectURL(e.target.files[0]);
-            let img = [...this.state.img.slice(0, index), imgFile, ...this.state.img.slice(index + 1, this.state.img.length)];
-            this.setState({ img });
+            let previewImgFile = URL.createObjectURL(e.target.files[0]);
+            let img = [...this.state.img.slice(0, index), e.target.files[0], ...this.state.img.slice(index + 1, this.state.img.length)];
+            let previewImg = [...this.state.previewImg.slice(0, index), previewImgFile, ...this.state.previewImg.slice(index + 1, this.state.previewImg.length)];
+            this.setState({ img, previewImg });
         }
     }
 
@@ -120,14 +126,26 @@ class AdminAddProduct extends Component {
         e.preventDefault();
         const formData = new FormData();
         formData.append('name', this.state.name);
-        formData.append('categories', this.state.categories);
         formData.append('brand', this.state.brand);
         formData.append('description', this.state.description);
-        formData.append('sizes', this.state.sizes);
         formData.append('price', this.state.price);
         formData.append('quantity', this.state.quantity);
-        formData.append('img', this.state.img);
-        formData.append('colors', this.state.colors);
+        for (let index = 0; index < this.state.colors.length; index++) {
+            const element = this.state.colors[index];
+            formData.append('colors', element);
+        }
+        for (let index = 0; index < this.state.sisez.length; index++) {
+            const element = this.state.sisez[index];
+            formData.append('sizes', element);
+        }
+        for (let index = 0; index < this.state.categories.length; index++) {
+            const element = this.state.categories[index];
+            formData.append('categories', element);
+        }
+        for (let index = 0; index < this.state.img.length; index++) {
+            const element = this.state.img[index];
+            formData.append('img', element);
+        }
 
         this.props.addProductIntoDB(formData);
     }
@@ -142,7 +160,7 @@ class AdminAddProduct extends Component {
                 <div className="wrapped-label">
                     <Label title="PHOTOS" className="title-label" />
                 </div>
-                <PreviewImage img={this.state.img} imgChange={this.handleImgChange} />
+                <PreviewImage img={this.state.previewImg} imgChange={this.handleImgChange} />
                 <TextField title='NAME' classNameInput="input-name-field" classNameLabel="title-label" wrappedLabel="wrapped-label" placeholder='Enter name of product' name="name" value={this.state.name} onChange={e => this.handleChangeName(e)} />
                 <div className="wrapped-label">
                     <Label title="CATEGORIES" className="title-label" />
@@ -180,7 +198,8 @@ class AdminAddProduct extends Component {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categoriesReducer.categories
+        categories: state.categoriesReducer.categories,
+        cloth: state.adminReducer.cloth
     }
 }
 
@@ -198,4 +217,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProduct);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminAddProduct));

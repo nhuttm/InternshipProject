@@ -2,10 +2,7 @@ import axios from 'axios';
 
 let config = {
     baseURL: 'http://localhost:2000/api',
-    timeout: 2000,
-    headers: {
-        'Content-Type': 'multipart/form-data'
-    }
+    timeout: 2000
 };
 
 let axiosInstance = axios.create(config);

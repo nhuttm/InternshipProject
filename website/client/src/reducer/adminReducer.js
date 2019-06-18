@@ -1,6 +1,6 @@
 import * as Types from '../constant/constant';
 
-let initialState = {clothes: [], totalEntry: 0, totalPages: 0, pageNumber: 1, pageLimit: 10, message: '', titlePage: 'Products'};
+let initialState = {clothes: [], cloth: null, totalEntry: 0, totalPages: 0, pageNumber: 1, pageLimit: 10, message: '', titlePage: 'Products'};
 
 const adminReducer = (state = initialState, action ) => {
     switch (action.type){
@@ -18,7 +18,7 @@ const adminReducer = (state = initialState, action ) => {
         }
 
         case Types.ADD_CLOTHES_INTO_DB_ADMIN: {
-            return {...state, message: action.payload.message};
+            return {...state, message: action.payload.message, cloth: action.payload.cloth};
         }
         default:
             return state;

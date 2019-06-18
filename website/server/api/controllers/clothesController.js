@@ -59,6 +59,7 @@ export default class clothesController {
         upload(req, res, async (err) => {
             try{
                 let imgArray = [];
+                console.log(req.body);
                 for (let index = 0; index < req.files.length; index++) {
                     const element = req.files[index];
                     imgArray.push('/public/img/' + element.filename);
@@ -69,7 +70,7 @@ export default class clothesController {
                     }
                 });
                 for (let index = 0; index < categoriesQuery.length; index++) {
-                    const element = categoriesQuery[index];
+                    const element = categoriesQuery[index]._id;
                     categories.push(element);
                 }
                 let clothes = new Clothes({
@@ -95,7 +96,7 @@ export default class clothesController {
                     categoriesQuery[index].ofArrayProduct = [...newArrayProduct];
                     await categoriesQuery[index].save();
                 }
-                res.status(200).json({"message": "add product success"});
+                res.status(200).json({"message": "add product success", 'cloth': clothes});
             } catch (err){
                 console.log(err);
                 res.status(500).send({err});

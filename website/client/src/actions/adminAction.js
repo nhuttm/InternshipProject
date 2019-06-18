@@ -26,8 +26,10 @@ export const removeClothesWithIdRequestAdmin = (id) => {
 export const addProductIntoDBRequest = (product) => {
     return async (dispatch) => {
         try{
-            const response = await axiosInstance.post('/admin/clothes/add_product', product);
-            dispatch(addProductIntoDB(response.data.message));
+            const response = await axiosInstance.post('/admin/clothes/add_product', product, {headers: {
+                'content-type': 'multipart/form-data'
+            }});
+            dispatch(addProductIntoDB(response.data.message, response.data.cloth));
         } catch(error) {
             console.log(error);
         }
@@ -65,11 +67,12 @@ export const removeClothesWithIdAdmin = (message) => {
     }
 }
 
-export const addProductIntoDB = message => {
+export const addProductIntoDB = (message, cloth) => {
     return {
         type: Types.ADD_CLOTHES_INTO_DB_ADMIN,
         payload: {
-            message
+            message,
+            cloth
         }
     }
 }
