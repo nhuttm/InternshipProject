@@ -8,6 +8,9 @@ import IconHeadbar from './IconHeadbar';
 
 class HeaderBar extends React.Component {
     
+    componentDidMount = () => {
+        document.body.className = "user-body";
+    }
     render() {
         return (
             <React.Fragment>

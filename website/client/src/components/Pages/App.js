@@ -2,6 +2,7 @@ import React from 'react';
 import CategoryImage from '../Image/CategoryImage';
 import { Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import Label from '../Label/Label';
 export default class App extends React.Component {
     render() {
         return (
@@ -12,6 +13,7 @@ export default class App extends React.Component {
                             as='img'
                             centered
                             style={{ width: 1100, height: 550, paddingTop: 30, objectFit: 'cover' }} />
+                            <Label title="Outfit of the week" className='home-page-label'/>
                             <Link to={{ pathname: "/products"}} className="shop-home">Shop now</Link>
                     </div>
                     <div className='container-fluid'>
