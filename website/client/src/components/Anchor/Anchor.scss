@@ -38,6 +38,10 @@
     color: #202124;
   }
 
+  .active-menu{
+    color: $pale-orange;
+  }
+
   .left-anchor{
      @include paginate;
      margin-right: 20px;

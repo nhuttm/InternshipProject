@@ -10,12 +10,27 @@ export default class clothesController {
         try{
             const pageNumber = parseInt(req.query.pageNumber) || 1;
             const pageLimit = parseInt(req.query.pageLimit) || PAGE_LIMIT;
+            const category = req.query.category || 'all';
 
             const offSet = (pageNumber - 1) * pageLimit;
-            let result = await Clothes.find();
-            const totalPages = Math.ceil(result.length / pageLimit);
-            result = result.slice(offSet, offSet + pageLimit);
-            let response = {"clothes": result, "pageNumber": pageNumber, "totalPages": totalPages};
+            let result = null;
+            let response = null;
+            let totalPages = 0;
+            if (category === 'all'){
+                result = await Clothes.find();
+                console.log(result.length);
+                totalPages = Math.ceil(result.length / pageLimit);
+                result = result.slice(offSet, offSet + pageLimit);
+                console.log(result.length);
+                response = {"clothes": result, "pageNumber": pageNumber, "totalPages": totalPages};
+            } else {
+                result = await Category.findOne({'_id': category}).populate('ofArrayProduct');
+                console.log(result.ofArrayProduct.length);
+                totalPages = Math.ceil(result.ofArrayProduct.length / pageLimit);
+                result.ofArrayProduct = result.ofArrayProduct.slice(offSet, offSet + pageLimit);
+                console.log(result.ofArrayProduct.length);
+                response = {"clothes": result.ofArrayProduct, "pageNumber": pageNumber, "totalPages": totalPages};
+            }
             res.json(response);
         } catch (err) {
             console.log(err);

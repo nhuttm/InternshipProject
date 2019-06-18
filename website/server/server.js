@@ -68,19 +68,33 @@ app.get('/createData', async (req, res) => {
     // await user2.save();
 
     const size = ['S','M','L'];
-    const kind = [Types.BOY, Types.GIRL, Types.LADIE, Types.MEN];
-    let uuid = await Category.find().select({ _id: 1 });
+    const color = [Types.RED, Types.BLUE, Types.CHARCOAL_GREY, Types.PALE_ORANGE, Types.WHITE_THREE, Types.YELLOW];
+    const img = ['/public/img/boy.jpg','/public/img/girl.jpg','/public/img/girl_child.jpg']
+    let uuid = await Category.find();
 
     for (let index = 0; index < 100; index++) {
+        let sizes = [];
+        let colors = [];
         let imageUrl = [];
         let categories = [];
         let comments = [];
+        let categoriesKeeper = [];
+        for (let x = 0; x < 2; x++) {
+            let size_tmp = size[Math.floor(Math.random()*3)];
+            sizes.push(size_tmp);
+        }
+        for (let x = 0; x < 3; x++) {
+            let color_tmp = color[Math.floor(Math.random()*6)];
+            colors.push(color_tmp);
+        }
         for (let x = 0; x < 4; x++) {
-            let number = Math.floor(Math.random()*99+1);
-            imageUrl.push("https://picsum.photos/id/" + number + "/200/300");
+            let img_tmp = img[Math.floor(Math.random()*3)];
+            imageUrl.push(img_tmp);
         }
         for (let x = 0; x < 2; x++) {
-            categories.push(uuid[Math.floor(Math.random() * 5)]._id);
+            let cate = uuid[Math.floor(Math.random() * 5)];
+            categories.push(cate._id);
+            categoriesKeeper.push(cate);
         }
         for (let x = 0; x < 10; x++) {
             let comment = {
@@ -94,20 +108,28 @@ app.get('/createData', async (req, res) => {
         }
         const clothes = new Clothes({
             _id: mongoose.Types.ObjectId(),
-            size: size[Math.floor(Math.random()*3)],
+            sizes: sizes,
             price: faker.random.number(),
             name: faker.lorem.lines(),
+            colors: colors,
             brand: faker.lorem.lines(),
-            detail: faker.lorem.paragraph(),
+            description: faker.lorem.paragraph(),
             quantity: faker.random.number(),
             img: imageUrl,
             rating: Math.floor(Math.random()*5+1),
-            kind: kind[Math.random()*4],
             dateAdd: new Date(),
             ofArrayComment: comments,
             ofArrayCategory: categories
         });
         await clothes.save();
+
+        for (let index = 0; index < categoriesKeeper.length; index++) {
+            const element = categoriesKeeper[index];
+            let tmp_array = [...element.ofArrayProduct];
+            tmp_array.push(clothes._id);
+            element.ofArrayProduct = [...tmp_array];
+            await element.save();
+        }
     }
 
 

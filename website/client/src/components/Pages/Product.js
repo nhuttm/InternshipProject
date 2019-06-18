@@ -10,19 +10,26 @@ import { optionsSortBy } from '../../constant/options';
 
 class Products extends React.Component {
 
+    constructor(){
+        super();
+        this.state = {
+            category: 'all'
+        }
+    }
     componentDidMount = () => {
         const values = queryString.parse(this.props.location.search);
         const pageNumber = values.pageNumber || 1;
-        this.props.getAllClothes(pageNumber);
+        this.props.getAllClothes(pageNumber, 'all');
     }
 
     componentDidUpdate = (prevProps) => {
         if (prevProps.location.search != this.props.location.search){
             const values = queryString.parse(this.props.location.search);
             const pageNumber = values.pageNumber || 1;
-            this.props.getAllClothes(pageNumber);
+            const category = values.category || this.state.category;
+            this.props.getAllClothes(pageNumber, category);
+            this.setState({pageNumber, category});
         }
-
     }
 
     render() {
@@ -31,7 +38,7 @@ class Products extends React.Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-2">
-                                <MenuBar />
+                                <MenuBar selected={this.state.category}/>
                             </div>
                             <div className="col-md-10">
                                 <div className="row" style={{ paddingLeft: 13, paddingTop: 20 }}>
@@ -47,8 +54,8 @@ class Products extends React.Component {
                                     {
                                         this.props.clothes.length != 0 ? this.props.clothes.map((item, index) => {
                                             return (
-                                                <div className="container-item" key={item._id}>
-                                                    <ProductItem key={item._id} id={item._id} imgSrc={item.img[0]} title={item.name} price={item.price} />
+                                                <div className="container-item">
+                                                    <ProductItem key={index} id={item._id} imgSrc={item.img[0]} title={item.name} price={item.price} />
                                                 </div>)
                                         }) : null
                                     }
@@ -69,7 +76,6 @@ class Products extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         clothes: state.clothesReducer.clothes,
         totalPages: state.clothesReducer.totalPages,
@@ -79,8 +85,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllClothes: (pageNumber) => {
-            dispatch(getAllClothesRequest(pageNumber));
+        getAllClothes: (pageNumber, category) => {
+            dispatch(getAllClothesRequest(pageNumber, category));
         }
     }
 }
