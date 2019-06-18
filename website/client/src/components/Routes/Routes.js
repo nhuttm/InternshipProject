@@ -10,6 +10,7 @@ import PublicRoutes from './PublicRoutes';
 import AdminProducts from '../Pages/Admin/AdminProducts';
 import CartPage from '../Pages/CartPage';
 import AdminAddProduct from '../Pages/Admin/AdminAddProduct';
+import ErrorPage from '../Pages/ErrorPage';
 
 class Routes extends React.Component {
     render() {
@@ -24,6 +25,7 @@ class Routes extends React.Component {
                     <PrivateRouteAdmin exact path="/admin/products" user={this.props.user} component={AdminProducts} />
                     <PrivateRouteAdmin exact path="/admin/addproduct" user={this.props.user} component={AdminAddProduct} />
                     <Route exact path="/admin/login" component={AdminLogin}/>
+                    <Route component={ErrorPage}/>
                 </Switch>
             </>
         )
