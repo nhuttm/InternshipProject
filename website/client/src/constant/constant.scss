@@ -10,8 +10,14 @@ input {
     outline: none !important;
 }
 
+input[type="file"]{
+    cursor: pointer;
+}
+
 a {
     text-decoration: none !important;
+    outline: none !important;
+    cursor: pointer;
 }
 
 button {
@@ -24,6 +30,10 @@ div {
 
 #root{
     height: 100%;
+}
+
+.user-body{
+    background: white;
 }
 
 .red {

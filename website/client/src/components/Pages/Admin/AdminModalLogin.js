@@ -42,7 +42,7 @@ class AdminModalLogin extends React.Component{
                         <TextField title='E-MAIL' classNameInput="input-field-admin" classNameLabel="title-label-admin"  placeholder='email@sample.com' name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row">
-                        <TextField title='PASSWORD' classNameInput="input-field-admin" classNameLabel="title-label-admin"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
+                        <TextField title='PASSWORD' classNameInput="input-field-admin pass" classNameLabel="title-label-admin"  placeholder='Enter your password' name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                     </div>
                     <div className="row" style={{paddingTop: 20}}>
                         <Button type="submit" className="bttn-login-admin" title="Login" onButtonClick={e => this.handleLogin(e)} />

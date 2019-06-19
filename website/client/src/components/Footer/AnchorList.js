@@ -1,17 +1,17 @@
 import React from 'react';
 import Anchor from '../Anchor/Anchor';
-
+import { Link } from 'react-router-dom';
 export default class AnchorList extends React.Component{
     render(){
         return(
             <React.Fragment>
                 <div className="row">
-                    <Anchor title="Home" className={this.props.className} link="/"/>
-                    <Anchor title="Products" className={this.props.className} link="/products"/>
-                    <Anchor title="Services" className={this.props.className} link="/"/>
-                    <Anchor title="About Us" className={this.props.className} link="/"/>
-                    <Anchor title="Help" className={this.props.className} link="/"/>
-                    <Anchor title="Contacts" className={this.props.className} link="/"/>
+                    <Link className={this.props.className} to="/">Home</Link>
+                    <Link className={this.props.className} to="/products">Products</Link>
+                    <Link className={this.props.className} to="/">Services</Link>
+                    <Link className={this.props.className} to="/">About Us</Link>
+                    <Link className={this.props.className} to="/">Help</Link>
+                    <Link className={this.props.className} to="/">Contacts</Link>
                 </div>
             </React.Fragment>
         )

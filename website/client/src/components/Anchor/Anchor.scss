@@ -38,6 +38,10 @@
     color: #202124;
   }
 
+  .active-menu{
+    color: $pale-orange;
+  }
+
   .left-anchor{
      @include paginate;
      margin-right: 20px;
@@ -62,4 +66,26 @@ background-image: url(../../next.png);
 
 .forgot-pass:hover{
   color: white;
+}
+
+.notfound {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  .notfound-404 {
+    h1 {
+      font-family: 'Titillium Web', sans-serif;
+      font-size: 186px;
+      font-weight: 900;
+      margin: 0px;
+      text-transform: uppercase;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  .notfound-link{
+    @extend .shop-now;
+    left: 0;
+    top: 100%;
+  }
 }

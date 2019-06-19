@@ -1,0 +1,40 @@
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import IconHeadbar from './IconHeadbar';
+import './HeaderBar.scss';
+import UserAva from './UserAva';
+import Label from '../Label/Label';
+
+class AdminHeaderBar extends Component {
+    render() {
+        return (
+            <div className="row" style={{ height: 100 }}>
+                <div className="col-md-7" style={{margin: 'auto'}}>
+                    <Label className="title-page-admin" title={this.props.titlePage}/>
+                </div>
+                <div className="col-md-5" style={{ margin: 'auto' }}>
+                    <div className="row">
+                        <div className="col-md-8">
+                            <UserAva name={this.props.user.fullname} />
+                        </div>
+                        <div className="col-md-2" style={{ margin: 'auto', textAlign: 'center', marginLeft: -70 }}>
+                            <IconHeadbar number="9+" link="#" classNameLink="mail" classNameLabel="number-mail" />
+                        </div>
+                        <div className="col-md-2" style={{ margin: 'auto', textAlign: 'center', marginLeft: -70 }}>
+                            <IconHeadbar number="9+" link="#" classNameLink="notify" classNameLabel="number-notify" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        user: state.userReducer.user,
+        titlePage: state.adminReducer.titlePage
+    }
+}
+
+export default connect(mapStateToProps, null)(AdminHeaderBar);

@@ -1,5 +1,32 @@
 @import "../../../constant/constant.scss";
 
+@mixin product-fix {
+  display: flex;
+  width: 20%;  
+  height: 100%;
+  margin: auto;
+}
+
+@mixin default-content{
+  margin: auto;
+  font-size: 13px;
+}
+
+@mixin input-custom{
+  border-radius: 2px;
+    border: solid 1px #ededed;
+    padding-left: 10px;
+    background-color: white;
+    height: 80%;
+    width: 100%;
+    margin: auto;
+}
+
+.admin-body{
+  background-color: #f6f6f6;
+  height: 120vh;
+}
+
 .admin{
     background-image: url(../../admintheme.png);
     height: 100%;
@@ -18,4 +45,275 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.08);
   background-color: rgba(61, 61, 63, 0.8);
+}
+
+.sortBy{
+  width: 15%;
+  margin-left: 30px;
+  height: 18px;
+  margin-right: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #acacac;
+}
+.products-page{
+  padding-top: 20px;
+}
+.wrapped-top-products{
+  display: flex;
+}
+
+.wrapped-sortBy{
+  display: flex;
+  width: 100%;
+}
+
+.wrapped-form{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.wrapped-export{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  .export-bttn{
+    height: 100%;
+    width: 100%;
+    padding-left: 30px;
+    background-color: white;
+    border: solid 1px #ededed;
+    color: $pale-orange;
+  }
+  .img-export{
+    height: 50%;
+    width: 100%;
+    margin-top: 8px;
+    margin-right: -25px;
+  }
+}
+
+.add-product-admin{
+  background-color: $pale-orange;
+  border-radius: 2px;
+  height: 100%;
+  color: white;
+}
+
+.main-product-admin{
+  margin: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  .title--field{
+    display: flex;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    justify-content: space-around;
+    width: 100%;
+    .content-title-field{
+      width: 20%;
+      text-align: center;
+      margin: 20px;
+      color: #acacac;
+    }
+    .content-title-field-product{
+      width: 20%;
+      text-align: left;
+      margin: 20px;
+      color: #acacac;
+    }
+  }
+
+
+  .footer-product-admin{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    margin-right: 50px;
+    .entries-product{
+      margin-top: auto;
+    }
+    .option-paging{
+      display: flex;
+      width: 53%;
+      .pagination-admin{
+        margin-left: 10px;
+      }
+    }
+  }
+
+
+  .product-item-admin{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 20px;
+    height: 10%;
+    margin-top: 15px;
+    .product-field{
+      @include product-fix;
+      .wrapped-detail{
+        display: flex;
+        margin-left: 10px;
+        width: 100%;
+        padding-top: 10px;
+        font-size: 13px;
+        flex-direction: column;
+        align-self: center;
+        .title-product{
+          font-weight: bold;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .category-product{
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+      .item-img{
+        object-fit: cover;
+        margin: auto;
+        height: 80%;
+        width: 20%;
+      }
+    }
+    .sold-field{
+      @include product-fix;
+      .sold-product{
+        @include default-content;
+      }
+    }
+    .date-field{
+      @include product-fix;
+      .date-product{
+        @include default-content;
+
+      }
+    }
+    .profit-field{
+      @include product-fix;
+      .profit-product{
+        @include default-content;
+
+      }
+    }
+    .action-field{
+      @include product-fix;
+      position: relative;
+      .action-product{
+        @include default-content;
+        width: 50%;
+        height: 50%;
+        border: none;
+        background-color: none;
+        .dropdown-action{
+          background-color: pink;
+          width: 110px;
+          height: 100px;
+          flex-direction: column;
+          z-index: 3;
+          position: absolute;
+          left: 55px;
+          top: 20px;
+          display: none;
+          box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.08);
+          .edit-bttn{
+            border: none;
+            height: 50%;
+          }
+          .remove-bttn{
+            border: none;
+            height: 50%;
+          }
+        }
+      }
+
+      .action-product:hover{
+        .dropdown-action{
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+.add-product-page{
+  width: 80%;
+  padding: 10px;
+  height: 100%;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 30% repeat(10, 7% [row-start]);
+  .title-label{
+  font-size: 12px;
+  padding-top: 5px;
+  align-items: center;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  margin: auto;
+  text-align: right;
+  color: #202124;
+  }
+  .wrapped-label{
+    text-align: right;
+    align-self: center;
+    padding-right: 15px;
+  }
+  .wrapped-selectpage{
+    width: 100% !important;
+  }
+
+  .input-img-field{
+    @include input-custom;
+  }
+
+  .input-name-field{
+    @include input-custom;
+  }
+
+  .input-price-field{
+    @include input-custom;
+  }
+
+  .input-quantity-field{
+    @include input-custom;
+  }
+
+  .input-description-field{
+    @include input-custom;
+  }
+
+  .grouped-bttn{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    text-align: -webkit-right;
+    .cancel-bttn{
+      width: 25%;
+      margin-right: 10px;
+      color: $pale-orange;
+      border: solid 1px #ededed;
+      background-color: white;
+    }
+    .complete-bttn{
+      border-radius: 2px;
+      background-color: $pale-orange;
+      color: white;
+    }
+  }
+  
 }

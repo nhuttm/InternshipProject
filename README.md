@@ -16,10 +16,33 @@ All the `code` required to get started
 #### Clone
 - Clone this repo to your local machine using `https://github.com/nhuttm/InternshipProject.git`
 #### Setup
-
+- Open terminal and go to project: cd ~DIRECTORY/website
+- Install the dependencies in the local node_modules folder.
+```
+cd client
+npm install
+```
+```
+cd server
+npm install
+```
 ## Contributing
 ### Step 1
+Run server and client
+- In client:
+```
+npm start
+```
+- In server:
+```
+npm start dev
+```
 ### Step 2
+Create dummy data in db
+- Open browser:
+```
+localhost:2000/createData
+```
 ### Step 3
 ## Documentation
 - [React.js documentation](https://reactjs.org/docs)
@@ -30,7 +53,7 @@ All the `code` required to get started
 ## Versioning
 ## Support
 Contact with me at one of the following places!
-- Email: mailto:huanhiendanh@gmail.com
+- Email: huanhiendanh@gmail.com
 
 # Internship Project Work flow (27/5/2019 - 27/6/2019)
 ## Week 1 (27/5/2019 - 2/6/2019)
@@ -68,7 +91,7 @@ Contact with me at one of the following places!
 ### (8/6/2019-9/6/2019): 
 - Review all knowledge in `Week 2`.
 - Learn JWT for authenticate
-## Week 3 (10/6/2019-17/6/2019)
+## Week 3 (10/6/2019-16/6/2019)
 ### 10/6/2019: 
 - Modify UI.
 - Make register account.
@@ -83,5 +106,13 @@ Contact with me at one of the following places!
 - Make cart page.
 - Store product into redux and local storage and load in cart page.
 ### 14/6/2019:
-...
-
+- Learn about MD file, update README.md for project
+### (15/6/2019-16/6/2019): 
+- Review all knowledge in `Week 3`.
+## Week 4 (17/6/2019-23/6/2019)
+### (17/6/2019-16/6/2019):
+- Make load product for admin, remove product.
+- UI for add product page
+### (18/6/2019-16/6/2019):
+- Learn about multer for upload image.
+- Add product into db.

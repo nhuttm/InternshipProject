@@ -1,10 +1,10 @@
 import * as Types from '../constant/constant.js'
 import axiosInstance from '../instances/axiosInstance';
 
-export const getAllClothesRequest = (pageNumber) => {
+export const getAllClothesRequest = (pageNumber, category) => {
     return async (dispatch) => {
         try {
-            const response = await axiosInstance.get('/clothes?pageNumber=' + pageNumber);
+            const response = await axiosInstance.get('/clothes?pageNumber=' + pageNumber + '&category=' + category);
             dispatch(getAllClothes(response.data.clothes, response.data.totalPages, response.data.pageNumber));
         } catch (error) {
             console.log(error); 

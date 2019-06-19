@@ -40,10 +40,12 @@ const cartReducer = (state = initialState, action ) => {
             const index = action.payload.index;
             let productRemove = state.productList[index];
             let totalAfter = state.total;
+            let numberProductAfter = state.numberProduct;
 
             totalAfter -= productRemove.product.price * productRemove.config.quantity;
+            numberProductAfter--;
 
-            state = {...state, total: totalAfter, productList: [...state.productList.slice(0, index), ...state.productList.slice(index+1, state.productList.length+1)]};
+            state = {...state,numberProduct: numberProductAfter, total: totalAfter, productList: [...state.productList.slice(0, index), ...state.productList.slice(index+1, state.productList.length+1)]};
             localStorage.setItem('productCart', JSON.stringify(state));
             return state;
         }

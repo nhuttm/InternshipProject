@@ -1,38 +1,23 @@
 import React from 'react';
-import { Select } from 'semantic-ui-react';
+import Select from 'react-select';
+import './SelectBox.scss';
 
 export default class SelectBox extends React.Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            options: [{
-                key: 'Popularity',
-                text: 'Popularity',
-                value: 'Popularity',
-            }, 
-            {
-                key: 'NameAZ',
-                text: 'Name: A-Z',
-                value: 'NameAZ',
-            },
-            {
-                key: 'Price1',
-                text: 'Price: lowest to highest',
-                value: 'Price1',
-            },
-            {
-                key: 'Price2',
-                text: 'Price: highest to lowest',
-                value: 'Price2',
-            }]
+            options: props.options,
         }
     }
 
     render() {
         return (
-            <div className={this.props.classNames}>
-                <Select className="select-box" value="Popularity" options={this.state.options}  />
+            <div className={this.props.className}>
+                <Select className={this.props.classNameSelect} 
+                options={this.state.options} 
+                defaultValue={this.props.defaultValue} 
+                onChange={this.props.onChange} />
             </div>
         )
     }
