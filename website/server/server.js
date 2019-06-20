@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(passport.initialize());
 
-mongoose.connect('mongodb://localhost:27017/local');
+process.env.NODE_ENV == 'test' && mongoose.connect('mongodb://localhost:27017/test') || mongoose.connect('mongodb://localhost:27017/local');
 
 const Clothes = mongoose.model('Clothes');
 const Category = mongoose.model('Category');

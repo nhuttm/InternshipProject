@@ -6,10 +6,17 @@ const Clothes = mongoose.model('Clothes')
 const Category = mongoose.model('Category');
 
 export default class clothesController {
+    
+    getPageValueFromQuery = pageValue => {
+        let num = parseInt(pageValue);
+        return num > 0 && num; 
+    }
+
     listAllClothes = async (req, res) => {
         try{
-            const pageNumber = parseInt(req.query.pageNumber) || 1;
-            const pageLimit = parseInt(req.query.pageLimit) || PAGE_LIMIT;
+            const pageNumber = this.getPageValueFromQuery(req.query.pageNumber) || 1;
+            const pageLimit = this.getPageValueFromQuery(req.query.pageLimit) || PAGE_LIMIT;
+
             const category = req.query.category || 'all';
 
             const offSet = (pageNumber - 1) * pageLimit;
@@ -18,30 +25,23 @@ export default class clothesController {
             let totalPages = 0;
             if (category === 'all'){
                 result = await Clothes.find();
-                console.log(result.length);
-                totalPages = Math.ceil(result.length / pageLimit);
-                result = result.slice(offSet, offSet + pageLimit);
-                console.log(result.length);
-                response = {"clothes": result, "pageNumber": pageNumber, "totalPages": totalPages};
             } else {
                 result = await Category.findOne({'_id': category}).populate('ofArrayProduct');
-                console.log(result.ofArrayProduct.length);
-                totalPages = Math.ceil(result.ofArrayProduct.length / pageLimit);
-                result.ofArrayProduct = result.ofArrayProduct.slice(offSet, offSet + pageLimit);
-                console.log(result.ofArrayProduct.length);
-                response = {"clothes": result.ofArrayProduct, "pageNumber": pageNumber, "totalPages": totalPages};
+                result = [...result.ofArrayProduct];
             }
-            res.json(response);
+            totalPages = Math.ceil(result.length / pageLimit);
+            result = result.slice(offSet, offSet + pageLimit);
+            response = {"clothes": result, "pageNumber": pageNumber, "totalPages": totalPages};
+            res.status(200).json(response);
         } catch (err) {
-            console.log(err);
             res.status(500).send({err});
         }
     }
 
     listAllClothesAdmin = async (req, res) => {
         try{
-            const pageNumber = parseInt(req.query.pageNumber) || 1;
-            const pageLimit =  parseInt(req.query.pageLimit) || PAGE_LIMIT_ADMIN;
+            const pageNumber = this.getPageValueFromQuery(req.query.pageNumber) || 1;
+            const pageLimit =  this.getPageValueFromQuery(req.query.pageLimit) || PAGE_LIMIT_ADMIN;
 
             const offSet = (pageNumber - 1) * pageLimit;
             let result = await Clothes.find().populate('ofArrayCategory', 'name');
@@ -51,7 +51,7 @@ export default class clothesController {
             result = result.slice(offSet, offSet + pageLimit);
             
             let response = {"clothes": result, "pageNumber": pageNumber, "pageLimit": pageLimit ,"totalPages": totalPages, "totalEntry": totalEntry};
-            res.json(response);
+            res.status(200).json(response);
         } catch (err) {
             console.log(err);
             res.status(500).send({err});
@@ -63,7 +63,7 @@ export default class clothesController {
             const id = req.params.id;
             const result = await Clothes.findOne({"_id": id}).populate('ofArrayCategory');
             let response = {"clothes": result};
-            res.json(response);
+            res.status(200).json(response);
         } catch (err){
             console.log(err);
             res.status(500).send({err});
@@ -74,10 +74,11 @@ export default class clothesController {
         upload(req, res, async (err) => {
             try{
                 let imgArray = [];
-                console.log(req.body);
-                for (let index = 0; index < req.files.length; index++) {
-                    const element = req.files[index];
-                    imgArray.push('/public/img/' + element.filename);
+                if (req.files){
+                    for (let index = 0; index < req.files.length; index++) {
+                        const element = req.files[index];
+                        imgArray.push('/public/img/' + element.filename);
+                    }
                 }
                 let categories = [];
                 let categoriesQuery = await Category.find({'_id': {
@@ -134,10 +135,12 @@ export default class clothesController {
                 }
 
                 let imgArray = [...cloth.img];
+                if (req.files){
                 for (let index = 0; index < req.files.length; index++) {
                     const element = req.files[index];
                     imgArray[index] = '/public/img/' + element.filename;
                 }
+            }
                 let categories = [];
                 let categoriesQuery = await Category.find({'_id': {
                         $in: req.body.categories            
